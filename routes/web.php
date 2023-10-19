@@ -24,6 +24,9 @@ Route::get("/",[homeControl::class,"index"]);
 
 Route::get("/redirect",[homeControl::class,"redirectFunct"]);
 Route::get("/allusers",[adminControl::class,"displayusers"]);
+Route::get("/allfiles",[adminControl::class,"displayallfiles"]);
+Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
+Route::get("/floorplan",[adminControl::class,"displayfloorplan"]);
 
 Route::middleware([
     'auth:sanctum',

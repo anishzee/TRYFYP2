@@ -14,6 +14,12 @@
   color: white;
 }
 
+.container {
+  position: relative;
+  text-align: center;
+  color: rgba(202, 201, 201, 0.982);
+}
+
 /* Bottom left text */
 .bottom-left {
   position: absolute;
@@ -57,7 +63,7 @@
 .column {
   float: left;
   width: 300px; 
-  padding: 8px; /* jarak antara images */
+  padding: 5px; /* jarak antara images */
   
 }
 
@@ -84,8 +90,6 @@
             </div>
             
             <div class="row">
-              <div class="col-xl-4 col-md-6 grid-margin stretch-card">
-                
                 <div class="row">
                   <div class="column">
                     <div class="container">
@@ -108,9 +112,83 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            
             </div>
+
+
+
+            <div>
+              <p></p>
+                <ul>
+                  <li></li>
+                  <button type="button" class="btn btn-sm ms-3 btn-success"> + NEW </button>
+                  <li></li>
+                </ul>
+            </div> 
+
+
+
+
+
+            <div class="row">
+              <div class="">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Recently Used</h4>
+                    
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Document name</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Last used by</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Document 1</td>
+                            <td>12/12/2022</td>
+                            <td>RK 1A</td>
+                            <td>Abu</td>
+                          </tr>
+                          <tr>
+                            <td>Document 2</td>
+                            <td>10/12/2022</td>
+                            <td>RK 10A</td>
+                            <td>Ahmad</td>
+                          </tr>
+                          <tr>
+                            <td>Document 3</td>
+                            <td>09/11/2022</td>
+                            <td>RK 5A</td>
+                            <td>Aminah</td>
+                          </tr>
+                          <tr>
+                            <td>Document 4</td>
+                            <td>12/10/2022</td>
+                            <td>KB 1A</td>
+                            <td>Rozana</td>
+                          </tr>
+                          <tr>
+                            <td>Document 5</td>
+                            <td>16/09/2022</td>
+                            <td>KB 1A</td>
+                            <td>Abu</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
 
             <footer class="footer">
               <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -118,11 +196,7 @@
               </div>
             </footer>
           </div>
-
-
-
-            
-              
+ 
               
         </div>
   </div>
