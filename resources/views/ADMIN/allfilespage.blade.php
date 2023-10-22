@@ -67,6 +67,12 @@
   clear: both;
   display: table;
 }
+
+.content-wrapper {
+  background: white;
+  
+}
+
     </style>
   </head>
  <body>
@@ -77,37 +83,8 @@
     @include("ADMIN.navbar")
         <div class="">
           <div class="content-wrapper pb-0">
-            <div class="page-header flex-wrap">
-              <h3 class="mb-0"> Hi, welcome back Admin!
-              </h3>
-              
-            </div>
             
-            <div class="row">
-                <div class="row">
-                  <div class="column">
-                    <div class="container">
-                      <img src="admin/assets/images/dashboard/group 4.jpg" alt="image" style="width:100%;">
-                        <div class="bottom-left">Bottom Left</div>
-                        <div class="top-left">Top Left</div>
-                        <div class="top-right">Top Right</div>
-                        <div class="bottom-right">Bottom Right</div>
-                        <div class="centered">Centered</div>
-                    </div>
-                  </div>
-                  <div class="column">
-                    <div class="container">
-                      <img src="admin/assets/images/dashboard/group 4.jpg" alt="image" style="width:100%;">
-                        <div class="bottom-left">Bottom Left</div>
-                        <div class="top-left">Top Left</div>
-                        <div class="top-right">Top Right</div>
-                        <div class="bottom-right">Bottom Right</div>
-                        <div class="centered">Centered</div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-
+            
 
 
             <div>
@@ -127,7 +104,7 @@
               <div class="">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Recently Used</h4>
+                    <h4 class="card-title">All Files</h4>
                     
                     </p>
                     <div class="table-responsive">
@@ -138,6 +115,9 @@
                             <th>Date</th>
                             <th>Location</th>
                             <th>Last used by</th>
+                            <th>Manage</th>
+                            <th>Status</th>
+                            <th>Operation</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -146,30 +126,75 @@
                             <td>12/12/2022</td>
                             <td>RK 1A</td>
                             <td>Abu</td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
                           </tr>
                           <tr>
                             <td>Document 2</td>
                             <td>10/12/2022</td>
                             <td>RK 10A</td>
                             <td>Ahmad</td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
                           </tr>
                           <tr>
                             <td>Document 3</td>
                             <td>09/11/2022</td>
                             <td>RK 5A</td>
                             <td>Aminah</td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
                           </tr>
                           <tr>
                             <td>Document 4</td>
                             <td>12/10/2022</td>
                             <td>KB 1A</td>
                             <td>Rozana</td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
                           </tr>
                           <tr>
                             <td>Document 5</td>
                             <td>16/09/2022</td>
                             <td>KB 1A</td>
                             <td>Abu</td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
+                            <td>
+                              <label class="badge badge-danger">Pending</label>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -184,11 +209,7 @@
 
 
 
-            <footer class="footer">
-              <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2023 Anishah Hawa. All Rights Reserved.</span>
-              </div>
-            </footer>
+            
           </div>
  
               

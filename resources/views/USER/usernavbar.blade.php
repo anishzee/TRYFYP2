@@ -8,7 +8,6 @@
         </div>
 
         <br></br>
-
         <ul class="nav">
           
           <li class="nav-item">
@@ -18,26 +17,26 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/allfiles')}}">
+            <a class="nav-link" href="{{url('/allfilesUser')}}">
               <i class="mdi mdi-file-document-box menu-icon"></i>
               <span class="menu-title">All Files</span>
             </a>
     
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/managereq')}}"> 
+            <a class="nav-link" href="{{url('/reqstatsUser')}}"> 
               <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-              <span class="menu-title">Manage Request</span>
+              <span class="menu-title">Request Status</span>
             </a>
           </li>
           <li class="nav-item"> 
-            <a class="nav-link" href="{{url('/allusers')}}">
+            <a class="nav-link" href="{{url('/helpUser')}}">
               <i class="mdi mdi-contacts menu-icon"></i>
-              <span class="menu-title">View All Users</span>
+              <span class="menu-title">Help</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/floorplan')}}">
+            <a class="nav-link" href="{{url('/floorplanUser')}}">
               <i class="mdi mdi-table-large menu-icon"></i>
               <span class="menu-title">Floor Plan</span>
             </a>

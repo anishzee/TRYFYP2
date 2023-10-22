@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    @include("ADMIN.admincss")
+    @include("USER.usercss")
 
     <style>
       /* Container holding the image and the text */
@@ -86,11 +86,11 @@
 
   <div class="container-scroller">
 
-    @include("ADMIN.navbar")
+    @include("USER.usernavbar")
         <div class="">
-          <div class="content-wrapper pb-0">
+          <div class="content-wrapper ">
             <div class="page-header flex-wrap">
-              <h3 class="mb-0"> Hi, welcome back Admin!
+              <h3 class="mb-0"> Hi, welcome back User!
               </h3>
               
             </div>
@@ -126,7 +126,7 @@
               <p></p>
                 <ul>
                   <li></li>
-                  <button type="button" class="btn btn-sm ms-3 btn-success"> + NEW </button>
+                  <button type="button" class="btn btn-sm ms-3 btn-success" > + NEW </button>
                   <li></li>
                 </ul>
             </div> 
@@ -196,7 +196,7 @@
 
 
 
-            
+           
           </div>
  
               
@@ -205,6 +205,6 @@
 
 
 
-  @include("ADMIN.adminscript")
+  @include("USER.userscript")
  </body>
 </html>

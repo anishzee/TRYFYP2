@@ -23,7 +23,7 @@ class homeControl extends Controller
         
         else
         {
-            return view('home'); //the normal user view
+            return view('user.userpage'); //the normal user view
         }
         
     }
