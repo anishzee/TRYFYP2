@@ -30,6 +30,8 @@ Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete lecturer info
 Route::get("/allfiles",[adminControl::class,"displayallfiles"]);
 Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
 Route::get("/floorplan",[adminControl::class,"displayfloorplan"]);
+Route::get("/uploadfiles",[adminControl::class,"uploadfiles"]);
+
 
 Route::get("/allfilesUser",[userControl::class,"userallfiles"]);
 Route::get("/reqstatsUser",[userControl::class,"userreqstats"]);

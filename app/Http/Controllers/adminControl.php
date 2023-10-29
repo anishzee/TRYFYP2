@@ -39,7 +39,10 @@ class adminControl extends Controller
         return view('ADMIN.floorplanpage');
     }
 
-   
+    function uploadfiles() //go to manage request page
+    {
+        return view('ADMIN.uploadfilespage');
+    }
 
     
 }

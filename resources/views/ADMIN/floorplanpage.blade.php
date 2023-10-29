@@ -79,7 +79,7 @@
 
 <div class="container-scroller">
 
-  @include("USER.usernavbar")
+@include("ADMIN.navbar")
       <div class="">
         <div class="content-wrapper pb-0">
           <div class="page-header flex-wrap">
@@ -125,6 +125,6 @@
 
 
 
-@include("USER.userscript")
+@include("ADMIN.adminscript")
 </body>
 </html>

@@ -114,7 +114,7 @@
                           <td>{{$data->name}}</td>
                           <td>{{$data->email}}</td>
                           <td>
-                            <div class="badge badge-inverse-danger"> <span class="linkbutton"><a href={{"del/".$data['id']}}>Delete🗑️</a> </span> </div>
+                            <a class="btn btn-danger" href={{"del/".$data['id']}}>Delete🗑️</a> 
                           </td>
                         </tr>
                         @endforeach

@@ -73,6 +73,12 @@
   
 }
 
+.linkbutton {
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+}
+
     </style>
   </head>
  <body>
@@ -91,13 +97,13 @@
               <p></p>
                 <ul>
                   <li></li>
-                  <button type="button" class="btn btn-sm ms-3 btn-success"> + NEW </button>
+                    <button type="button" class="btn btn-sm ms-3 btn-success" onclick="window.location.href='/uploadfiles'">+ NEW</button>
                   <li></li>
                 </ul>
             </div> 
 
 
-
+            
 
 
             <div class="row">
