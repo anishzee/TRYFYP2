@@ -70,7 +70,6 @@
 
 .content-wrapper {
   background: white;
-  
 }
 
     </style>

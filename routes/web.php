@@ -25,7 +25,8 @@ Route::get("/",[homeControl::class,"index"]);
 
 Route::get("/redirect",[homeControl::class,"redirectFunct"]);
 
-Route::get("/allusers",[adminControl::class,"displayusers"]);
+Route::get("/allusers",[adminControl::class,"user"]);
+Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete lecturer info
 Route::get("/allfiles",[adminControl::class,"displayallfiles"]);
 Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
 Route::get("/floorplan",[adminControl::class,"displayfloorplan"]);

@@ -72,6 +72,12 @@
   background: white;
 }
 
+.linkbutton {
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+}
+
     </style>
   </head>
   <body>
@@ -98,24 +104,21 @@
                           <th>User ID</th>
                           <th>Username</th>
                           <th>Email</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($data as $data)
                         <tr>
-                          <td>1</td>
-                          <td>Anishah</td>
-                          <td>Anishah@gmail.com</td>
+                          <td>{{$data->id}}</td>
+                          <td>{{$data->name}}</td>
+                          <td>{{$data->email}}</td>
+                          <td>
+                            <div class="badge badge-inverse-danger"> <span class="linkbutton"><a href={{"del/".$data['id']}}>Delete🗑️</a> </span> </div>
+                          </td>
                         </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Niss</td>
-                          <td>Anishah@gmail.com</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Hawa</td>
-                          <td>Hawa@gmail.com</td>
-                        </tr>
+                        @endforeach
+                        
                       </tbody>
                     </table>
                   </div>
