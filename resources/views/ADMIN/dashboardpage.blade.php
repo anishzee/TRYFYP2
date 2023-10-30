@@ -398,5 +398,4 @@
               </li>
 
 
-
-              <span class="linkbutton"><a href="{{url('/uploadfiles')}}"> + NEW </a> </span>
+              <div class="badge badge-inverse-danger"> <span class="linkbutton"><a href={{"del/".$data['id']}}>Delete🗑️</a> </span> </div>
