@@ -127,81 +127,21 @@
                           </tr>
                         </thead>
                         <tbody>
+                          @foreach($data as $data)
                           <tr>
-                            <td>Document 1</td>
-                            <td>12/12/2022</td>
-                            <td>RK 1A</td>
-                            <td>Abu</td>
+                            <td>{{$data->DocName}}</td>
+                            <td>{{$data->DocDate}}</td>
+                            <td>{{$data->Location}}</td>
+                            <td>{{$data->LastUsed}}</td>
                             <td>
-                              <label class="badge badge-danger">Pending</label>
+                            <a class="badge badge-danger" href={{"documentinfo/".$data['DocID']}}>View</a>
                             </td>
+                            <td>{{$data->Status}}</td>
                             <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
+                            <a class="badge badge-danger" href={{"deleteDoc/".$data['DocID']}} >Delete</a>
                             </td>
                           </tr>
-                          <tr>
-                            <td>Document 2</td>
-                            <td>10/12/2022</td>
-                            <td>RK 10A</td>
-                            <td>Ahmad</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Document 3</td>
-                            <td>09/11/2022</td>
-                            <td>RK 5A</td>
-                            <td>Aminah</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Document 4</td>
-                            <td>12/10/2022</td>
-                            <td>KB 1A</td>
-                            <td>Rozana</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Document 5</td>
-                            <td>16/09/2022</td>
-                            <td>KB 1A</td>
-                            <td>Abu</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

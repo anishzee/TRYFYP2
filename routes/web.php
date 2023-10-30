@@ -26,11 +26,16 @@ Route::get("/",[homeControl::class,"index"]);
 Route::get("/redirect",[homeControl::class,"redirectFunct"]);
 
 Route::get("/allusers",[adminControl::class,"user"]);
-Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete lecturer info
-Route::get("/allfiles",[adminControl::class,"displayallfiles"]);
+Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
+
 Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
 Route::get("/floorplan",[adminControl::class,"displayfloorplan"]);
 Route::get("/uploadfiles",[adminControl::class,"uploadfiles"]);
+Route::post("/addDocument",[adminControl::class,"uploadfilesDB"]); //add data to DB
+Route::get("/allfiles",[adminControl::class,"allfilesdisplay"]); //display all files
+Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
+Route::get("/deleteDoc/{DocID}",[adminControl::class,"deletedoc"]); //delete document
+
 
 
 Route::get("/allfilesUser",[userControl::class,"userallfiles"]);

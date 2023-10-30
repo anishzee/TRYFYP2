@@ -79,6 +79,22 @@
 }
 
     </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".file-upload-browse").click(function () {
+                $("input[type='file']").click();
+            });
+
+            // Display the selected file name in the input field
+            $("input[type='file']").change(function () {
+                var filename = $(this).val().split("\\").pop();
+                $(".file-upload-info").val(filename);
+            });
+        });
+    </script>
+
   </head>
   <body>
 
@@ -96,10 +112,11 @@
                   <h4 class="card-title">Basic form elements</h4>
                   
                   
-                    <form class="forms-sample">
+                    <form class="forms-sample" method="post" action="/addDocument"> 
+                      @csrf
                       <div class="form-group">
                         <label for="name">Document Name: </label>
-                        <input type="text" class="form-control" name="name" placeholder="Document Name" required>
+                        <input type="text" class="form-control" name="docname" placeholder="Document Name" required>
                       </div>
                       <div class="form-group">
                         <label for="docdate">Date:</label>
@@ -107,7 +124,7 @@
                       </div>
                       <div class="form-group">
                         <label for="location">Location: </label>
-                        <input type="text" class="form-control" maxlength="4" name="location" placeholder="Location" required>
+                        <input type="text" class="form-control" maxlength="5" name="location" placeholder="Location" required>
                       </div>
                       <div class="form-group">
                         <label for="lastused">Last Used: </label>

@@ -72,11 +72,7 @@
   background: white;
 }
 
-.linkbutton {
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-}
+
 
     </style>
   </head>
