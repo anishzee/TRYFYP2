@@ -55,6 +55,17 @@ class adminControl extends Controller
 
     }
 
+    function storeDoc(Request $req) //receive data from form to DB
+    {
+        $DocUpload=$req->document;
+        
+        $filename=save();
+
+        return redirect('/allfiles');
+
+    }
+
+
     public function allfilesdisplay() //go to all files page
     {
         $data=documentinfo::all();

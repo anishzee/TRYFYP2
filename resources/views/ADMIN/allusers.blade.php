@@ -72,9 +72,20 @@
   background: white;
 }
 
+ .round2 {
+  border: 2px solid lightblue;
+  border-radius: 8px;
+  padding: 5px;
+}
+
 
 
     </style>
+
+
+
+
+
   </head>
   <body>
 
@@ -91,22 +102,27 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">All Users</h4>
+                  <br></br>
+                  <div >
+                    <input type="text" id="searchInput" class="round2" onkeyup="searchTable()" placeholder="Search for names..">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                  </div>
+                  <br></br>
+                  <div class=".table-hover">
                   
-                  
-                  <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="searchTable">
                       <thead>
                         <tr>
-                          <th>User ID</th>
-                          <th>Username</th>
-                          <th>Email</th>
-                          <th>Action</th>
+               
+                          <th><i>Username</i></th>
+                          <th><i>Email</i></th>
+                          <th><i>Action</i></th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($data as $data)
                         <tr>
-                          <td>{{$data->id}}</td>
+              
                           <td>{{$data->name}}</td>
                           <td>{{$data->email}}</td>
                           <td>
@@ -135,6 +151,29 @@
       </div>
 </div>
 
+    <script>
+          function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("searchTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+          }
+    </script>
+
+
+ 
 
 
 @include("ADMIN.adminscript")
