@@ -9,3 +9,4 @@
     <link rel="stylesheet" href="admin/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" href="admin/assets/css/style.css" />
     <link rel="shortcut icon" href="admin/assets/images/favicon.png" />
+    

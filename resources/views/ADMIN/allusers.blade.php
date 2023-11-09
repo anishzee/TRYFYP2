@@ -108,38 +108,44 @@
                     <button type="submit"><i class="fa fa-search"></i></button>
                   </div>
                   <br></br>
-                  <div class=".table-hover">
+                  <div class="table-responsive">
                   
-                    <table class="table" id="searchTable">
+                    <table class="table table-hover" id="searchTable">
                       <thead>
                         <tr>
                
-                          <th><i>Username</i></th>
-                          <th><i>Email</i></th>
-                          <th><i>Action</i></th>
+                          <th>Username</th>
+                          <th>Email</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($data as $data)
+                        @foreach($data as $user)
                         <tr>
               
-                          <td>{{$data->name}}</td>
-                          <td>{{$data->email}}</td>
+                          <td>{{$user->name}}</td>
+                          <td>{{$user->email}}</td>
                           <td>
-                            <a class="btn btn-danger" href={{"del/".$data['id']}}>Delete🗑️</a> 
+                            <a class="btn btn-danger" href={{"del/".$user['id']}}>Delete🗑️</a> 
                           </td>
                         </tr>
                         @endforeach
-                        
+          
                       </tbody>
                     </table>
+                   
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          
+          <br></br>
+                    <span>
+                      {{$data->links('vendor.pagination.bootstrap-4')}}
+                    </span>
 
-
+                   
 
 
 

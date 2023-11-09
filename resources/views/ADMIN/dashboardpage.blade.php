@@ -398,4 +398,19 @@
               </li>
 
 
+              
+              
+              
+              
               <div class="badge badge-inverse-danger"> <span class="linkbutton"><a href={{"del/".$data['id']}}>Delete🗑️</a> </span> </div>
+
+
+
+
+
+
+              <div >
+                    <input type="text" id="searchInput" class="round2" onkeyup="searchTable()" placeholder="Search for names..">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                  </div>
+                  <br></br>

@@ -129,7 +129,7 @@
               <p></p>
                 <ul>
                   <li></li>
-                  <button type="button" class="btn btn-sm ms-3 btn-success" onclick="window.location.href='/uploadfiles'">+ NEW</button>
+                  <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfiles'">+ NEW</button>
                  
                   <li></li>
                   <li></li>
@@ -145,7 +145,7 @@
                     
                     </p>
                     <div class="table-responsive">
-                      <table class="table">
+                      <table class="table table-hover">
                         <thead>
                           <tr>
                             <th>Document name</th>

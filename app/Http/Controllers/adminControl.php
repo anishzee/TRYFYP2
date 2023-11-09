@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Auth;
 class adminControl extends Controller
 {
     //
-    public function user() //go to all users page
+    public function user() //go to all users page & display all users data
     {
-        $data=User::all();
+        $data=User::paginate(2); //can change ikut suka
         return view("ADMIN.allusers",['data'=>$data]);
     }
 
-    function deleteit($id)
+    function deleteit($id)//delete user
     {
         DB::delete('delete from users where id=?',[$id]);
 
