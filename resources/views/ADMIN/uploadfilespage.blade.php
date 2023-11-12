@@ -112,27 +112,28 @@
                   <h4 class="card-title">Basic form elements</h4>
                   
                   
-                    <form class="forms-sample" method="post" action="/addDocument"> 
+                    <form class="forms-sample" method="post" action="/addDocument" enctype="multipart/form-data"> 
                       @csrf
                       <div class="form-group">
                         <label for="name">Document Name: </label>
-                        <input type="text" class="form-control" name="docname" placeholder="Document Name" required>
+                        <input type="text" class="form-control" name="DocName" placeholder="Document Name" required>
                       </div>
                       <div class="form-group">
                         <label for="docdate">Date:</label>
-                        <input type="date" class="form-control" name="docdate"  required>
+                        <input type="date" class="form-control" name="DocDate"  required>
                       </div>
                       <div class="form-group">
                         <label for="location">Location: </label>
-                        <input type="text" class="form-control" maxlength="5" name="location" placeholder="Location" required>
+                        <input type="text" class="form-control" maxlength="5" name="Location" placeholder="Location" required>
                       </div>
                       <div class="form-group">
                         <label for="lastused">Last Used: </label>
-                        <input type="text" class="form-control" name="lastused" placeholder="Last Used" required>
+                        <input type="text" class="form-control" name="LastUsed" placeholder="Last Used" required>
                       </div>
                       <div class="form-group">
                         <label>File upload</label>
-                        <input type="file" name="document" class="file-upload-default" />
+                        <input type="file" name="DocUpload" class="file-upload-default" />
+
                         <div class="input-group col-xs-12">
                           <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Document" />
                           <span class="input-group-append">

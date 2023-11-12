@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\documentinfo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Stroage;
 
 class adminControl extends Controller
 {
@@ -44,11 +45,20 @@ class adminControl extends Controller
     {
         $newdoc = new documentinfo;
 
-        $newdoc->DocName=$req->docname;
-        $newdoc->DocDate=$req->docdate;
-        $newdoc->Location=$req->location;
-        $newdoc->LastUsed=$req->lastused;
-        $newdoc->DocUpload=$req->document;
+        $DocUpload=$req->DocUpload;
+
+	    $filename=time().'.'.$DocUpload->getClientOriginalExtension();
+       
+        $req->DocUpload->move('assets/AllDocuments',$filename);
+
+		$newdoc->DocUpload=$filename;
+
+
+        $newdoc->DocName=$req->DocName;
+        $newdoc->DocDate=$req->DocDate;
+        $newdoc->Location=$req->Location;
+        $newdoc->LastUsed=$req->LastUsed;
+       
         $newdoc->save();
 
         return redirect('/allfiles');

@@ -123,6 +123,8 @@
                             <th>Last used by</th>
                             <th>Manage</th>
                             <th>Status</th>
+                            <th>Update</th>
+                            <th>Download</th>
                             <th>Operation</th>
                           </tr>
                         </thead>
@@ -136,7 +138,13 @@
                             <td>
                             <a class="badge badge-danger" href={{"documentinfo/".$data['DocID']}}>View</a>
                             </td>
-                            <td>{{$data->Status}}</td>
+                            <td>{{$data->status}}</td>
+                            <td>
+                            <a class="badge badge-danger" href="">Update</a>
+                            </td>
+                            <td>
+                            <a class="badge badge-danger" href="">Download</a>
+                            </td>
                             <td>
                             <a class="badge badge-danger" href={{"deleteDoc/".$data['DocID']}} >Delete</a>
                             </td>

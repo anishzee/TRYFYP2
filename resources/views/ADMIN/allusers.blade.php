@@ -113,7 +113,6 @@
                     <table class="table table-hover" id="searchTable">
                       <thead>
                         <tr>
-               
                           <th>Username</th>
                           <th>Email</th>
                           <th>Action</th>
@@ -122,7 +121,6 @@
                       <tbody>
                         @foreach($data as $user)
                         <tr>
-              
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>
@@ -159,22 +157,23 @@
 
     <script>
           function searchTable() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("searchTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("searchInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("searchTable");
+              tr = table.getElementsByTagName("tr");
+
+              for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[0];
                 if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }       
-            }
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
           }
     </script>
 
