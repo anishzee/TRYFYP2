@@ -36,12 +36,18 @@ Route::get("/allfiles",[adminControl::class,"allfilesdisplay"]); //display all f
 Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
 Route::get("/deleteDoc/{DocID}",[adminControl::class,"deletedoc"]); //delete document
 
+Route::get("/docinfo",[adminControl::class,"viewdocinfo"]);
+
 
 
 Route::get("/allfilesUser",[userControl::class,"userallfiles"]);
 Route::get("/reqstatsUser",[userControl::class,"userreqstats"]);
 Route::get("/floorplanUser",[userControl::class,"userfloorplan"]);
 Route::get("/helpUser",[userControl::class,"userhelp"]);
+
+
+
+
 
 Route::middleware([
     'auth:sanctum',

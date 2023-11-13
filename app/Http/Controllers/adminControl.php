@@ -36,12 +36,12 @@ class adminControl extends Controller
         return view('ADMIN.floorplanpage');
     }
 
-    function uploadfiles() //go to manage request page
+    function uploadfiles() //KIV
     {
         return view('ADMIN.uploadfilespage');
     }
 
-    function uploadfilesDB(Request $req) //receive data from form to DB
+    function uploadfilesDB(Request $req) //upload data from form to DB
     {
         $newdoc = new documentinfo;
 
@@ -65,15 +65,6 @@ class adminControl extends Controller
 
     }
 
-    function storeDoc(Request $req) //receive data from form to DB
-    {
-        $DocUpload=$req->document;
-        
-        $filename=save();
-
-        return redirect('/allfiles');
-
-    }
 
 
     public function allfilesdisplay() //go to all files page
@@ -94,6 +85,12 @@ class adminControl extends Controller
         $data=documentinfo::find($getid); //to capture one set of data in a table//
 
         return view("ADMIN.viewfiles",['data'=>$data]); //go to form page to insert updates
+    }
+
+
+    function viewdocinfo() //go to manage request page
+    {
+        return view('ADMIN.viewdocinfo');
     }
     
 

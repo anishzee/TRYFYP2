@@ -45,6 +45,12 @@
               <span class="menu-title">Floor Plan</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url('/docinfo')}}">
+              <i class="mdi mdi-table-large menu-icon"></i>
+              <span class="menu-title">Doc Info</span>
+            </a>
+          </li>
           
           
         </ul>
