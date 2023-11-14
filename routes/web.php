@@ -35,6 +35,8 @@ Route::post("/addDocument",[adminControl::class,"uploadfilesDB"]); //add data to
 Route::get("/allfiles",[adminControl::class,"allfilesdisplay"]); //display all files
 Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
 Route::get("/deleteDoc/{DocID}",[adminControl::class,"deletedoc"]); //delete document
+Route::get("/updDoc/{DocID}",[adminControl::class,"showData"]); //update document
+Route::post("/edit",[adminControl::class,"updatedoc"]); //update document
 
 Route::get("/docinfo",[adminControl::class,"viewdocinfo"]);
 

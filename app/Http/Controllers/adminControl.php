@@ -80,11 +80,35 @@ class adminControl extends Controller
         return redirect('/allfiles');
     }
 
+    function showData($DocID) //show the original records
+    {
+        $data=documentinfo::find($DocID); //to capture one set of data in a table//
+
+        return view("ADMIN.updateFiles",['disp'=>$data]); //go to form page to insert updates
+    }
+
+    function updatedoc(Request $req) //update doc in DB
+    {
+        
+        $data=documentinfo::find($req->DocID);
+
+        $data->DocName=$req->DocName;
+        $data->DocDate=$req->DocDate;
+        $data->Location=$req->Location;
+        $data->LastUsed=$req->LastUsed;
+        $data->status=$req->status;
+
+        $data->save();
+
+        return redirect('/allfiles');
+    }
+
+
     function viewdocumentinfo($getid) //show the original records
     {
         $data=documentinfo::find($getid); //to capture one set of data in a table//
 
-        return view("ADMIN.viewfiles",['data'=>$data]); //go to form page to insert updates
+        return view("ADMIN.viewfiles",['data'=>$data]); 
     }
 
 
@@ -92,6 +116,8 @@ class adminControl extends Controller
     {
         return view('ADMIN.viewdocinfo');
     }
+    
+
     
 
 

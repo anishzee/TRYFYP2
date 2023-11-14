@@ -87,7 +87,7 @@
   <div class="container-scroller">
 
     @include("ADMIN.navbar")
-        <div class="">
+      
           <div class="content-wrapper pb-0">
             
             
@@ -123,6 +123,8 @@
                             <th>Last used by</th>
                             <th>Manage</th>
                             <th>Status</th>
+                            <th>Update</th>
+                            <th>Download</th>
                             <th>Operation</th>
                           </tr>
                         </thead>
@@ -137,6 +139,12 @@
                             <a class="badge badge-danger" href={{"documentinfo/".$data['DocID']}}>View</a>
                             </td>
                             <td>{{$data->status}}</td>
+                            <td>
+                            <td><a class="btn btn-success" href={{"updDoc/".$data['DocID']}}>Update✏️</a></td>
+                            </td>
+                            <td>
+                            <a class="badge badge-danger" href="">Download</a>
+                            </td>
                             <td>
                             <a class="badge badge-danger" href={{"deleteDoc/".$data['DocID']}} >Delete</a>
                             </td>
@@ -159,7 +167,7 @@
           </div>
  
               
-        </div>
+       
   </div>
 
 
