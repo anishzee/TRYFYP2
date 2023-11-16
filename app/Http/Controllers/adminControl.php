@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Stroage;
 
 class adminControl extends Controller
 {
-    //
+    //---------------------------------------- VIEW REGISTERED USER ---------------------------------------------------
+
     public function user() //go to all users page & display all users data
     {
         $data=User::paginate(2); //can change ikut suka
@@ -26,17 +27,9 @@ class adminControl extends Controller
     }
 
 
-    function displaymanagereq() //go to manage request page
-    {
-        return view('ADMIN.managereqpage');
-    }
+    //---------------------------------------- UPLOAD NEW DOCUMENT ---------------------------------------------------
 
-    function displayfloorplan() //go to manage request page
-    {
-        return view('ADMIN.floorplanpage');
-    }
-
-    function uploadfiles() //KIV
+    function uploadfiles() //redirect to the form page
     {
         return view('ADMIN.uploadfilespage');
     }
@@ -65,11 +58,11 @@ class adminControl extends Controller
 
     }
 
-
+    //---------------------------------------- VIEW ALL DOCUMENTS ---------------------------------------------------
 
     public function allfilesdisplay() //go to all files page
     {
-        $data=documentinfo::all();
+        $data=documentinfo::paginate(2);
         return view("ADMIN.allfilespage",['data'=>$data]);
     }
 
@@ -79,6 +72,16 @@ class adminControl extends Controller
 
         return redirect('/allfiles');
     }
+
+    public function download(Request $request,$DocUpload)
+   {
+
+   	    return response()->download(public_path('assets/AllDocuments/'.$DocUpload));
+   }
+
+
+    //---------------------------------------- UPDATE FILES ---------------------------------------------------
+
 
     function showData($DocID) //show the original records
     {
@@ -104,6 +107,9 @@ class adminControl extends Controller
     }
 
 
+    //---------------------------------------- VIEW DOCUMENT ---------------------------------------------------
+
+
     function viewdocumentinfo($getid) //show the original records
     {
         $data=documentinfo::find($getid); //to capture one set of data in a table//
@@ -111,13 +117,23 @@ class adminControl extends Controller
         return view("ADMIN.viewfiles",['data'=>$data]); 
     }
 
-
     function viewdocinfo() //go to manage request page
     {
         return view('ADMIN.viewdocinfo');
     }
     
 
+    //---------------------------------------- TO EDIT LATER ---------------------------------------------------
+
+    function displaymanagereq() //go to manage request page
+    {
+        return view('ADMIN.managereqpage');
+    }
+
+    function displayfloorplan() //go to manage request page
+    {
+        return view('ADMIN.floorplanpage');
+    }
     
 
 

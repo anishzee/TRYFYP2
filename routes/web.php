@@ -17,30 +17,41 @@ use App\Http\Controllers\userControl;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES
+|--------------------------------------------------------------------------
+*/
 
-Route::get("/",[homeControl::class,"index"]);
+Route::get("/",[homeControl::class,"index"]);//home page
 
-Route::get("/redirect",[homeControl::class,"redirectFunct"]);
+Route::get("/redirect",[homeControl::class,"redirectFunct"]);//1st page
 
 Route::get("/allusers",[adminControl::class,"user"]);//display all users
 Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
 
 Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
-Route::get("/floorplan",[adminControl::class,"displayfloorplan"]);
-Route::get("/uploadfiles",[adminControl::class,"uploadfiles"]);
+Route::get("/floorplan",[adminControl::class,"displayfloorplan"]); 
+
+Route::get("/uploadfiles",[adminControl::class,"uploadfiles"]); //upload doc button
 Route::post("/addDocument",[adminControl::class,"uploadfilesDB"]); //add data to DB
+
 Route::get("/allfiles",[adminControl::class,"allfilesdisplay"]); //display all files
-Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
 Route::get("/deleteDoc/{DocID}",[adminControl::class,"deletedoc"]); //delete document
-Route::get("/updDoc/{DocID}",[adminControl::class,"showData"]); //update document
-Route::post("/edit",[adminControl::class,"updatedoc"]); //update document
 
-Route::get("/docinfo",[adminControl::class,"viewdocinfo"]);
+Route::get("/updDoc/{DocID}",[adminControl::class,"showData"]); //show data in form 
+Route::post("/edit",[adminControl::class,"updatedoc"]); //post update document to DB
 
+Route::get("/download/{file}",[adminControl::class,'download']); //download doc
 
+Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
+Route::get("/docinfo",[adminControl::class,"viewdocinfo"]); //to be check -> dummy 
+
+/*
+|--------------------------------------------------------------------------
+| USERS ROUTES
+|--------------------------------------------------------------------------
+*/
 
 Route::get("/allfilesUser",[userControl::class,"userallfiles"]);
 Route::get("/reqstatsUser",[userControl::class,"userreqstats"]);

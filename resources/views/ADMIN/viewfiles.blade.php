@@ -65,10 +65,18 @@
                             <td>
                             <a class="badge badge-danger" href={{"deleteDoc/".$data['DocID']}} >Delete</a>
                             </td>
+                            <td>
+                            <iframe height="400"  width="400" src="/assets/AllDocuments/{{$data->DocUpload}}"></iframe>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
+
+                    <br></br>
+
+                    
+
                   </div>
                 </div>
               </div>

@@ -1,0 +1,50 @@
+/* ---- Question no 1 -----*/
+
+square([]).	
+
+square([H|T]):-	
+	S is H*H,
+	write('Square of '),
+ 	write(H),
+        write(' is '),
+	write(S), nl,
+	square(T).
+
+/* ---- Question no 2 -----*/
+
+del(X,[X|Tail],Tail).
+
+del(X,[Head|Tail],[Head|NewTail]):-
+	del(X,Tail,NewTail).
+
+/* ---- Question no 3 -----*/
+
+min_in_list([Min],Min).             
+
+min_in_list([H,K|T],M) :-
+    H =< K,                             
+    min_in_list([H|T],M).              
+
+min_in_list([H,K|T],M) :-
+    H > K,                              
+    min_in_list([K|T],M).               
+
+
+/* ---- Question no 4 -----*/
+
+reverse([],[]).
+
+reverse([Head|Tail],X):-
+	reverse(Tail,Y),
+	cont(Y,[Head],X).
+
+cont([],L,L).
+cont([X1|L1],L2,[X1|L3]):-
+	cont(L1,L2,L3).
+
+/* ---- Question no 5 -----*/
+
+append([],T2,T2).
+
+append([H|T],T2,[H|T3]:-
+	append(T,T2,T3).

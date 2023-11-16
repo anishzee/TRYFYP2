@@ -129,24 +129,24 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($data as $data)
+                          @foreach($data as $x)
                           <tr>
-                            <td>{{$data->DocName}}</td>
-                            <td>{{$data->DocDate}}</td>
-                            <td>{{$data->Location}}</td>
-                            <td>{{$data->LastUsed}}</td>
+                            <td>{{$x->DocName}}</td>
+                            <td>{{$x->DocDate}}</td>
+                            <td>{{$x->Location}}</td>
+                            <td>{{$x->LastUsed}}</td>
                             <td>
-                            <a class="badge badge-danger" href={{"documentinfo/".$data['DocID']}}>View</a>
+                            <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View</a>
                             </td>
-                            <td>{{$data->status}}</td>
+                            <td>{{$x->status}}</td>
                             <td>
-                            <td><a class="btn btn-success" href={{"updDoc/".$data['DocID']}}>Update✏️</a></td>
-                            </td>
-                            <td>
-                            <a class="badge badge-danger" href="">Download</a>
+                            <a class="btn btn-success" href={{"updDoc/".$x['DocID']}}>Update✏️</a>
                             </td>
                             <td>
-                            <a class="badge badge-danger" href={{"deleteDoc/".$data['DocID']}} >Delete</a>
+                            <a class="btn btn-success" href="{{url('/download',$x->DocUpload)}}">Download</a>
+                            </td>
+                            <td>
+                            <a class="btn btn-success" href={{"deleteDoc/".$x['DocID']}} >Delete</a>
                             </td>
                           </tr>
                           @endforeach
@@ -160,6 +160,10 @@
 
 
 
+            <br></br>
+                    <span>
+                      {{$data->links('vendor.pagination.bootstrap-4')}} 
+                    </span>
 
 
 
