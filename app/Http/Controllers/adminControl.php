@@ -79,6 +79,16 @@ class adminControl extends Controller
    	    return response()->download(public_path('assets/AllDocuments/'.$DocUpload));
    }
 
+    public function searchFiles(Request $request)
+   {
+       $searchTerm = $request->input('search');
+       $data = documentinfo::where('DocName', 'like', '%' . $searchTerm . '%')
+           ->orWhere('Location', 'like', '%' . $searchTerm . '%')
+           ->paginate(2);
+   
+       return view("ADMIN.allfilespage", ['data' => $data]);
+   }
+
 
     //---------------------------------------- UPDATE FILES ---------------------------------------------------
 
@@ -115,11 +125,6 @@ class adminControl extends Controller
         $data=documentinfo::find($getid); //to capture one set of data in a table//
 
         return view("ADMIN.viewfiles",['data'=>$data]); 
-    }
-
-    function viewdocinfo() //go to manage request page
-    {
-        return view('ADMIN.viewdocinfo');
     }
     
 

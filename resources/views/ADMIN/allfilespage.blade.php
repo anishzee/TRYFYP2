@@ -79,6 +79,16 @@
   text-align: center;
 }
 
+.content-wrapper {
+  background: white;
+} 
+
+.round2 {
+  border: 2px solid lightblue;
+  border-radius: 8px;
+  padding: 5px;
+}
+
     </style>
   </head>
  <body>
@@ -112,9 +122,19 @@
                   <div class="card-body">
                     <h4 class="card-title">All Files</h4>
                     
-                    </p>
+                    <br></br>
+                    <!-- Search Bar -->
+                    <form action="{{ url('/allfiles/search') }}" method="get">
+                       @csrf
+                        <div class="form-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search...">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                    <!-- End Search Bar -->
+                    <br></br>
                     <div class="table-responsive">
-                      <table class="table table-hover">
+                      <table class="table table-hover" >
                         <thead>
                           <tr>
                             <th>Document name</th>
@@ -174,8 +194,7 @@
        
   </div>
 
-
-
+  
   @include("ADMIN.adminscript")
  </body>
 </html>
