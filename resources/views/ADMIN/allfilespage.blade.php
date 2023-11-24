@@ -156,17 +156,17 @@
                             <td>{{$x->Location}}</td>
                             <td>{{$x->LastUsed}}</td>
                             <td>
-                            <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View</a>
+                            <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
                             </td>
                             <td>{{$x->status}}</td>
                             <td>
                             <a class="btn btn-success" href={{"updDoc/".$x['DocID']}}>Update✏️</a>
                             </td>
                             <td>
-                            <a class="btn btn-success" href="{{url('/download',$x->DocUpload)}}">Download</a>
+                            <a class="btn btn-success" href="{{url('/download',$x->DocUpload)}}">Download⏬</a>
                             </td>
                             <td>
-                            <a class="btn btn-success" href={{"deleteDoc/".$x['DocID']}} >Delete</a>
+                            <a class="btn btn-success" href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
                             </td>
                           </tr>
                           @endforeach

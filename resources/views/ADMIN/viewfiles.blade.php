@@ -72,6 +72,12 @@
   background: white;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
     </style>
   </head>
   <body>
@@ -100,11 +106,8 @@
                             <th>Date</th>
                             <th>Location</th>
                             <th>Last used by</th>
-                            <th>Manage</th>
                             <th>Status</th>
-                            <th>Update</th>
                             <th>Download</th>
-                            <th>Operation</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -113,21 +116,9 @@
                             <td>{{$data->DocDate}}</td>
                             <td>{{$data->Location}}</td>
                             <td>{{$data->LastUsed}}</td>
-                            <td>
-                            <a class="badge badge-danger" href={{"documentinfo/".$data['DocID']}}>View</a>
-                            </td>
                             <td>{{$data->status}}</td>
                             <td>
-                            <a class="badge badge-danger" href="">Update</a>
-                            </td>
-                            <td>
-                            <a class="badge badge-danger" href="">Download</a>
-                            </td>
-                            <td>
-                            <a class="badge badge-danger" href={{"deleteDoc/".$data['DocID']}} >Delete</a>
-                            </td>
-                            <td>
-                            <iframe height="400"  width="400" src="/assets/AllDocuments/{{$data->DocUpload}}"></iframe>
+                            <a class="btn btn-success" href="{{url('/download',$data->DocUpload)}}">Download⏬</a>
                             </td>
                           </tr>
                         </tbody>
@@ -136,8 +127,7 @@
 
                     <br></br>
 
-                    
-
+                    <iframe class="center" height="400"  width="400" src="/assets/AllDocuments/{{$data->DocUpload}}"></iframe>
                   </div>
                 </div>
               </div>

@@ -46,7 +46,6 @@ class adminControl extends Controller
 
 		$newdoc->DocUpload=$filename;
 
-
         $newdoc->DocName=$req->DocName;
         $newdoc->DocDate=$req->DocDate;
         $newdoc->Location=$req->Location;

@@ -1,29 +1,90 @@
+<x-app-layout>
+ 
+</x-app-layout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    @include("ADMIN.admincss")
 
-@extends('ADMIN.viewdocinfo')
-@section('xxx')
+    <style>
+      /* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
 
-  <div class="container-scroller">
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
 
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 300px; 
+  padding: 5px; /* jarak antara images */
   
-       
-          <div class="content-wrapper pb-0">
-            
-            
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.content-wrapper {
+  background: white;
+}
+
+    </style>
+  </head>
+  <body>
 
 
-            <div>
-              <p></p>
-                <ul>
-                  <li></li>
-                    <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfiles'">+ NEW</button>
-                  <li></li>
-                </ul>
-            </div> 
+<div class="container-scroller">
 
-
-            
-
-
+@include("ADMIN.navbar")
+      <div class="">
+        <div class="content-wrapper pb-0">
+         
+          
+          
             <div class="row">
               <div class="">
                 <div class="card">
@@ -83,15 +144,14 @@
             </div>
 
 
-
-
-
+        </div>
 
             
-          </div>
- 
-        
-  </div>
+      </div>
+</div>
 
 
-  @stop
+
+@include("ADMIN.adminscript")
+</body>
+</html>
