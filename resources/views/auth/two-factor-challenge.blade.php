@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            <a class="w-16 h-16" viewbox="0 0 48 48" >
+                <img src="../admin/assets/images/LOGOREPO.png" alt="logo" width="300" height="300" />
+            </a>
         </x-slot>
 
         <div x-data="{ recovery: false }">

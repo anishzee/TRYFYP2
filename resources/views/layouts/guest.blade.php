@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Login') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,9 +16,19 @@
 
         <!-- Styles -->
         @livewireStyles
+
+        <style>
+        
+        .min-h-screen {
+            background-image: url('../admin/assets/images/LoginBG5.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        </style>
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
+    <body >
+        <div class="font-sans text-white-900 antialiased">
             {{ $slot }}
         </div>
 
