@@ -8,6 +8,8 @@ use App\Models\documentinfo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Stroage;
+use Illuminate\Support\Facades\Session;
+
 
 class adminControl extends Controller
 {
@@ -53,7 +55,9 @@ class adminControl extends Controller
        
         $newdoc->save();
 
-        return redirect('/allfiles');
+        Session::flash('success', 'Document uploaded successfully');
+
+        return redirect('/uploadfiles');
 
     }
 

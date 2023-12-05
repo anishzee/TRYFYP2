@@ -78,6 +78,25 @@
   text-align: center;
 }
 
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+        
+
     </style>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -92,9 +111,8 @@
                 var filename = $(this).val().split("\\").pop();
                 $(".file-upload-info").val(filename);
             });
-        });
-    </script>
-
+        }); // this script will allow user to choose file from their PC folder
+    </script> 
   </head>
   <body>
 
@@ -102,14 +120,19 @@
 <div class="container-scroller">
 
   @include("ADMIN.navbar")
-    <div class="">
+    <div class="centerALL">
         <div class="content-wrapper pb-0">
-          
+          @if(Session::has('success'))
+            <div class="alert alert-success" style="background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
+              {{ Session::get('success') }}
+            </div>
+          @endif
          <br></br>
           <div class="row">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Basic form elements</h4>
+              <div class="card" style="width: 60%; margin: 0 auto;">
+                <div class="card-body" >
+                  <h4 class="card-title">Upload New Document</h4>
+                  <br></br>
                   
                   
                     <form class="forms-sample" method="post" action="/addDocument" enctype="multipart/form-data"> 

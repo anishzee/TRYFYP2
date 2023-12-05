@@ -16,8 +16,24 @@
 
         <!-- Styles -->
         @livewireStyles
+
+
+        <style>
+        
+        .bgimage {
+            background-image: url('../admin/assets/images/LoginBG5.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .none {
+            background-color: #862d86;
+        }
+
+        </style>
+
     </head>
-    <body >
+    <body class="font-sans antialiased" >
        
 
         <div class="">
@@ -25,8 +41,8 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="">
-                    <div class="">
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
