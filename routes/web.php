@@ -33,7 +33,9 @@ Route::get("/allusers",[adminControl::class,"user"]);//display all users
 Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
 
 Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
-Route::get("/floorplan",[adminControl::class,"displayfloorplan"]); 
+
+Route::get("/floorplan",[adminControl::class,"displayfloorplan"]); //go to floorplan page 
+Route::get("/floorplandummy",[adminControl::class,"displayfloorplandummy"]);//dummy floorplan
 
 Route::get("/uploadfiles",[adminControl::class,"uploadfiles"]); //upload doc button
 Route::post("/addDocument",[adminControl::class,"uploadfilesDB"]); //add data to DB

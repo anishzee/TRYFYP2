@@ -65,7 +65,7 @@ class adminControl extends Controller
 
     public function allfilesdisplay() //go to all files page
     {
-        $data=documentinfo::paginate(2);
+        $data=documentinfo::paginate(5);
         return view("ADMIN.allfilespage",['data'=>$data]);
     }
 
@@ -130,6 +130,18 @@ class adminControl extends Controller
         return view("ADMIN.viewfiles",['data'=>$data]); 
     }
     
+    //---------------------------------------- VIEW DOCUMENT ---------------------------------------------------
+
+    function displayfloorplan() //go to manage request page
+    {
+        return view('ADMIN.floorplanpage');
+    }
+
+    function displayfloorplandummy() //go to manage request page
+    {
+        return view('ADMIN.viewdocinfo');
+    }
+    
 
     //---------------------------------------- TO EDIT LATER ---------------------------------------------------
 
@@ -138,10 +150,7 @@ class adminControl extends Controller
         return view('ADMIN.managereqpage');
     }
 
-    function displayfloorplan() //go to manage request page
-    {
-        return view('ADMIN.floorplanpage');
-    }
+    
     
 
 
