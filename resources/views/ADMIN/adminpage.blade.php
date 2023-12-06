@@ -107,7 +107,9 @@
                         <div class="top-left">Top Left</div>
                         <div class="top-right">Top Right</div>
                         <div class="bottom-right">Bottom Right</div>
-                        <div class="centered">Centered</div>
+                        <div class="centered">
+                          Available: {{ \App\Models\documentinfo::where('status', 'Available')->count() }}
+                        </div>
                     </div>
                   </div>
                   <div class="column">
@@ -117,7 +119,9 @@
                         <div class="top-left">Top Left</div>
                         <div class="top-right">Top Right</div>
                         <div class="bottom-right">Bottom Right</div>
-                        <div class="centered">Centered</div>
+                        <div class="centered">
+                          In Used: {{ \App\Models\documentinfo::where('status', 'In Used')->count() }}
+                        </div>
                     </div>
                   </div>
                 </div>

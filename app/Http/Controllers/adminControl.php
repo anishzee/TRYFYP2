@@ -73,6 +73,8 @@ class adminControl extends Controller
     {
         DB::delete('delete from documentinfos where DocID=?',[$DocID]);
 
+        Session::flash('success', 'Document deleted successfully');
+
         return redirect('/allfiles');
     }
 
@@ -80,6 +82,7 @@ class adminControl extends Controller
    {
 
    	    return response()->download(public_path('assets/AllDocuments/'.$DocUpload));
+
    }
 
     public function searchFiles(Request $request)
@@ -115,6 +118,8 @@ class adminControl extends Controller
         $data->status=$req->status;
 
         $data->save();
+
+        Session::flash('success', 'Document updated successfully');
 
         return redirect('/allfiles');
     }
