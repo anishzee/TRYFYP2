@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\documentinfo;
+use App\Models\docfavorite;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Stroage;
@@ -137,16 +138,48 @@ class adminControl extends Controller
     
     //---------------------------------------- VIEW DOCUMENT ---------------------------------------------------
 
-    function displayfloorplan() //go to manage request page
+    
+    function displayfloorplan() //go to floorplan page
     {
         return view('ADMIN.floorplanpage');
     }
 
-    function displayfloorplandummy() //go to manage request page
+    function displayfloorplandummy() //go to floorplan page
     {
-        return view('ADMIN.viewdocinfo');
+        return view('ADMIN.favoritedoc');
     }
     
+    
+    //---------------------------------------- FAVOURITE DOCUMENT ---------------------------------------------------
+
+    
+    public function addToFavorites($document)
+    {
+        $documentModel = documentinfo::findOrFail($document);
+
+        // Attach the document to the user's favorites >> function from user model
+        auth()->user()->favorites()->create(['doc_id' => $documentModel->DocID]);
+
+        Session::flash('success', 'Document added to favorites successfully');
+
+        return redirect('/allfiles');
+    }
+
+
+    public function showFavorites()
+    {
+        // Debugging statement
+        //dd('Controller is called'); // Check if the user is authenticated
+
+        // Retrieve the user's favorite documents
+        $userFavorites = auth()->user()->favorites()->with('document')->get();
+
+        // Debugging statement
+        //dd($userFavorites); // Check the content of $userFavorites
+
+        return view('admin.favoritedoc', compact('userFavorites'));
+    }
+
 
     //---------------------------------------- TO EDIT LATER ---------------------------------------------------
 

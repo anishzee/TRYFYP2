@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\docfavorite;
 
 class documentinfo extends Model
 {
@@ -25,6 +26,9 @@ class documentinfo extends Model
     
     use HasFactory;
 
-    
+    public function favorites()
+    {
+        return $this->hasMany(docfavorite::class, 'doc_id', 'DocID');
+    }
 
 }

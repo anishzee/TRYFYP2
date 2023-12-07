@@ -146,8 +146,9 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Favorites Documents</h4>
-                    
-                    </p>
+                    @if(isset($userFavorites))
+                        {{ dd($userFavorites) }}
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
@@ -160,7 +161,47 @@
                             </tr>
                           </thead>
                           <tbody>
-                            
+                            @foreach($userFavorites as $favorite)
+                            <tr>
+                              <td>
+                                @if(isset($favorite->document))
+                                    {{ $favorite->document->DocName }}
+                                @else
+                                    N/A
+                                @endif
+                              </td>
+                              <td>
+                                @if(isset($favorite->document))
+                                    {{ $favorite->document->DocDate }}
+                                @else
+                                    N/A
+                                @endif
+                              </td>
+                              <td>
+                                @if(isset($favorite->document))
+                                    <a class="btn btn-success" href="{{ url('/floorplan') }}">
+                                        {{ $favorite->document->Location }}
+                                    </a>
+                                @else
+                                    N/A
+                                @endif
+                              </td>
+                              <td>
+                                @if(isset($favorite->document))
+                                    {{ $favorite->document->LastUsed }}
+                                @else
+                                    N/A
+                                @endif
+                              </td>
+                              <td>
+                                @if(isset($favorite->document))
+                                    {{ $favorite->document->status }}
+                                @else
+                                    N/A
+                                @endif
+                              </td>
+                            </tr>
+                            @endforeach
                           </tbody>
                         </table>
                     </div>

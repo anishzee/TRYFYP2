@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\docfavorite;
 
 class User extends Authenticatable
 {
@@ -61,5 +62,8 @@ class User extends Authenticatable
 
     public $table= "users";
 
-  
+    public function favorites()
+    {
+        return $this->hasMany(docfavorite::class, 'user_id', 'id');
+    }
 }

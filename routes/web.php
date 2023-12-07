@@ -55,6 +55,9 @@ Route::post("/edit",[adminControl::class,"updatedoc"]); //post update document t
 Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
 
 
+Route::post('/addfav/{DocID}', [adminControl::class, 'addToFavorites'])->name('addfav');
+Route::get('/favorites', [adminControl::class, 'showFavorites'])->name('favorites');
+
 /*
 |--------------------------------------------------------------------------
 | USERS ROUTES

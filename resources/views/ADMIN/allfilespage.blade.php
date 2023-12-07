@@ -168,7 +168,7 @@
                               <th>Manage</th>
                               <th>Status</th>
                               <th>Update</th>
-                              <th>Download</th>
+                              <th>Add Favorite</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
@@ -189,7 +189,10 @@
                                 <a class="btn btn-success" href={{"updDoc/".$x['DocID']}}>Update✏️</a>
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{url('/download',$x->DocUpload)}}">Download⏬</a>
+                                <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
+                                @csrf
+                                  <button type="submit" class="btn btn-success">Add to Favorites 💜</button>
+                                </form>
                               </td>
                               <td>
                                 <a class="btn btn-success" href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
