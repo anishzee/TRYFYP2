@@ -99,20 +99,31 @@
 
     </style>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".file-upload-browse").click(function () {
-                $("input[type='file']").click();
-            });
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".file-upload-browse").click(function () {
+            $("input[type='file']").click();
+        });
 
-            // Display the selected file name in the input field
-            $("input[type='file']").change(function () {
-                var filename = $(this).val().split("\\").pop();
-                $(".file-upload-info").val(filename);
-            });
-        }); // this script will allow user to choose file from their PC folder
-    </script> 
+        // Display the selected file name in the input field
+        $("input[type='file']").change(function () {
+            // Check if the selected file has a PDF extension
+            var allowedExtensions = /(\.pdf)$/i;
+            var filename = $(this).val().split("\\").pop();
+
+            if (!allowedExtensions.exec(filename)) {
+                alert('Please choose a PDF file.');
+                $(this).val('');
+                $(".file-upload-info").val('');
+                return;
+            }
+
+            $(".file-upload-info").val(filename);
+        });
+    });
+</script>
+
   </head>
   <body>
 

@@ -107,12 +107,15 @@
           @if(Session::has('success'))
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script>
-                $(document).ready(function(){
-                    $('.alert').fadeIn();
-                    setTimeout(function(){
-                        $('.alert').fadeOut();  // make the alert message dissapear after a few seconds 
-                    }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
-                });
+              $(document).ready(function(){
+                  var alertElement = $('.alert');
+                  alertElement.fadeIn();
+
+                  // Hide the alert after a few seconds
+                  setTimeout(function(){
+                    alertElement.fadeOut();
+                  }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
+              });
             </script>
             <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
                 {{ Session::get('success') }}
@@ -168,7 +171,7 @@
                               <th>Manage</th>
                               <th>Status</th>
                               <th>Update</th>
-                              <th>Add Favorite</th>
+                              <th>Add to Favorite</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
@@ -191,7 +194,7 @@
                               <td>
                                 <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
                                 @csrf
-                                  <button type="submit" class="btn btn-success">Add to Favorites 💜</button>
+                                  <button type="submit" class="btn btn-success">Favorite💜</button>
                                 </form>
                               </td>
                               <td>

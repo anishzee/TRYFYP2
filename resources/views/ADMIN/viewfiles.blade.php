@@ -78,6 +78,24 @@
   width: 50%;
 }
 
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
     </style>
   </head>
   <body>
@@ -86,7 +104,7 @@
 <div class="container-scroller">
 
 @include("ADMIN.navbar")
-      <div class="">
+      <div class="centerALL">
         <div class="content-wrapper pb-0">
          
           
@@ -128,14 +146,16 @@
                     <br></br>
 
                     <iframe class="center" height="400"  width="400" src="/assets/AllDocuments/{{$data->DocUpload}}"></iframe>
+                    <br></br>
                   </div>
                 </div>
               </div>
+              <br></br><br></br>
             </div>
-
+            <br></br><br></br>
 
         </div>
-
+       
             
       </div>
 </div>

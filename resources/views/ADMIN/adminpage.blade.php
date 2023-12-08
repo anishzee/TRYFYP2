@@ -79,6 +79,23 @@
   
 }
 
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.none {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
 
 
 
@@ -90,7 +107,7 @@
   <div class="container-scroller">
 
     @include("ADMIN.navbar")
-        <div class="">
+        <div class="centerALL">
           <div class="content-wrapper pb-0">
             <div class="page-header flex-wrap">
               <h3 class="mb-0"> Hi, welcome back Admin!
