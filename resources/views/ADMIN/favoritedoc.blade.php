@@ -93,53 +93,12 @@
         <div class="">
           <div class="content-wrapper pb-0">
             <div class="page-header flex-wrap">
-              <h3 class="mb-0"> Hi, welcome back Admin!
+              <h3 class="mb-0"> Favorite Document 
               </h3>
               
             </div>
             
-            <div class="row">
-                <div class="row">
-                  <div class="column">
-                    <div class="container">
-                      <img src="admin/assets/images/dashboard/group 4.jpg" alt="image" style="width:100%;">
-                        <div class="bottom-left">Bottom Left</div>
-                        <div class="top-left">Top Left</div>
-                        <div class="top-right">Top Right</div>
-                        <div class="bottom-right">Bottom Right</div>
-                        <div class="centered">
-                          Available: {{ \App\Models\documentinfo::where('status', 'Available')->count() }}
-                        </div>
-                    </div>
-                  </div>
-                  <div class="column">
-                    <div class="container">
-                      <img src="admin/assets/images/dashboard/group 4.jpg" alt="image" style="width:100%;">
-                        <div class="bottom-left">Bottom Left</div>
-                        <div class="top-left">Top Left</div>
-                        <div class="top-right">Top Right</div>
-                        <div class="bottom-right">Bottom Right</div>
-                        <div class="centered">
-                          In Used: {{ \App\Models\documentinfo::where('status', 'In Used')->count() }}
-                        </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-
-
-
-            <div>
-              <p></p>
-                <ul>
-                  <li></li>
-                  <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfiles'">+ NEW</button>
-                 
-                  <li></li>
-                  <li></li>
-                </ul>
-            </div> 
-
+          
 
             <div class="row">
               <div class="">
