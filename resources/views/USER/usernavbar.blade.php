@@ -3,8 +3,8 @@
     
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-          <a class="sidebar-brand brand-logo" ><img src="admin/assets/images/LOGOREPO.png" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo" ><img src="../admin/assets/images/LOGOREPO.png" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="index.html"><img src="../admin/assets/images/logo-mini.svg" alt="logo" /></a>
         </div>
 
         <br></br>

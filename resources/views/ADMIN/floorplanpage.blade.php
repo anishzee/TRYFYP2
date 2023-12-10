@@ -108,7 +108,7 @@
               <div class="row">
                 <div class="column">
                   <div class="container">
-                    <img src="admin/assets/images/dashboard/locationfloorplan.jpg" alt="image" style="width:100%;" class="center">
+                    <img src="admin/assets/images/dashboard/locationfloorplan.jpg" alt="image" style="width:100%;">
                       
                   </div>
                 </div>

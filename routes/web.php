@@ -40,11 +40,14 @@ Route::get("/floorplandummy",[adminControl::class,"displayfloorplandummy"]);//du
 Route::get("/uploadfiles",[adminControl::class,"uploadfiles"]); //upload doc button
 Route::post("/addDocument",[adminControl::class,"uploadfilesDB"]); //add data to DB
 
+//---------------------------------------- VIEW ALL DOCUMENTS ---------------------------------------------------
 
 Route::get("/allfiles",[adminControl::class,"allfilesdisplay"]); //display all files
 Route::get("/deleteDoc/{DocID}",[adminControl::class,"deletedoc"]); //delete document
 Route::get("/download/{file}",[adminControl::class,'download']); //download doc
 Route::get("/allfiles/search", [adminControl::class, 'searchFiles']); //search doc
+
+Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
 
 
 Route::get("/updDoc/{DocID}",[adminControl::class,"showData"]); //show data in form 
@@ -52,11 +55,16 @@ Route::post("/edit",[adminControl::class,"updatedoc"]); //post update document t
 
 
 
-Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
 
+//---------------------------------------- ADD TO FAV DOCUMENTS ---------------------------------------------------
 
 Route::post('/addfav/{DocID}', [adminControl::class, 'addToFavorites'])->name('addfav');
 Route::get('/favorites', [adminControl::class, 'showFavorites'])->name('favorites');
+
+
+//---------------------------------------- END OF ADMIN  ---------------------------------------------------
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +72,23 @@ Route::get('/favorites', [adminControl::class, 'showFavorites'])->name('favorite
 |--------------------------------------------------------------------------
 */
 
+//---------------------------------------- VIEW ALL DOCUMENTS ---------------------------------------------------
+
 Route::get("/allfilesUser",[userControl::class,"userallfiles"]);
+Route::get("/download/{file}",[userControl::class,'downloaduser']); //download doc
+Route::get("/allfilesUser/search", [userControl::class, 'searchFilesuser']); //search doc
+
+Route::get("/documentinfo/{DocID}",[userControl::class,"viewdocumentinfouser"]); //view each document info
+
+
+//---------------------------------------- UPDATE DOCUMENTS ---------------------------------------------------
+
+Route::get("/updDoc/{DocID}",[userControl::class,"showData"]); //show data in form 
+Route::post("/edit",[userControl::class,"updatedoc"]); //post update document to DB
+
+
+//---------------------------------------- TO EDIT ---------------------------------------------------
+
 Route::get("/reqstatsUser",[userControl::class,"userreqstats"]);
 Route::get("/floorplanUser",[userControl::class,"userfloorplan"]);
 Route::get("/helpUser",[userControl::class,"userhelp"]);

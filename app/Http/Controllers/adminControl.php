@@ -136,7 +136,7 @@ class adminControl extends Controller
         return view("ADMIN.viewfiles",['data'=>$data]); 
     }
     
-    //---------------------------------------- VIEW DOCUMENT ---------------------------------------------------
+    //---------------------------------------- VIEW FLOORPLAN  ---------------------------------------------------
 
     
     function displayfloorplan() //go to floorplan page
@@ -146,37 +146,57 @@ class adminControl extends Controller
 
     function displayfloorplandummy() //go to floorplan page
     {
-        return view('ADMIN.favoritedoc');
+        return view('ADMIN.favoritedoc'); //try fav doc 
     }
     
     
     //---------------------------------------- FAVOURITE DOCUMENT ---------------------------------------------------
 
     
-    public function addToFavorites($document)
+    
+    public function addToFavorites($DocID)
     {
-        $documentModel = documentinfo::findOrFail($document);
+        // Fetch the Documentinfo model based on the document ID
+        $document = Documentinfo::find($DocID);
 
-        // Attach the document to the user's favorites >> function from user model
-        auth()->user()->favorites()->create(['doc_id' => $documentModel->DocID]);
+        if (!$document) {
+            // Handle the case where the document is not found
+            Session::flash('fail', 'Document not found');
+            return redirect('/allfiles');
+        }
 
-        Session::flash('success', 'Document added to favorites successfully');
+        // Check if the document is not already in favorites
+        $userId = auth()->id();
+        $isFavorite = docfavorite::where('user_id', $userId)->where('doc_id', $document->DocID)->exists();
 
+        if (!$isFavorite) {
+            // Add the document to favorites
+            docfavorite::create([
+                'user_id' => $userId,
+                'doc_id' => $document->DocID,
+            ]);
+
+            Session::flash('success', 'Document added to favorite successfully');
+            return redirect('/allfiles');
+        }
+
+        // Display error message
+        Session::flash('fail', 'Failed to add favorite');
         return redirect('/allfiles');
     }
 
 
     public function showFavorites()
     {
-        // Debugging statement
-        //dd('Controller is called'); // Check if the user is authenticated
+        // Get the current user's ID
+        $userId = auth()->id();
 
-        // Retrieve the user's favorite documents
-        $userFavorites = auth()->user()->favorites()->with('document')->get();
+        // Query the 'docfavorite' table to get the favorite document IDs for the user
+        $favoriteDocumentIds = docfavorite::where('user_id', $userId)->pluck('doc_id')->toArray();
 
-        // Debugging statement
-        //dd($userFavorites); // Check the content of $userFavorites
-
+        // Retrieve the documents based on the IDs from the 'Documentinfo' table
+        $userFavorites = documentinfo::whereIn('DocID', $favoriteDocumentIds)->get();
+        
         return view('admin.favoritedoc', compact('userFavorites'));
     }
 

@@ -104,23 +104,30 @@
       
           <div class="content-wrapper pb-0">
             
-          @if(Session::has('success'))
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script>
-              $(document).ready(function(){
-                  var alertElement = $('.alert');
-                  alertElement.fadeIn();
+          @if(Session::has('success') || Session::has('fail'))
+              <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+              <script>
+                  $(document).ready(function(){
+                    var alertElement = $('.alert');
+                    alertElement.fadeIn();
 
-                  // Hide the alert after a few seconds
-                  setTimeout(function(){
-                    alertElement.fadeOut();
-                  }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
-              });
-            </script>
-            <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
-                {{ Session::get('success') }}
-            </div>
-          @endif
+                    // Hide the alert after a few seconds
+                    setTimeout(function(){
+                      alertElement.fadeOut();
+                    }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
+                  });
+              </script>
+
+              @if(Session::has('success'))
+                  <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
+                    {{ Session::get('success') }}
+                  </div>
+              @elseif(Session::has('fail'))
+                  <div class="alert alert-danger" style="display: none; background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; padding: 10px;">
+                    {{ Session::get('fail') }}
+                  </div>
+              @endif
+        @endif
 
 
             <div>

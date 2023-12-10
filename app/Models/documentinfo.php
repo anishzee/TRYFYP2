@@ -24,11 +24,6 @@ class documentinfo extends Model
 
     public $timestamps=false; //disabale the created_at & updated_at field (so we wont get error column not found)
     
-    use HasFactory;
 
-    public function favorites()
-    {
-        return $this->hasMany(docfavorite::class, 'doc_id', 'DocID');
-    }
 
 }

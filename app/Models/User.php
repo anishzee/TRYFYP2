@@ -62,8 +62,5 @@ class User extends Authenticatable
 
     public $table= "users";
 
-    public function favorites()
-    {
-        return $this->hasMany(docfavorite::class, 'user_id', 'id');
-    }
+    
 }

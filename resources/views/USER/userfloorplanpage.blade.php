@@ -79,6 +79,24 @@
   background: white;
 }
 
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
     </style>
   </head>
  <body>
@@ -87,19 +105,17 @@
   <div class="container-scroller">
 
     @include("USER.usernavbar")
-        <div class="">
+        <div class="centerALL">
           <div class="content-wrapper pb-0">
             <div class="page-header flex-wrap">
-              <h3 class="mb-0"> Location
-              </h3>
-              
+              <h3 class="mb-0 centerALL" > Location</h3>
             </div>
             
             <div class="row" >
                 <div class="row">
                   <div class="column">
                     <div class="container">
-                      <img src="admin/assets/images/dashboard/locationfloorplan.jpg" alt="image" style="width:100%;" class="center">
+                      <img src="admin/assets/images/dashboard/locationfloorplan.jpg" alt="image" style="width:100%;" >
                         
                     </div>
                   </div>
@@ -112,15 +128,7 @@
 
 
             <div class="row">
-              <div class="">
-                <div class="">
-                 
-                    
-                    <img src="admin/assets/images/dashboard/floorplan.jpg" alt="image" style="width:50%;">
-                    
-                  </div>
-                </div>
-              </div>
+              <img src="admin/assets/images/dashboard/floorplan.jpg" alt="image" style="width:50%;">
             </div>
             <br></br>
 

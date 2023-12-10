@@ -105,9 +105,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">Favorites Documents</h4>
-                    @if(isset($userFavorites))
-                        {{ dd($userFavorites) }}
-                    @endif
+                   
                     <div class="table-responsive">
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
@@ -120,47 +118,27 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($userFavorites as $favorite)
+                          @foreach($userFavorites as $x)
                             <tr>
                               <td>
-                                @if(isset($favorite->document))
-                                    {{ $favorite->document->DocName }}
-                                @else
-                                    N/A
-                                @endif
+                                  {{ $x->DocName }}
                               </td>
                               <td>
-                                @if(isset($favorite->document))
-                                    {{ $favorite->document->DocDate }}
-                                @else
-                                    N/A
-                                @endif
+                                  {{ $x->DocDate }}
                               </td>
                               <td>
-                                @if(isset($favorite->document))
-                                    <a class="btn btn-success" href="{{ url('/floorplan') }}">
-                                        {{ $favorite->document->Location }}
-                                    </a>
-                                @else
-                                    N/A
-                                @endif
+                                  <a class="btn btn-success" href="{{ url('/floorplan') }}">
+                                    {{ $x->Location }}
+                                  </a>
                               </td>
                               <td>
-                                @if(isset($favorite->document))
-                                    {{ $favorite->document->LastUsed }}
-                                @else
-                                    N/A
-                                @endif
+                                  {{ $x->LastUsed }}
                               </td>
                               <td>
-                                @if(isset($favorite->document))
-                                    {{ $favorite->document->status }}
-                                @else
-                                    N/A
-                                @endif
+                                  {{ $x->status }}
                               </td>
                             </tr>
-                            @endforeach
+                          @endforeach
                           </tbody>
                         </table>
                     </div>

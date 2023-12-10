@@ -18,12 +18,14 @@ class homeControl extends Controller
 
         if($typeuser=='1')
         {
-            return view('admin.adminpage'); //the admin view
+            $user=Auth::user();
+            return view('admin.adminpage')->with('name', $user->name); //the admin view
         }
         
         else
         {
-            return view('user.userpage'); //the normal user view
+            $user=Auth::user();
+            return view('user.userpage')->with('name', $user->name); //the normal user view
         }
         
     }

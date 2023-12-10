@@ -10,9 +10,13 @@ class docfavorite extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'doc_id'];
+    
+    public $table = 'docfavorites';
 
-    public function document()
-    {
-        return $this->belongsTo(documentinfo::class, 'doc_id', 'DocID');
-    }
+    protected $primaryKey = 'FavID';
+
+    protected $keyType ="integer";
+    
+    public $timestamps=false; //disabale the created_at & updated_at field (so we wont get error column not found)
+    
 }
