@@ -113,7 +113,7 @@
           <div class="row">
               <div class="card" style="width: 60%; margin: 0 auto;">
                 <div class="card-body">
-                  <h4 class="card-title">Update files</h4>
+                  <h4 class="card-title">Update Document</h4>
                   
                   
                     <form class="forms-sample" method="post" action="/edit" > 
@@ -220,14 +220,11 @@
                       </div>
                       
                       <button type="submit" class="btn btn-primary mr-2"> Update </button>
-                      <button class="btn btn-light">Reset</button>
+                      <button type="reset" class="btn btn-dark">Reset</button>
                     </form>
                 </div>
               </div>
           </div>
-
-
-
 
 
           <br></br><br></br>

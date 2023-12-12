@@ -116,7 +116,7 @@
                   <h4 class="card-title">Update files</h4>
                   
                   
-                    <form class="forms-sample" method="post" action="/edit" > 
+                    <form class="forms-sample" method="post" action="/editUser" > 
                       @csrf
 
                       <div class="form-group">
@@ -212,7 +212,7 @@
                       </div>
                       
                       <button type="submit" class="btn btn-primary mr-2"> Update </button>
-                      <button class="btn btn-light">Reset</button>
+                      <button type="reset" class="btn btn-dark">Reset</button>
                     </form>
                 </div>
               </div>

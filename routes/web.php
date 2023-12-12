@@ -47,13 +47,15 @@ Route::get("/deleteDoc/{DocID}",[adminControl::class,"deletedoc"]); //delete doc
 Route::get("/download/{file}",[adminControl::class,'download']); //download doc
 Route::get("/allfiles/search", [adminControl::class, 'searchFiles']); //search doc
 
+//---------------------------------------- VIEW SPECIFIC DOCUMENT ---------------------------------------------------
+
 Route::get("/documentinfo/{DocID}",[adminControl::class,"viewdocumentinfo"]); //view each document info
+
+//---------------------------------------- UPDATE DOCUMENTS ---------------------------------------------------
 
 
 Route::get("/updDoc/{DocID}",[adminControl::class,"showData"]); //show data in form 
 Route::post("/edit",[adminControl::class,"updatedoc"]); //post update document to DB
-
-
 
 
 //---------------------------------------- ADD TO FAV DOCUMENTS ---------------------------------------------------
@@ -75,16 +77,16 @@ Route::get('/favorites', [adminControl::class, 'showFavorites'])->name('favorite
 //---------------------------------------- VIEW ALL DOCUMENTS ---------------------------------------------------
 
 Route::get("/allfilesUser",[userControl::class,"userallfiles"]);
-Route::get("/download/{file}",[userControl::class,'downloaduser']); //download doc
+Route::get("/downloadUser/{file}",[userControl::class,'downloaduser']); //download doc
 Route::get("/allfilesUser/search", [userControl::class, 'searchFilesuser']); //search doc
 
-Route::get("/documentinfo/{DocID}",[userControl::class,"viewdocumentinfouser"]); //view each document info
+Route::get("/documentinfoUser/{DocID}",[userControl::class,"viewdocumentinfouser"]); //view each document info
 
 
 //---------------------------------------- UPDATE DOCUMENTS ---------------------------------------------------
 
-Route::get("/updDoc/{DocID}",[userControl::class,"showData"]); //show data in form 
-Route::post("/edit",[userControl::class,"updatedoc"]); //post update document to DB
+Route::get("/updDocUser/{DocID}",[userControl::class,"showData"]); //show data in form 
+Route::post("/editUser",[userControl::class,"updatedoc"]); //post update document to DB
 
 
 //---------------------------------------- TO EDIT ---------------------------------------------------

@@ -185,16 +185,16 @@
                               </td>
                               <td>{{$x->LastUsed}}</td>
                               <td>
-                                <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
+                                <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>
                               </td>
                               <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
                                 {{ $x->status }}
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"updDoc/".$x['DocID']}}>Update✏️</a>
+                                <a class="btn btn-success" href={{"updDocUser/".$x['DocID']}}>Update✏️</a>
                               </td>
                               <td>
-                                <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
+                                <form action="{{ route('addfav', $x['DocID']) }}" method="POST"> <!-- To be edit -->
                                 @csrf
                                   <button type="submit" class="btn btn-success">Favorite💜</button>
                                 </form>

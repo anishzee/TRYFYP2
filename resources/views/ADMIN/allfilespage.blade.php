@@ -130,14 +130,7 @@
         @endif
 
 
-            <div>
-              <p></p>
-                <ul>
-                  <li></li>
-                    <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfiles'">+ NEW</button>
-                  <li></li>
-                </ul>
-            </div> 
+            
 
 
             
@@ -168,16 +161,20 @@
                     <br></br>
                     <div class="table-container">
                       <div >
+                        <div class="d-flex justify-content-end">
+                          <ul>
+                            <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfiles'">+ NEW</button>
+                          </ul>
+                        </div> 
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
-                              <th>Document name</th>
+                              <th>Document Name</th>
                               <th>Date</th>
-                              <th>Location</th>
                               <th>Last used by</th>
-                              <th>Manage</th>
                               <th>Status</th>
-                              <th>Update</th>
+                              <th>Location</th>
+                              <th>Manage</th>
                               <th>Add to Favorite</th>
                               <th>Operation</th>
                             </tr>
@@ -187,16 +184,15 @@
                             <tr>
                               <td>{{$x->DocName}}</td>
                               <td>{{$x->DocDate}}</td>
+                              <td>{{$x->LastUsed}}</td>
+                              <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
+                                {{$x->status}}
+                              </td>
                               <td>
                                 <a class="btn btn-success" href="{{url('/floorplan')}}">{{$x->Location}}</a>
                               </td>
-                              <td>{{$x->LastUsed}}</td>
                               <td>
                                 <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
-                              </td>
-                              <td>{{$x->status}}</td>
-                              <td>
-                                <a class="btn btn-success" href={{"updDoc/".$x['DocID']}}>Update✏️</a>
                               </td>
                               <td>
                                 <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
@@ -205,7 +201,7 @@
                                 </form>
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
+                                <a class="btn btn-danger" href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
                               </td>
                             </tr>
                             @endforeach
@@ -227,7 +223,7 @@
 
 
 
-            
+                    <br></br><br></br><br></br>    
           </div>
  
               

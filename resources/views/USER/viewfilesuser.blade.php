@@ -136,7 +136,7 @@
                             <td>{{$data->LastUsed}}</td>
                             <td>{{$data->status}}</td>
                             <td>
-                            <a class="btn btn-success" href="{{url('/download',$data->DocUpload)}}">Download⏬</a>
+                            <a class="btn btn-success" href="{{url('/downloadUser',$data->DocUpload)}}">Download⏬</a>
                             </td>
                           </tr>
                         </tbody>

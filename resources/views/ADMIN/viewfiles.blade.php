@@ -113,18 +113,19 @@
               <div class="">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">All Files</h4>
+                    <h4 class="card-title">View Document</h4>
                     
                     </p>
                     <div class="table-responsive">
                       <table class="table table-hover">
                         <thead>
                           <tr>
-                            <th>Document name</th>
+                            <th>Document Name</th>
                             <th>Date</th>
-                            <th>Location</th>
                             <th>Last used by</th>
                             <th>Status</th>
+                            <th>Location</th>
+                            <th>Manage</th>
                             <th>Download</th>
                           </tr>
                         </thead>
@@ -132,11 +133,18 @@
                           <tr>
                             <td>{{$data->DocName}}</td>
                             <td>{{$data->DocDate}}</td>
-                            <td>{{$data->Location}}</td>
                             <td>{{$data->LastUsed}}</td>
-                            <td>{{$data->status}}</td>
+                            <td style="font-size: 14px; color: {{ $data->status === 'Available' ? 'green' : ($data->status === 'In Used' ? 'red' : 'black') }};">
+                              {{$data->status}}
+                            </td>
                             <td>
-                            <a class="btn btn-success" href="{{url('/download',$data->DocUpload)}}">Download⏬</a>
+                              <a class="btn btn-success" href="{{url('/floorplan')}}">{{$data->Location}}</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-success" href="{{url('updDoc/'.$data['DocID'])}}">Update✏️</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-success" href="{{url('/download',$data->DocUpload)}}">Download⏬</a>
                             </td>
                           </tr>
                         </tbody>

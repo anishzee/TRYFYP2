@@ -174,7 +174,7 @@ class adminControl extends Controller
             docfavorite::create([
                 'user_id' => $userId,
                 'doc_id' => $document->DocID,
-            ]);
+            ]); 
 
             Session::flash('success', 'Document added to favorite successfully');
             return redirect('/allfiles');
