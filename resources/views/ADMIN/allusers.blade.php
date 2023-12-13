@@ -72,12 +72,29 @@
   background: white;
 }
 
- .round2 {
+.round2 {
   border: 2px solid lightblue;
   border-radius: 8px;
   padding: 5px;
 }
 
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
 
 
     </style>
@@ -93,15 +110,15 @@
 <div class="container-scroller">
 
   @include("ADMIN.navbar")
-      <div class="">
+      <div class="centerALL">
         <div class="content-wrapper pb-0">
           
-        <br></br>
+          <br></br><br></br>
           <div class="row">
             <div class="">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">All Users</h4>
+                  <h4 class="card-title" style="text-align: center; font-size: 18px;">All Users</h4>
                   <br></br>
                   <div >
                     <input type="text" id="searchInput" class="round2" onkeyup="searchTable()" placeholder="Search for names..">
@@ -139,15 +156,26 @@
           </div>
           
           <br></br>
-                    <span>
+                    <span class="centerALL">
                       {{$data->links('vendor.pagination.bootstrap-4')}}
                     </span>
 
                    
 
 
-
-
+          
+          <br></br>
+          <br></br>
+          <br></br>
+         
+          <br></br>
+          
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+         
+            
           
         </div>
 
@@ -176,6 +204,8 @@
               }
           }
     </script>
+
+
 
 
 

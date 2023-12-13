@@ -18,7 +18,7 @@ class adminControl extends Controller
 
     public function user() //go to all users page & display all users data
     {
-        $data=User::paginate(2); //can change ikut suka
+        $data=User::paginate(3); //can change ikut suka
         return view("ADMIN.allusers",['data'=>$data]);
     }
 
@@ -186,6 +186,7 @@ class adminControl extends Controller
     }
 
 
+
     public function showFavorites()
     {
         // Get the current user's ID
@@ -195,9 +196,33 @@ class adminControl extends Controller
         $favoriteDocumentIds = docfavorite::where('user_id', $userId)->pluck('doc_id')->toArray();
 
         // Retrieve the documents based on the IDs from the 'Documentinfo' table
-        $userFavorites = documentinfo::whereIn('DocID', $favoriteDocumentIds)->get();
+        $userFavorites = documentinfo::whereIn('DocID', $favoriteDocumentIds)->paginate(2);
         
         return view('admin.favoritedoc', compact('userFavorites'));
+    }
+
+
+    public function removeFav($doc_id)
+    {
+        // Find the favorite record based on doc_id and user_id
+        $favorite = docfavorite::where('doc_id', $doc_id)
+            ->where('user_id', auth()->id())
+            ->first();
+
+        // Check if the favorite record exists
+        if ($favorite) {
+            // Delete the favorite record
+            $favorite->delete();
+
+            Session::flash('success', 'Document removed from favorite successfully');
+
+            return redirect('/favorites');
+        }
+
+        // If the favorite record doesn't exist
+        Session::flash('fail', 'Failed to remove, document did not exist');
+
+        return redirect('/favorites');
     }
 
 

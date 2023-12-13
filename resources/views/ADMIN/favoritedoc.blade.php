@@ -79,6 +79,23 @@
   
 }
 
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
 
 
 
@@ -90,21 +107,43 @@
   <div class="container-scroller">
 
     @include("ADMIN.navbar")
-        <div class="">
+        <div class="centerALL">
           <div class="content-wrapper pb-0">
-            <div class="page-header flex-wrap">
-              <h3 class="mb-0"> Favorite Document 
-              </h3>
-              
-            </div>
             
-          
+          @if(Session::has('success') || Session::has('fail'))
+              <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+              <script>
+                  $(document).ready(function(){
+                    var alertElement = $('.alert');
+                    alertElement.fadeIn();
 
+                    // Hide the alert after a few seconds
+                    setTimeout(function(){
+                      alertElement.fadeOut();
+                    }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
+                  });
+              </script>
+
+              @if(Session::has('success'))
+                  <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
+                    {{ Session::get('success') }}
+                  </div>
+              @elseif(Session::has('fail'))
+                  <div class="alert alert-danger" style="display: none; background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; padding: 10px;">
+                    {{ Session::get('fail') }}
+                  </div>
+              @endif
+          @endif
+
+
+            <br></br>
+            <br></br>
             <div class="row">
               <div class="">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Favorites Documents</h4>
+                    <h4 class="card-title" style="text-align: center; font-size: 18px;">Favorite Document</h4>
+                    <br></br>
                    
                     <div class="table-responsive">
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
@@ -112,9 +151,11 @@
                             <tr>
                               <th>Document name</th>
                               <th>Date</th>
-                              <th>Location</th>
                               <th>Last used by</th>
                               <th>Status</th>
+                              <th>Location</th>
+                              <th>Manage</th>
+                              <th>Operation</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -127,15 +168,19 @@
                                   {{ $x->DocDate }}
                               </td>
                               <td>
-                                  <a class="btn btn-success" href="{{ url('/floorplan') }}">
-                                    {{ $x->Location }}
-                                  </a>
+                                {{$x->LastUsed}}
+                              </td>
+                              <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
+                                {{$x->status}}
                               </td>
                               <td>
-                                  {{ $x->LastUsed }}
+                                <a class="btn btn-success" href="{{url('/floorplan')}}">{{$x->Location}}</a>
                               </td>
                               <td>
-                                  {{ $x->status }}
+                                <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
+                              </td>
+                              <td>
+                                <a class="btn btn-danger" href={{"removeFav/".$x['DocID']}}>Remove🗑️</a>
                               </td>
                             </tr>
                           @endforeach
@@ -147,16 +192,31 @@
               </div>
             </div>
 
+            <br></br>
+                    <span class="centerALL">
+                      {{$userFavorites->links('vendor.pagination.bootstrap-4')}}
+                    </span>
 
-<br></br>
 
-
-
-            
+            <br></br>
+            <br></br>
+             
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+             
           </div>
- 
-              
+                     
+            
         </div>
+      
+
+
   </div>
 
 

@@ -93,6 +93,27 @@
   overflow-x: auto;
 }
 
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+
+
+
     </style>
   </head>
  <body>
@@ -101,7 +122,7 @@
   <div class="container-scroller">
 
     @include("ADMIN.navbar")
-      
+        <div class="centerALL">
           <div class="content-wrapper pb-0">
             
           @if(Session::has('success') || Session::has('fail'))
@@ -127,20 +148,14 @@
                     {{ Session::get('fail') }}
                   </div>
               @endif
-        @endif
-
-
-            
-
-
-            
+          @endif
 
 
             <div class="row" style="max-width: 100%;overflow-x: auto;">
               <div >
                 <div class="card" style="max-width: 100%;">
                   <div class="card-body" style="max-width: 100%;">
-                    <h4 class="card-title">All Files</h4>
+                    <h4 class="card-title" style="text-align: center; font-size: 18px;">All Files</h4>
                     
                     <br></br>
                     <!-- Search Bar -->
@@ -217,14 +232,28 @@
 
 
             <br></br>
-                    <span>
-                      {{$data->links('vendor.pagination.bootstrap-4')}} 
-                    </span>
+              <div style="text-align: center;">
+                <span style="display: inline-block;">
+                  {{$data->links('vendor.pagination.bootstrap-4')}}
+                </span>
+              </div>
 
 
 
-                    <br></br><br></br><br></br>    
+              <br></br>
+          <br></br>
+          <br></br>
+         
+          <br></br>
+          
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+
           </div>
+        
+        </div>
  
               
        

@@ -62,6 +62,7 @@ Route::post("/edit",[adminControl::class,"updatedoc"]); //post update document t
 
 Route::post('/addfav/{DocID}', [adminControl::class, 'addToFavorites'])->name('addfav');
 Route::get('/favorites', [adminControl::class, 'showFavorites'])->name('favorites');
+Route::get('/removeFav/{doc_id}', [AdminControl::class, 'removeFav'])->name('removeFav');
 
 
 //---------------------------------------- END OF ADMIN  ---------------------------------------------------
