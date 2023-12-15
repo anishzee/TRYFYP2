@@ -216,7 +216,7 @@
                                 </form>
                               </td>
                               <td>
-                                <a class="btn btn-danger" href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
+                                <a class="btn btn-danger"  href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
                               </td>
                             </tr>
                             @endforeach

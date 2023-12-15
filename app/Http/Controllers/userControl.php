@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\documentinfo;
 use App\Models\docfavorite;
+use App\Models\docrequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Stroage;
@@ -82,13 +83,87 @@ class userControl extends Controller
     }
 
 
-    //---------------------------------------- TO EDIT LATER ---------------------------------------------------
+    //---------------------------------------- REQUEST DOCUMENT ---------------------------------------------------
 
 
     function userreqstats() //go to manage request page
     {
         return view('user.userreqstatpage');
     }
+
+    public function addToRequests($DocID)
+    {
+        // Fetch the Documentinfo model based on the document ID
+        $docreq = Documentinfo::find($DocID);
+
+        if (!$docreq) {
+            // Handle the case where the document is not found
+            Session::flash('fail', 'Document not found');
+            return redirect('/allfilesUser');
+        }
+
+        // Check if the document is not already in requests
+        $userId = auth()->id();
+        $isRequest = docrequest::where('ReqUserID', $userId)->where('ReqDocID', $docreq->DocID)->exists();
+
+        if (!$isRequest) {
+            // Add the document to requests table
+            docrequest::create([
+                'ReqUserID' => $userId,
+                'ReqDocID' => $docreq->DocID,
+            ]); 
+
+            Session::flash('success', 'Document requested successfully');
+            return redirect('/allfilesUser');
+        }
+
+        // Display error message
+        Session::flash('fail', 'Failed to request document');
+        return redirect('/allfilesUser');
+    }
+
+    public function showRequests()
+    {
+        // Get the current user's ID
+        $userId = auth()->id();
+
+        // Query the 'docrequest' table to get the requested document IDs for the user
+        $requestedDocumentIds = docrequest::where('ReqUserID', $userId)->pluck('ReqDocID')->toArray();
+
+        // Retrieve the documents based on the IDs from the 'Documentinfo' table
+        $userRequested = documentinfo::whereIn('DocID', $requestedDocumentIds)->paginate(2);
+        
+        return view('user.userreqstatpage', compact('userRequested'));
+    }
+
+
+    public function removeReq($doc_id)
+    {
+        // Find the requested record based on doc_id and user_id
+        $requested = docrequest::where('ReqDocID', $doc_id)
+            ->where('ReqUserID', auth()->id())
+            ->first();
+
+        // Check if the request record exists
+        if ($requested) {
+            // Delete the favorite record
+            $requested->delete();
+
+            Session::flash('success', 'Document removed from request successfully');
+
+            return redirect('/reqstatsUser');
+        }
+
+        // If the requested record doesn't exist
+        Session::flash('fail', 'Failed to remove, document did not exist');
+
+        return redirect('/reqstatsUser');
+    }
+    
+
+
+    //---------------------------------------- TO EDIT LATER ---------------------------------------------------
+
 
     function userfloorplan() //go to manage request page
     {

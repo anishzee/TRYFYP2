@@ -76,7 +76,28 @@
 
 .content-wrapper {
   background: white;
+  
 }
+
+.centerALL {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the container takes the full height of the viewport */
+    width: 100%;
+    margin: 0; /* Remove default body margin */
+}
+
+
 
     </style>
   </head>
@@ -86,119 +107,112 @@
   <div class="container-scroller">
 
     @include("USER.usernavbar")
-        <div class="">
+        <div class="centerALL">
           <div class="content-wrapper pb-0">
             
-            
-            
+          @if(Session::has('success') || Session::has('fail'))
+              <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+              <script>
+                  $(document).ready(function(){
+                    var alertElement = $('.alert');
+                    alertElement.fadeIn();
+
+                    // Hide the alert after a few seconds
+                    setTimeout(function(){
+                      alertElement.fadeOut();
+                    }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
+                  });
+              </script>
+
+              @if(Session::has('success'))
+                  <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
+                    {{ Session::get('success') }}
+                  </div>
+              @elseif(Session::has('fail'))
+                  <div class="alert alert-danger" style="display: none; background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; padding: 10px;">
+                    {{ Session::get('fail') }}
+                  </div>
+              @endif
+          @endif
 
 
-
-            <div>
-              <p></p>
-                <ul>
-                  <li></li>
-                  <button type="button" class="btn btn-sm ms-3 btn-success"> + NEW </button>
-                  <li></li>
-                </ul>
-            </div> 
-
-
-
-
-
+            <br></br>
+            <br></br>
             <div class="row">
               <div class="">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Request Status</h4>
-                    
-                    </p>
+                    <h4 class="card-title" style="text-align: center; font-size: 18px;">Requested Document</h4>
+                    <br></br>
+                   
                     <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Document name</th>
-                            <th>Date</th>
-                            <th>Location</th>
-                            <th>Last used by</th>
-                            <th>Manage</th>
-                            <th>Request Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Document 1</td>
-                            <td>12/12/2022</td>
-                            <td>RK 1A</td>
-                            <td>Abu</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Document 2</td>
-                            <td>10/12/2022</td>
-                            <td>RK 10A</td>
-                            <td>Ahmad</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Document 3</td>
-                            <td>09/11/2022</td>
-                            <td>RK 5A</td>
-                            <td>Aminah</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Document 4</td>
-                            <td>12/10/2022</td>
-                            <td>KB 1A</td>
-                            <td>Rozana</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Document 5</td>
-                            <td>16/09/2022</td>
-                            <td>KB 1A</td>
-                            <td>Abu</td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                            <td>
-                              <label class="badge badge-danger">Pending</label>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
+                          <thead>
+                            <tr>
+                              <th>Document name</th>
+                              <th>Last used by</th>
+                              <th>Location</th>
+                              <th>Manage</th>
+                              <th>Request Status</th>
+                              <th>Operation</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          @foreach($userRequested as $x)
+                            <tr>
+                              <td>
+                                  {{ $x->DocName }}
+                              </td>
+                              <td>
+                                {{$x->LastUsed}}
+                              </td>
+                              <td>
+                                <a class="btn btn-success" href="{{url('/floorplan')}}">{{$x->Location}}</a>
+                              </td>
+                              <td>
+                                <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>
+                              </td>
+                              <td style="font-size: 14px; color: {{ $x->reqstatus === 'Pending' ? 'orange' : ($x->reqstatus === 'Accepted' ? 'green' : ($x->reqstatus === 'Rejected' ? 'red' : 'black')) }};">
+                                {{$x->reqstatus}}
+                              </td>
+                              <td>
+                                <a class="btn btn-danger" href={{"removeReq/".$x['DocID']}}>Remove🗑️</a>
+                              </td>
+                            </tr>
+                          @endforeach
+                          </tbody>
+                        </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
+            <br></br>
+                    <span class="centerALL">
+                      {{$userRequested->links('vendor.pagination.bootstrap-4')}}
+                    </span>
+
+
+            <br></br>
+            <br></br>
+             
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+             
           </div>
- 
-              
+                     
+            
         </div>
+      
+
+
   </div>
 
 

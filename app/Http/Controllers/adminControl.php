@@ -41,6 +41,9 @@ class adminControl extends Controller
     {
         $newdoc = new documentinfo;
 
+        $newdoc->status = 'Available'; //set value by default = Available 
+        $newdoc->reqstatus = 'Pending'; //set value by default = Pending 
+
         $DocUpload=$req->DocUpload;
 
 	    $filename=time().'.'.$DocUpload->getClientOriginalExtension();
@@ -226,13 +229,16 @@ class adminControl extends Controller
     }
 
 
-    //---------------------------------------- TO EDIT LATER ---------------------------------------------------
+    //---------------------------------------- REQUEST DOCUMENTS ---------------------------------------------------
+
 
     function displaymanagereq() //go to manage request page
     {
         return view('ADMIN.managereqpage');
     }
 
+
+    //---------------------------------------- TO EDIT LATER ---------------------------------------------------
     
     
 

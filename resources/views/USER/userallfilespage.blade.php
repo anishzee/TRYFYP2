@@ -194,14 +194,17 @@
                                 <a class="btn btn-success" href={{"updDocUser/".$x['DocID']}}>Update✏️</a>
                               </td>
                               <td>
-                                <form action="{{ route('addfav', $x['DocID']) }}" method="POST"> <!-- To be edit -->
+                                <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
                                 @csrf
                                   <button type="submit" class="btn btn-success">Favorite💜</button>
                                 </form>
                               </td>
                               <td>
                                 @if($x->status === 'Available')
-                                  <a class="btn btn-success" href="">Request</a>
+                                  <form action="{{ route('reqdoc', $x['DocID']) }}" method="POST">
+                                  @csrf
+                                    <button type="submit" class="btn btn-success">Request</button>
+                                  </form>
                                 @else
                                   <button class="btn btn-success" disabled>Request</button>
                                 @endif

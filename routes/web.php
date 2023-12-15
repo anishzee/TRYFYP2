@@ -32,8 +32,6 @@ Route::get("/redirect",[homeControl::class,"redirectFunct"]);//1st page
 Route::get("/allusers",[adminControl::class,"user"]);//display all users
 Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
 
-Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
-
 Route::get("/floorplan",[adminControl::class,"displayfloorplan"]); //go to floorplan page 
 Route::get("/floorplandummy",[adminControl::class,"displayfloorplandummy"]);//dummy floorplan
 
@@ -65,6 +63,14 @@ Route::get('/favorites', [adminControl::class, 'showFavorites'])->name('favorite
 Route::get('/removeFav/{doc_id}', [AdminControl::class, 'removeFav'])->name('removeFav');
 
 
+//---------------------------------------- REQUEST DOCUMENTS ---------------------------------------------------
+
+
+Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
+Route::get("/updReq/{DocID}",[AdminControl::class,"updateRequests"])->name('updReqUser'); //show data in form 
+
+
+
 //---------------------------------------- END OF ADMIN  ---------------------------------------------------
 
 
@@ -86,13 +92,22 @@ Route::get("/documentinfoUser/{DocID}",[userControl::class,"viewdocumentinfouser
 
 //---------------------------------------- UPDATE DOCUMENTS ---------------------------------------------------
 
+
 Route::get("/updDocUser/{DocID}",[userControl::class,"showData"]); //show data in form 
 Route::post("/editUser",[userControl::class,"updatedoc"]); //post update document to DB
 
 
-//---------------------------------------- TO EDIT ---------------------------------------------------
+//---------------------------------------- REQUEST DOCUMENT ------------------------------------------------------------
 
-Route::get("/reqstatsUser",[userControl::class,"userreqstats"]);
+
+Route::post('/reqdoc/{DocID}', [userControl::class, 'addToRequests'])->name('reqdoc');
+Route::get('/reqstatsUser', [userControl::class, 'showRequests'])->name('reqstatsUser');
+Route::get('/removeReq/{doc_id}', [userControl::class, 'removeReq'])->name('removeReq');
+
+
+//---------------------------------------- TO EDIT ------------------------------------------------------------
+
+
 Route::get("/floorplanUser",[userControl::class,"userfloorplan"]);
 Route::get("/helpUser",[userControl::class,"userhelp"]);
 
