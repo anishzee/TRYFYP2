@@ -127,7 +127,7 @@
               <p></p>
                 <ul>
                   <li></li>
-                    <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfiles'">+ NEW</button>
+                    <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfilesUser'">+ NEW</button>
                   <li></li>
                 </ul>
             </div> 

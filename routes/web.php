@@ -35,6 +35,9 @@ Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
 Route::get("/floorplan",[adminControl::class,"displayfloorplan"]); //go to floorplan page 
 Route::get("/floorplandummy",[adminControl::class,"displayfloorplandummy"]);//dummy floorplan
 
+
+//---------------------------------------- VIEW UPLOAD DOCUMENTS ---------------------------------------------------
+
 Route::get("/uploadfiles",[adminControl::class,"uploadfiles"]); //upload doc button
 Route::post("/addDocument",[adminControl::class,"uploadfilesDB"]); //add data to DB
 
@@ -103,6 +106,13 @@ Route::post("/editUser",[userControl::class,"updatedoc"]); //post update documen
 Route::post('/reqdoc/{DocID}', [userControl::class, 'addToRequests'])->name('reqdoc');
 Route::get('/reqstatsUser', [userControl::class, 'showRequests'])->name('reqstatsUser');
 Route::get('/removeReq/{doc_id}', [userControl::class, 'removeReq'])->name('removeReq');
+
+
+//---------------------------------------- VIEW UPLOAD DOCUMENTS ---------------------------------------------------
+
+
+Route::get("/uploadfilesUser",[userControl::class,"uploadfilesUser"]); //upload doc button
+Route::post("/addDocumentUser",[userControl::class,"uploadfilesDBUser"]); //add data to DB
 
 
 //---------------------------------------- TO EDIT ------------------------------------------------------------

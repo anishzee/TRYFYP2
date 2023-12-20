@@ -159,7 +159,42 @@ class userControl extends Controller
 
         return redirect('/reqstatsUser');
     }
+
     
+    //---------------------------------------- UPLOAD DOCUMENTS ---------------------------------------------------
+
+    function uploadfilesUser() //redirect to the form page
+    {
+        return view('User.uploadfilesUser');
+    }
+
+    function uploadfilesDBUser(Request $req) //upload data from form to DB
+    {
+        $newdoc = new documentinfo;
+
+        $newdoc->status = 'Available'; //set value by default = Available 
+        $newdoc->reqstatus = 'Pending'; //set value by default = Pending 
+
+        $DocUpload=$req->DocUpload;
+
+	    $filename=time().'.'.$DocUpload->getClientOriginalExtension();
+       
+        $req->DocUpload->move('assets/AllDocuments',$filename);
+
+		$newdoc->DocUpload=$filename;
+
+        $newdoc->DocName=$req->DocName;
+        $newdoc->DocDate=$req->DocDate;
+        $newdoc->Location=$req->Location;
+        $newdoc->LastUsed=$req->LastUsed;
+       
+        $newdoc->save();
+
+        Session::flash('success', 'Document uploaded successfully');
+
+        return redirect('/uploadfilesUser');
+
+    }
 
 
     //---------------------------------------- TO EDIT LATER ---------------------------------------------------
