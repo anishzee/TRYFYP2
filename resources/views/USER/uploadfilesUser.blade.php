@@ -146,7 +146,7 @@
                   <br></br>
                   
                   
-                    <form class="forms-sample" method="post" action="/addDocument" enctype="multipart/form-data"> 
+                    <form class="forms-sample" method="post" action="/addDocumentUser" enctype="multipart/form-data"> 
                       @csrf
                       <div class="form-group">
                         <label for="name">Document Name: </label>

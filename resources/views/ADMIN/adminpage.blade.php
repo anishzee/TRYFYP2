@@ -97,6 +97,9 @@
               <h3 class="mb-0"> Hello, welcome back {{$name}}! </h3>
               
             </div>
+
+            
+
             
             <div class="row">
                 
@@ -125,7 +128,10 @@
                         </script>
 
                       </div>
-                      
+                      <div class="col-sm-5 text-md-end">
+                          <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfiles'">
+                            <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
+                      </div>
                       
                     </div>
                     <div class="row">
@@ -244,45 +250,10 @@
 
 
 
-            <div>
-              <p></p>
-                <ul>
-                  <li></li>
-                  <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfiles'">+ NEW</button>
-                 
-                  <li></li>
-                  <li></li>
-                </ul>
-            </div> 
+            
 
 
-            <div class="row">
-              <div class="">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Favorites Documents</h4>
-                    
-                    </p>
-                    <div class="table-responsive">
-                        <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
-                          <thead>
-                            <tr>
-                              <th>Document name</th>
-                              <th>Date</th>
-                              <th>Location</th>
-                              <th>Last used by</th>
-                              <th>Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            
-                          </tbody>
-                        </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
 
 <br></br>

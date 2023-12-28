@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\documentinfo;
 use App\Models\docfavorite;
+use App\Models\docrequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Stroage;
@@ -75,7 +76,11 @@ class adminControl extends Controller
 
     function deletedoc($DocID) //delete doc in DB
     {
-        DB::delete('delete from documentinfos where DocID=?',[$DocID]);
+        // Delete related records in docfavorites table first
+        DB::delete('delete from docfavorites where doc_id = ?', [$DocID]);
+
+        // Now, delete the document from documentinfos table
+        DB::delete('delete from documentinfos where DocID = ?', [$DocID]);
 
         Session::flash('success', 'Document deleted successfully');
 
@@ -236,6 +241,42 @@ class adminControl extends Controller
     {
         return view('ADMIN.managereqpage');
     }
+
+
+    public function showRequestsAdmin()
+    {
+
+        // Query the 'docrequest' table to get the requested document IDs for the user
+        $requestedDocumentIds = docrequest::pluck('ReqDocID')->toArray();
+
+        // Retrieve the documents based on the IDs from the 'Documentinfo' table
+        $userRequested = documentinfo::whereIn('DocID', $requestedDocumentIds)->paginate(2);
+        
+        return view('ADMIN.managereqpage', compact('userRequested'));
+    }
+
+
+    public function removeReqAdmin($doc_id)
+    {
+        // Find the requested record based on doc_id and user_id
+        $requested = docrequest::where('ReqDocID', $doc_id)->first();
+
+        // Check if the request record exists
+        if ($requested) {
+            // Delete the favorite record
+            $requested->delete();
+
+            Session::flash('success', 'Document removed from request successfully');
+
+            return redirect('/reqstatsAdmin');
+        }
+
+        // If the requested record doesn't exist
+        Session::flash('fail', 'Failed to remove, document did not exist');
+
+        return redirect('/reqstatsAdmin');
+    }
+
 
 
     //---------------------------------------- TO EDIT LATER ---------------------------------------------------

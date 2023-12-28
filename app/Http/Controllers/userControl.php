@@ -209,4 +209,81 @@ class userControl extends Controller
     {
         return view('user.userhelppage');
     }
+
+
+    //---------------------------------------- FAVOURITE DOCUMENT ---------------------------------------------------
+
+    
+    
+    public function addToFavoritesUser($DocID) //add to fav button
+    {
+        // Fetch the Documentinfo model based on the document ID
+        $document = Documentinfo::find($DocID);
+
+        if (!$document) {
+            // Handle the case where the document is not found
+            Session::flash('fail', 'Document not found');
+            return redirect('/allfilesUser');
+        }
+
+        // Check if the document is not already in favorites
+        $userId = auth()->id();
+        $isFavorite = docfavorite::where('user_id', $userId)->where('doc_id', $document->DocID)->exists();
+
+        if (!$isFavorite) {
+            // Add the document to favorites
+            docfavorite::create([
+                'user_id' => $userId,
+                'doc_id' => $document->DocID,
+            ]); 
+
+            Session::flash('success', 'Document added to favorite successfully');
+            return redirect('/allfilesUser');
+        }
+
+        // Display error message
+        Session::flash('fail', 'Failed to add favorite');
+        return redirect('/allfilesUser');
+    }
+
+
+
+    public function showFavoritesUser()
+    {
+        // Get the current user's ID
+        $userId = auth()->id();
+
+        // Query the 'docfavorite' table to get the favorite document IDs for the user
+        $favoriteDocumentIds = docfavorite::where('user_id', $userId)->pluck('doc_id')->toArray();
+
+        // Retrieve the documents based on the IDs from the 'Documentinfo' table
+        $userFavorites = documentinfo::whereIn('DocID', $favoriteDocumentIds)->paginate(2);
+        
+        return view('user.favoritedocUser', compact('userFavorites'));
+    }
+
+
+    public function removeFavUser($doc_id)
+    {
+        // Find the favorite record based on doc_id and user_id
+        $favorite = docfavorite::where('doc_id', $doc_id)
+            ->where('user_id', auth()->id())
+            ->first();
+
+        // Check if the favorite record exists
+        if ($favorite) {
+            // Delete the favorite record
+            $favorite->delete();
+
+            Session::flash('success', 'Document removed from favorite successfully');
+
+            return redirect('/favoritesUser');
+        }
+
+        // If the favorite record doesn't exist
+        Session::flash('fail', 'Failed to remove, document did not exist');
+
+        return redirect('/favoritesUser');
+    }
+
 }

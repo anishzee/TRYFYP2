@@ -123,14 +123,7 @@
           @endif
 
 
-            <div>
-              <p></p>
-                <ul>
-                  <li></li>
-                    <button type="button" class="btn btn-primary mr-2" onclick="window.location.href='/uploadfilesUser'">+ NEW</button>
-                  <li></li>
-                </ul>
-            </div> 
+           
 
 
             
@@ -161,6 +154,10 @@
                     <br></br>
                     <div class="table-container">
                       <div >
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfiles'">
+                                <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
+                        </div> 
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
@@ -194,7 +191,7 @@
                                 <a class="btn btn-success" href={{"updDocUser/".$x['DocID']}}>Update✏️</a>
                               </td>
                               <td>
-                                <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
+                                <form action="{{ route('addfavUser', $x['DocID']) }}" method="POST">
                                 @csrf
                                   <button type="submit" class="btn btn-success">Favorite💜</button>
                                 </form>

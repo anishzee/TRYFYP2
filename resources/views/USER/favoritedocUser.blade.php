@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    @include("ADMIN.admincss")
+    @include("USER.usercss")
 
     <style>
       /* Container holding the image and the text */
@@ -12,6 +12,12 @@
   position: relative;
   text-align: center;
   color: white;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: rgba(202, 201, 201, 0.982);
 }
 
 /* Bottom left text */
@@ -73,26 +79,6 @@
   
 }
 
-.linkbutton {
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-}
-
-.content-wrapper {
-  background: white;
-} 
-
-.round2 {
-  border: 2px solid lightblue;
-  border-radius: 8px;
-  padding: 5px;
-}
-
-.table-container {
-  overflow-x: auto;
-}
-
 .centerALL {
     display: flex;
     justify-content: center;
@@ -113,7 +99,6 @@
 
 
 
-
     </style>
   </head>
  <body>
@@ -121,7 +106,7 @@
 
   <div class="container-scroller">
 
-    @include("ADMIN.navbar")
+    @include("USER.usernavbar")
         <div class="centerALL">
           <div class="content-wrapper pb-0">
             
@@ -151,55 +136,40 @@
           @endif
 
 
-            <div class="row" style="max-width: 100%;overflow-x: auto;">
-              <div >
-                <div class="card" style="max-width: 100%;">
-                  <div class="card-body" style="max-width: 100%;">
-                    <h4 class="card-title" style="text-align: center; font-size: 18px;">All Files</h4>
-                    
+            <br></br>
+            <br></br>
+            <div class="row">
+              <div class="">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title" style="text-align: center; font-size: 18px;">Favorite Document</h4>
                     <br></br>
-                    <!-- Search Bar -->
-                    <form action="{{ url('/allfiles/search') }}" method="get">
-                       @csrf
-                        <div class="form-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search...">
-                        </div>
-
-                        <div>
-                          <button type="submit" class="btn btn-primary">Search</button>
-                          <button type="button" class="btn btn-primary" onclick="window.location.href='/allfiles'">Reset</button>
-                        </div> 
-                    </form>
-                    <!-- End Search Bar -->
-                      
                    
-                    <br></br>
-                    <div class="table-container">
-                      <div >
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfiles'">
-                              <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
-                        </div> 
-                        <br></br>
+                    <div class="table-responsive">
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
-                              <th>Document Name</th>
+                              <th>Document name</th>
                               <th>Date</th>
                               <th>Last used by</th>
                               <th>Status</th>
                               <th>Location</th>
                               <th>Manage</th>
-                              <th>Add to Favorite</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($data as $x)
+                          @foreach($userFavorites as $x)
                             <tr>
-                              <td>{{$x->DocName}}</td>
-                              <td>{{$x->DocDate}}</td>
-                              <td>{{$x->LastUsed}}</td>
+                              <td>
+                                  {{ $x->DocName }}
+                              </td>
+                              <td>
+                                  {{ $x->DocDate }}
+                              </td>
+                              <td>
+                                {{$x->LastUsed}}
+                              </td>
                               <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
                                 {{$x->status}}
                               </td>
@@ -210,56 +180,47 @@
                                 <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
                               </td>
                               <td>
-                                <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
-                                @csrf
-                                  <button type="submit" class="btn btn-success">Favorite💜</button>
-                                </form>
-                              </td>
-                              <td>
-                                <a class="btn btn-danger"  href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
+                                <a class="btn btn-danger" href={{"removeFav/".$x['DocID']}}>Remove🗑️</a>
                               </td>
                             </tr>
-                            @endforeach
+                          @endforeach
                           </tbody>
                         </table>
-                      </div>  
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
+            <br></br>
+                    <span class="centerALL">
+                      {{$userFavorites->links('vendor.pagination.bootstrap-4')}}
+                    </span>
 
 
             <br></br>
-              <div style="text-align: center;">
-                <span style="display: inline-block;">
-                  {{$data->links('vendor.pagination.bootstrap-4')}}
-                </span>
-              </div>
-
-
-
-              <br></br>
-          <br></br>
-          <br></br>
-         
-          <br></br>
-          
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-
+            <br></br>
+             
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+             
           </div>
-        
+                     
+            
         </div>
- 
-              
-       
+      
+
+
   </div>
 
-  
-  @include("ADMIN.adminscript")
+
+
+  @include("USER.userscript")
  </body>
 </html>

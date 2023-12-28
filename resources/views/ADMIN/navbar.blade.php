@@ -28,7 +28,7 @@
     
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/managereq')}}"> 
+            <a class="nav-link" href="{{url('/reqstatsAdmin')}}"> 
               <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               <span class="menu-title">Manage Request</span>
             </a>

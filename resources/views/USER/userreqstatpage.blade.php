@@ -167,7 +167,7 @@
                                 {{$x->LastUsed}}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{url('/floorplan')}}">{{$x->Location}}</a>
+                                <a class="btn btn-success" href="{{url('/floorplanUser')}}">{{$x->Location}}</a>
                               </td>
                               <td>
                                 <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>

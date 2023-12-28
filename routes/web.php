@@ -63,15 +63,15 @@ Route::post("/edit",[adminControl::class,"updatedoc"]); //post update document t
 
 Route::post('/addfav/{DocID}', [adminControl::class, 'addToFavorites'])->name('addfav');
 Route::get('/favorites', [adminControl::class, 'showFavorites'])->name('favorites');
-Route::get('/removeFav/{doc_id}', [AdminControl::class, 'removeFav'])->name('removeFav');
+Route::get('/removeFav/{doc_id}', [adminControl::class, 'removeFav'])->name('removeFav');
 
 
 //---------------------------------------- REQUEST DOCUMENTS ---------------------------------------------------
 
 
-Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
-Route::get("/updReq/{DocID}",[AdminControl::class,"updateRequests"])->name('updReqUser'); //show data in form 
-
+//Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
+Route::get('/reqstatsAdmin', [adminControl::class, 'showRequestsAdmin'])->name('reqstatsAdmin');
+Route::get('/removeReqAdmin/{doc_id}', [adminControl::class, 'removeReqAdmin'])->name('removeReqAdmin');
 
 
 //---------------------------------------- END OF ADMIN  ---------------------------------------------------
@@ -115,7 +115,16 @@ Route::get("/uploadfilesUser",[userControl::class,"uploadfilesUser"]); //upload 
 Route::post("/addDocumentUser",[userControl::class,"uploadfilesDBUser"]); //add data to DB
 
 
+//---------------------------------------- ADD TO FAV DOCUMENTS ---------------------------------------------------
+
+
+Route::post('/addfavUser/{DocID}', [userControl::class, 'addToFavoritesUser'])->name('addfavUser');
+Route::get('/favoritesUser', [userControl::class, 'showFavoritesUser'])->name('favoritesUser');
+Route::get('/removeFavUser/{doc_id}', [userControl::class, 'removeFavUser'])->name('removeFavUser');
+
+
 //---------------------------------------- TO EDIT ------------------------------------------------------------
+
 
 
 Route::get("/floorplanUser",[userControl::class,"userfloorplan"]);

@@ -132,6 +132,10 @@
                         </script>
 
                       </div>
+                      <div class="col-sm-5 text-md-end">
+                          <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfilesUser'">
+                            <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
+                      </div>
                       
                       
                     </div>
