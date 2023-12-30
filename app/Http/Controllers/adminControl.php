@@ -245,13 +245,17 @@ class adminControl extends Controller
 
     public function showRequestsAdmin()
     {
-
         // Query the 'docrequest' table to get the requested document IDs for the user
         $requestedDocumentIds = docrequest::pluck('ReqDocID')->toArray();
 
         // Retrieve the documents based on the IDs from the 'Documentinfo' table
-        $userRequested = documentinfo::whereIn('DocID', $requestedDocumentIds)->paginate(2);
-        
+        $userRequested = \DB::table('documentinfo')
+            ->whereIn('DocID', $requestedDocumentIds)
+            ->join('docrequest', \DB::raw('documentinfo.DocID'), '=', \DB::raw('docrequest.ReqDocID'))
+            ->join('users', \DB::raw('docrequest.userID'), '=', \DB::raw('users.id'))
+            ->select('documentinfo.*', 'users.name as UserName')
+            ->paginate(2);
+
         return view('ADMIN.managereqpage', compact('userRequested'));
     }
 

@@ -152,6 +152,7 @@
                               <th>Document name</th>
                               <th>Last used by</th>
                               <th>Location</th>
+                              <th>Requested by</th>
                               <th>Manage</th>
                               <th>Request Status</th>
                               <th>Operation</th>
@@ -169,6 +170,7 @@
                               <td>
                                 <a class="btn btn-success" href="{{url('/floorplan')}}">{{$r->Location}}</a>
                               </td>
+                              <td>{{ $r->UserName }}</td>
                               <td>
                                 <a class="btn btn-success" href={{"documentinfo/".$r['DocID']}}>View📑</a>
                               </td>
