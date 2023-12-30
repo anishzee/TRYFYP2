@@ -72,7 +72,7 @@ Route::get('/removeFav/{doc_id}', [adminControl::class, 'removeFav'])->name('rem
 //Route::get("/managereq",[adminControl::class,"displaymanagereq"]);
 Route::get('/reqstatsAdmin', [adminControl::class, 'showRequestsAdmin'])->name('reqstatsAdmin');
 Route::get('/removeReqAdmin/{doc_id}', [adminControl::class, 'removeReqAdmin'])->name('removeReqAdmin');
-
+Route::patch('/updateStatus/{id}', [adminControl::class, 'updateStatus'])->name('updateStatus');
 
 //---------------------------------------- END OF ADMIN  ---------------------------------------------------
 

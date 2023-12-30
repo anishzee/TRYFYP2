@@ -184,9 +184,10 @@
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
+                              <th>No.</th>
                               <th>Document Name</th>
                               <th>Date</th>
-                              <th>Last used by</th>
+                              <th>Uploaded by</th>
                               <th>Status</th>
                               <th>Location</th>
                               <th>Manage</th>
@@ -195,8 +196,9 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($data as $x)
+                            @foreach($data as $key => $x)
                             <tr>
+                              <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                               <td>{{$x->DocName}}</td>
                               <td>{{$x->DocDate}}</td>
                               <td>{{$x->LastUsed}}</td>

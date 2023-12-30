@@ -130,14 +130,16 @@
                     <table class="table table-hover" id="searchTable">
                       <thead>
                         <tr>
+                          <th>No.</th>
                           <th>Username</th>
                           <th>Email</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($data as $user)
+                        @foreach($data as $key => $user)
                         <tr>
+                          <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>

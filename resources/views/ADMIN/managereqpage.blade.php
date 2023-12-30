@@ -149,43 +149,46 @@
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
+                              <th>No.</th>
                               <th>Document name</th>
-                              <th>Last used by</th>
-                              <th>Location</th>
                               <th>Requested by</th>
+                              <th>Status</th>
+                              <th>Location</th>
                               <th>Manage</th>
                               <th>Request Status</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
                           <tbody>
-                          @foreach($userRequested as $r)
+                          @foreach($userRequested as $key => $r)
                             <tr>
+                              <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                               <td>
                                   {{ $r->DocName }}
                               </td>
-                              <td>
-                                {{$r->LastUsed}}
+                              <td>{{ $r->UserName }}</td>
+                              <td style="font-size: 14px; color: {{ $r->status === 'Available' ? 'green' : ($r->status === 'In Used' ? 'red' : 'black') }};">
+                                {{$r->status}}
                               </td>
                               <td>
                                 <a class="btn btn-success" href="{{url('/floorplan')}}">{{$r->Location}}</a>
                               </td>
-                              <td>{{ $r->UserName }}</td>
                               <td>
                                 <a class="btn btn-success" href={{"documentinfo/".$r['DocID']}}>View📑</a>
                               </td>
                               <td>
                                 <a class="btn btn-danger" href={{"removeReqAdmin/".$r['DocID']}}>Remove🗑️</a>
                               </td>
-                              <td style="font-size: 14px; color: {{ $r->reqstatus === 'Pending' ? 'orange' : ($r->reqstatus === 'Accepted' ? 'green' : ($r->reqstatus === 'Rejected' ? 'red' : 'black')) }};">
-                                <form method="post" action="">
+                              <td>
+                                <form method="post" action="{{ route('updateStatus', ['id' => $r->DocID]) }}">
                                    @csrf
-                                    @method('patch') {{-- or use @method('put') depending on your route definition --}}
+                                    @method('patch') 
 
-                                  <select name="status" class="form-control" onchange="this.form.submit()">
-                                      <option value="Pending" {{ $r->reqstatus === 'Pending' ? 'selected' : '' }}>Pending</option>
-                                      <option value="Accepted" {{ $r->reqstatus === 'Accepted' ? 'selected' : '' }}>Accepted</option>
-                                      <option value="Rejected" {{ $r->reqstatus === 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                                  
+                                  <select name="status" class="form-control" onchange="this.form.submit()" style="background-color: {{ $r->reqstatus === 'Pending' ? '#ffc107' : ($r->reqstatus === 'Accepted' ? '#28a745' : ($r->reqstatus === 'Rejected' ? '#dc3545' : '')) }}; color: #fff; border-color: #ced4da; border-radius: 5px; padding: 8px; font-weight: bold;">
+                                      <option value="Pending" {{ $r->reqstatus === 'Pending' ? 'selected' : '' }} style="background-color: #ffc107; color: #212529;" >Pending</option>
+                                      <option value="Accepted" {{ $r->reqstatus === 'Accepted' ? 'selected' : '' }} style="background-color: #28a745; color: #fff;">Accepted</option>
+                                      <option value="Rejected" {{ $r->reqstatus === 'Rejected' ? 'selected' : '' }} style="background-color: #dc3545; color: #fff;">Rejected</option>
                                   </select>
                                 </form>
                               </td>

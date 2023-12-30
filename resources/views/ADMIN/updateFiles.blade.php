@@ -207,17 +207,10 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="LastUsed">Last Used: </label>
+                        <label for="LastUsed">Uploaded by: </label>
                         <input type="text" class="form-control" name="LastUsed" value="{{$disp['LastUsed']}}" required>
                       </div>
-                      <div class="form-group">
-                        <label for="status">Status</label>
-                          <select style="width:100%" name="status" required >
-                            <option value="In Used"{{ ($disp->status=="In Used")? "selected" : "" }}>In Used</option>
-                            <option value="Available"{{ ($disp->status=="Available")? "selected" : "" }}>Available</option>
-                          </select>
-                    
-                      </div>
+                      
                       
                       <button type="submit" class="btn btn-primary mr-2"> Update </button>
                       <button type="reset" class="btn btn-dark">Reset</button>
@@ -229,6 +222,9 @@
 
           <br></br><br></br>
           
+          <br></br><br></br>
+          <br></br><br></br>
+          <br></br><br></br>
         </div>
     
     

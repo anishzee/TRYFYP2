@@ -124,7 +124,6 @@ class adminControl extends Controller
         $data->DocDate=$req->DocDate;
         $data->Location=$req->Location;
         $data->LastUsed=$req->LastUsed;
-        $data->status=$req->status;
 
         $data->save();
 
@@ -137,7 +136,7 @@ class adminControl extends Controller
     //---------------------------------------- VIEW DOCUMENT ---------------------------------------------------
 
 
-    function viewdocumentinfo($getid) //show the original records
+    function viewdocumentinfo($getid) //show specific the orignal records
     {
         $data=documentinfo::find($getid); //to capture one set of data in a table//
 
@@ -246,14 +245,9 @@ class adminControl extends Controller
     public function showRequestsAdmin()
     {
         // Query the 'docrequest' table to get the requested document IDs for the user
-        $requestedDocumentIds = docrequest::pluck('ReqDocID')->toArray();
-
         // Retrieve the documents based on the IDs from the 'Documentinfo' table
-        $userRequested = \DB::table('documentinfo')
-            ->whereIn('DocID', $requestedDocumentIds)
-            ->join('docrequest', \DB::raw('documentinfo.DocID'), '=', \DB::raw('docrequest.ReqDocID'))
-            ->join('users', \DB::raw('docrequest.userID'), '=', \DB::raw('users.id'))
-            ->select('documentinfo.*', 'users.name as UserName')
+        $userRequested = documentinfo::join('docrequests', 'documentinfos.DocID', '=', 'docrequests.ReqDocID')
+            ->select('documentinfos.*', 'docrequests.RequestedName as UserName')
             ->paginate(2);
 
         return view('ADMIN.managereqpage', compact('userRequested'));
@@ -279,6 +273,30 @@ class adminControl extends Controller
         Session::flash('fail', 'Failed to remove, document did not exist');
 
         return redirect('/reqstatsAdmin');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required|in:Pending,Accepted,Rejected',
+        ]);
+
+        $document = documentinfo::find($id);
+        $document->reqstatus = $validatedData['status'];
+        
+        // If the request status is "Accepted", update the status to "In Used"
+        if ($validatedData['status'] === 'Accepted') {
+            $document->status = 'In Used';
+        } elseif ($validatedData['status'] === 'Rejected' || $validatedData['status'] === 'Pending') {
+            $document->status = 'Available';
+        }
+        
+        $document->save();
+
+        // Redirect back or to a specific page after the update
+        Session::flash('success', 'Status updated successfully');
+        return redirect('/reqstatsAdmin');
+      
     }
 
 

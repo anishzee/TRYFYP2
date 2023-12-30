@@ -149,6 +149,7 @@
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
+                              <th>No.</th>
                               <th>Document name</th>
                               <th>Date</th>
                               <th>Last used by</th>
@@ -159,8 +160,9 @@
                             </tr>
                           </thead>
                           <tbody>
-                          @foreach($userFavorites as $x)
+                          @foreach($userFavorites as $key => $x)
                             <tr>
+                              <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                               <td>
                                   {{ $x->DocName }}
                               </td>
