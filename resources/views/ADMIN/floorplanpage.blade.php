@@ -54,7 +54,7 @@
   box-sizing: border-box;
 }
 
-.column {
+.columnPic {
   float: left;
   width: 300px; 
   padding: 5px; /* jarak antara images */
@@ -62,7 +62,7 @@
 }
 
 /* Clearfix (clear floats) */
-.row::after {
+.rowPic::after {
   content: "";
   clear: both;
   display: table;
@@ -81,13 +81,50 @@
     margin: 0; /* Remove default body margin */
 }
 
-.row {
+.rowPic {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%; /* Ensure the container takes the full height of the viewport */
     width: 100%;
     margin: 0; /* Remove default body margin */
+}
+
+.centerBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;        
+}
+
+.box-container {
+  display: flex;
+  flex-direction: row; /* Make it horizontal */
+}
+
+.column {
+  display: flex;
+  flex-direction: column; /* Each column is vertical */
+  align-items: center;
+  margin-right: 50px; /* Adjust spacing between columns */
+}
+
+.box {
+  width: 100px; /* Adjust width */
+  height: 50px; /* Adjust height */
+  background-color: #3498db;
+  margin: 0; /* No space between boxes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* Text color */
+  border: 2px solid #2980b9; /* Border styling */
+  box-sizing: border-box; /* Include border in box dimensions */
+}
+
+.box.selected {
+    background-color: #660066; /* Highlight color */
 }
 
     </style>
@@ -98,17 +135,17 @@
 <div class="container-scroller">
 
 @include("ADMIN.navbar")
-      <div class="centerALL">
-        <div class="content-wrapper pb-0">
+    <div class="centerALL">
+      <div class="content-wrapper pb-0">
           <div class="page-header flex-wrap">
             <h3 class="centerALL"> Location</h3>
           </div>
           
-          <div class="row" >
-              <div class="row">
-                <div class="column">
+          <div class="rowPic" >
+              <div class="rowPic">
+                <div class="columnPic">
                   <div class="container">
-                    <img src="admin/assets/images/dashboard/locationfloorplan.jpg" alt="image" style="width:100%;">
+                    <img src="../admin/assets/images/dashboard/locationfloorplan.jpg" alt="image" style="width:100%;">
                       
                   </div>
                 </div>
@@ -116,19 +153,53 @@
               </div>
           </div>
 
-
-<br></br>
-
-
-          <div class="row">
-            <img src="admin/assets/images/dashboard/floorplan.jpg" alt="image" style="width:50%;">
+        <div class="centerBox">
+          <div class="box-container">
+              <div class="column">
+                <div class="box @if($selectedLocation === 'RK2A') selected @endif">RK2A</div>
+                <div class="box">Box 2</div> 
+                <div class="box">Box 3</div>
+                <div class="box">Box 4</div>
+                <div class="box">Box 5</div>
+              </div>
+        
+              <div class="column">
+                <div class="box @if($selectedLocation === 'RK9A') selected @endif">RK9A</div>
+                <div class="box">Box 6</div>
+                <div class="box">Box 7</div>
+                <div class="box">Box 8</div>
+                <div class="box">Box 9</div>
+                <div class="box">Box 10</div>
+              </div>
+        
+              <div class="column">
+                <div class="box @if($selectedLocation === 'KB1A') selected @endif">KB1A</div>
+                <div class="box">Box 6</div>
+                <div class="box">Box 6</div>
+                <div class="box">Box 7</div>
+                <div class="box">Box 8</div>
+                <div class="box">Box 9</div>
+                <div class="box">Box 10</div>
+              </div>
+        
+              <div class="column">
+                <div class="box">Box 6</div>
+                <div class="box">Box 7</div>
+                <div class="box">Box 8</div>
+                <div class="box">Box 9</div>
+                <div class="box">Box 10</div>
+              </div>
           </div>
-          <br></br>
 
         </div>
 
+
+
+          
+          <br></br>
+
             
-      </div>
+    </div>
 </div>
 
 

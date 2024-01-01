@@ -148,12 +148,14 @@ class adminControl extends Controller
     
     function displayfloorplan() //go to floorplan page
     {
-        return view('ADMIN.floorplanpage');
+        $selectedLocation = request()->route('location');
+        \Log::info('Selected Location: ' . $selectedLocation); // Log the selected location
+        return view('ADMIN.floorplanpage', compact('selectedLocation'));
     }
 
     function displayfloorplandummy() //go to floorplan page
     {
-        return view('ADMIN.favoritedoc'); //try fav doc 
+        return view('ADMIN.dummyfloor'); //try fav doc 
     }
     
     

@@ -32,7 +32,9 @@ Route::get("/redirect",[homeControl::class,"redirectFunct"]);//1st page
 Route::get("/allusers",[adminControl::class,"user"]);//display all users
 Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
 
-Route::get("/floorplan",[adminControl::class,"displayfloorplan"]); //go to floorplan page 
+
+
+Route::get("/floorplan/{location}",[adminControl::class,"displayfloorplan"]); //go to floorplan page 
 Route::get("/floorplandummy",[adminControl::class,"displayfloorplandummy"]);//dummy floorplan
 
 
