@@ -34,8 +34,8 @@ Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
 
 
 
-Route::get("/floorplan/{location}",[adminControl::class,"displayfloorplan"]); //go to floorplan page 
-Route::get("/floorplandummy",[adminControl::class,"displayfloorplandummy"]);//dummy floorplan
+Route::get("/floorplan/{location}",[adminControl::class,"displayfloorplan"]); //go to floorplan page if user click the button 
+Route::get("/floorplandummy",[adminControl::class,"displayfloorplandummy"]);//go to floorplan page thru navbar !!
 
 
 //---------------------------------------- VIEW UPLOAD DOCUMENTS ---------------------------------------------------

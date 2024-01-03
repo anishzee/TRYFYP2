@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/floorplan')}}">
+            <a class="nav-link" href="{{url('/floorplandummy')}}">
               <i class="mdi mdi-map-marker-radius menu-icon"></i>
               <span class="menu-title">Floor Plan</span>
             </a>
@@ -49,12 +49,6 @@
             <a class="nav-link" href="{{url('/favorites')}}">
               <i class="mdi mdi-file-document menu-icon"></i>
               <span class="menu-title">Favorite Document</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url('/floorplandummy')}}">
-              <i class="mdi mdi-file-document menu-icon"></i>
-              <span class="menu-title">Floorplan Pic</span>
             </a>
           </li>
           
