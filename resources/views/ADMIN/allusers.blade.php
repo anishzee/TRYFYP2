@@ -112,6 +112,31 @@
   @include("ADMIN.navbar")
       <div class="centerALL">
         <div class="content-wrapper pb-0">
+
+        @if(Session::has('success') || Session::has('fail'))
+              <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+              <script>
+                  $(document).ready(function(){
+                    var alertElement = $('.alert');
+                    alertElement.fadeIn();
+
+                    // Hide the alert after a few seconds
+                    setTimeout(function(){
+                      alertElement.fadeOut();
+                    }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
+                  });
+              </script>
+
+              @if(Session::has('success'))
+                  <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
+                    {{ Session::get('success') }}
+                  </div>
+              @elseif(Session::has('fail'))
+                  <div class="alert alert-danger" style="display: none; background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; padding: 10px;">
+                    {{ Session::get('fail') }}
+                  </div>
+              @endif
+          @endif
           
           <br></br><br></br>
           <div class="row">
@@ -120,10 +145,20 @@
                 <div class="card-body">
                   <h4 class="card-title" style="text-align: center; font-size: 18px;">All Users</h4>
                   <br></br>
-                  <div >
-                    <input type="text" id="searchInput" class="round2" onkeyup="searchTable()" placeholder="Search for names..">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                  </div>
+
+                  <!-- Search Bar -->
+                  <form action="{{ url('/alluser/search') }}" method="get">
+                       @csrf
+                        <div class="form-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search...">
+                        </div>
+
+                        <div>
+                          <button type="submit" class="btn btn-primary">Search</button>
+                          <button type="button" class="btn btn-primary" onclick="window.location.href='/allusers'">Reset</button>
+                        </div> 
+                    </form>
+                    <!-- End Search Bar -->
                   <br></br>
                   <div class="table-responsive">
                   
@@ -158,9 +193,11 @@
           </div>
           
           <br></br>
-                    <span class="centerALL">
-                      {{$data->links('vendor.pagination.bootstrap-4')}}
-                    </span>
+              <div style="text-align: center;">
+                <span style="display: inline-block;">
+                  {{$data->links('vendor.pagination.bootstrap-4')}}
+                </span>
+              </div>
 
                    
 
@@ -185,28 +222,7 @@
       </div>
 </div>
 
-    <script>
-          function searchTable() {
-              var input, filter, table, tr, td, i, txtValue;
-              input = document.getElementById("searchInput");
-              filter = input.value.toUpperCase();
-              table = document.getElementById("searchTable");
-              tr = table.getElementsByTagName("tr");
-
-              for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                  txtValue = td.textContent || td.innerText;
-                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
-                  }
-                }
-              }
-          }
-    </script>
-
+    
 
 
 

@@ -27,8 +27,24 @@ class adminControl extends Controller
     {
         DB::delete('delete from users where id=?',[$id]);
 
+        Session::flash('success', 'User deleted successfully');
+
         return redirect('/allusers');
     }
+
+
+    //---------------------------------------- SEARCH USERLIST ---------------------------------------------------
+    
+
+    public function searchUser(Request $request)
+   {
+       $searchTerm = $request->input('search');
+       $data = User::where('name', 'like', '%' . $searchTerm . '%')
+           ->orWhere('email', 'like', '%' . $searchTerm . '%')
+           ->paginate(3);
+   
+       return view("ADMIN.allusers", ['data' => $data]);
+   }
 
 
     //---------------------------------------- UPLOAD NEW DOCUMENT ---------------------------------------------------
@@ -99,7 +115,7 @@ class adminControl extends Controller
        $searchTerm = $request->input('search');
        $data = documentinfo::where('DocName', 'like', '%' . $searchTerm . '%')
            ->orWhere('Location', 'like', '%' . $searchTerm . '%')
-           ->paginate(2);
+           ->paginate(3);
    
        return view("ADMIN.allfilespage", ['data' => $data]);
    }
@@ -190,7 +206,7 @@ class adminControl extends Controller
         }
 
         // Display error message
-        Session::flash('fail', 'Failed to add favorite');
+        Session::flash('fail', 'Document already added to favorite');
         return redirect('/allfiles');
     }
 
@@ -303,11 +319,9 @@ class adminControl extends Controller
 
 
 
+    
+
     //---------------------------------------- TO EDIT LATER ---------------------------------------------------
-    
-    
-
-
 
     
 }

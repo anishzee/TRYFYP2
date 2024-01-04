@@ -31,6 +31,7 @@ Route::get("/redirect",[homeControl::class,"redirectFunct"]);//1st page
 
 Route::get("/allusers",[adminControl::class,"user"]);//display all users
 Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
+Route::get("/alluser/search", [adminControl::class, 'searchUser']); //search user
 
 
 

@@ -113,7 +113,7 @@
           <div class="row">
               <div class="card" style="width: 60%; margin: 0 auto;">
                 <div class="card-body">
-                  <h4 class="card-title">Update Document</h4>
+                  <h4 class="card-title" style="text-align: center; font-size: 18px;">Update Document</h4>
                   
                   
                     <form class="forms-sample" method="post" action="/edit" > 
@@ -128,8 +128,15 @@
                       </div>
                       <div class="form-group">
                         <label for="DocDate">Date:</label>
-                        <input type="date" class="form-control" name="DocDate"  value="{{$disp['DocDate']}}" required>
+                        <input type="date" class="form-control" name="DocDate"  id="docdate" value="{{$disp['DocDate']}}" required>
                       </div>
+                      <script>
+                        // Get the current date in the format "YYYY-MM-DD"
+                        var today = new Date().toISOString().split('T')[0];
+
+                        // Set the max attribute of the date input to today's date
+                        document.getElementById('docdate').setAttribute('max', today);
+                      </script>
 
                       <div class="form-group">
                         <label for="Location">Location: </label>
