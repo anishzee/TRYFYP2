@@ -162,7 +162,7 @@ class adminControl extends Controller
     //---------------------------------------- VIEW FLOORPLAN  ---------------------------------------------------
 
     
-    function displayfloorplan() //go to floorplan page
+    function displayfloorplan() //go to floorplan page when click location button
     {
         $selectedLocation = request()->route('location');
         \Log::info('Selected Location: ' . $selectedLocation); // Log the selected location
@@ -171,7 +171,7 @@ class adminControl extends Controller
 
     function displayfloorplandummy() //go to floorplan page
     {
-        return view('ADMIN.dummyfloor'); //try fav doc 
+        return view('ADMIN.dummyfloor'); 
     }
     
     
@@ -279,7 +279,7 @@ class adminControl extends Controller
 
         // Check if the request record exists
         if ($requested) {
-            // Delete the favorite record
+            // Delete the record
             $requested->delete();
 
             Session::flash('success', 'Document removed from request successfully');

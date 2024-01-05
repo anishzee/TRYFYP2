@@ -36,7 +36,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" title="Visual of the store room" href="{{url('/floorplanUser')}}">
+            <a class="nav-link" title="Visual of the store room" href="{{url('/floorplanUserNav')}}">
               <i class="mdi mdi-table-large menu-icon"></i>
               <span class="menu-title">Floor Plan</span>
             </a>

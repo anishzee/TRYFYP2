@@ -29,10 +29,16 @@ Route::get("/redirect",[homeControl::class,"redirectFunct"]);//1st page
 
 /*Route::get("/docinfo",[homeControl::class,"getRecentlyOpenedDocuments"]); //to be check -> dummy */
 
+
+//---------------------------------------- VIEW ALL DOCUMENTS ---------------------------------------------------
+
+
 Route::get("/allusers",[adminControl::class,"user"]);//display all users
 Route::get("/del/{id}",[adminControl::class,"deleteit"]); //delete users info
 Route::get("/alluser/search", [adminControl::class, 'searchUser']); //search user
 
+
+//--------------------------------------------- VIEW FLOORPLAN ---------------------------------------------------
 
 
 Route::get("/floorplan/{location}",[adminControl::class,"displayfloorplan"]); //go to floorplan page if user click the button 
@@ -126,11 +132,17 @@ Route::get('/favoritesUser', [userControl::class, 'showFavoritesUser'])->name('f
 Route::get('/removeFavUser/{doc_id}', [userControl::class, 'removeFavUser'])->name('removeFavUser');
 
 
+//--------------------------------------------- VIEW FLOORPLAN ---------------------------------------------------
+
+
+Route::get("/floorplanUser/{location}",[userControl::class,"userfloorplan"]); //go to floorplan page if user click the button 
+Route::get("/floorplanUserNav",[userControl::class,"displayfloorplandummyUser"]); //go to floorplan page thru navbar !!
+
+
 //---------------------------------------- TO EDIT ------------------------------------------------------------
 
 
 
-Route::get("/floorplanUser",[userControl::class,"userfloorplan"]);
 Route::get("/helpUser",[userControl::class,"userhelp"]);
 
 

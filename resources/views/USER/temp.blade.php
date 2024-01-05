@@ -93,27 +93,6 @@
   overflow-x: auto;
 }
 
-.centerALL {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Ensure the container takes the full height of the viewport */
-    width: 100%;
-    margin: 0; /* Remove default body margin */
-}
-
-.row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Ensure the container takes the full height of the viewport */
-    width: 100%;
-    margin: 0; /* Remove default body margin */
-}
-
-
-
-
     </style>
   </head>
  <body>
@@ -122,40 +101,39 @@
   <div class="container-scroller">
 
     @include("USER.usernavbar")
-        <div class="centerALL">
+      
           <div class="content-wrapper pb-0">
             
-          @if(Session::has('success') || Session::has('fail'))
-              <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-              <script>
-                  $(document).ready(function(){
-                    var alertElement = $('.alert');
-                    alertElement.fadeIn();
+          @if(Session::has('success'))
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+              $(document).ready(function(){
+                  var alertElement = $('.alert');
+                  alertElement.fadeIn();
 
-                    // Hide the alert after a few seconds
-                    setTimeout(function(){
-                      alertElement.fadeOut();
-                    }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
-                  });
-              </script>
-
-              @if(Session::has('success'))
-                  <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
-                    {{ Session::get('success') }}
-                  </div>
-              @elseif(Session::has('fail'))
-                  <div class="alert alert-danger" style="display: none; background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; padding: 10px;">
-                    {{ Session::get('fail') }}
-                  </div>
-              @endif
+                  // Hide the alert after a few seconds
+                  setTimeout(function(){
+                    alertElement.fadeOut();
+                  }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
+              });
+            </script>
+            <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
+                {{ Session::get('success') }}
+            </div>
           @endif
+
+
+           
+
+
+            
 
 
             <div class="row" style="max-width: 100%;overflow-x: auto;">
               <div >
                 <div class="card" style="max-width: 100%;">
                   <div class="card-body" style="max-width: 100%;">
-                    <h4 class="card-title" style="text-align: center; font-size: 18px;">All Files</h4>
+                    <h4 class="card-title">All Files</h4>
                     
                     <br></br>
                     <!-- Search Bar -->
@@ -178,38 +156,39 @@
                       <div >
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfilesUser'">
-                              <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
+                                <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
                         </div> 
-                        <br></br>
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
-                              <th>No.</th>
-                              <th>Document Name</th>
+                              <th>Document name</th>
                               <th>Date</th>
-                              <th>Uploaded by</th>
-                              <th>Status</th>
                               <th>Location</th>
+                              <th>Last used by</th>
                               <th>Manage</th>
+                              <th>Status</th>
+                              <th>Update</th>
                               <th>Add to Favorite</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($data as $key => $x)
+                            @foreach($data as $x)
                             <tr>
-                              <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                               <td>{{$x->DocName}}</td>
                               <td>{{$x->DocDate}}</td>
-                              <td>{{$x->LastUsed}}</td>
-                              <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
-                                {{$x->status}}
-                              </td>
                               <td>
-                                <a class="btn btn-success" href="{{ url('/floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
+                                <a class="btn btn-success" href="{{url('/floorplanUser')}}">{{$x->Location}}</a>
                               </td>
+                              <td>{{$x->LastUsed}}</td>
                               <td>
                                 <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>
+                              </td>
+                              <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
+                                {{ $x->status }}
+                              </td>
+                              <td>
+                                <a class="btn btn-success" href={{"updDocUser/".$x['DocID']}}>Update✏️</a>
                               </td>
                               <td>
                                 <form action="{{ route('addfavUser', $x['DocID']) }}" method="POST">
@@ -241,34 +220,20 @@
 
 
             <br></br>
-              <div style="text-align: center;">
-                <span style="display: inline-block;">
-                  {{$data->links('vendor.pagination.bootstrap-4')}}
-                </span>
-              </div>
+                    <span>
+                      {{$data->links('vendor.pagination.bootstrap-4')}} 
+                    </span>
 
 
-
-              <br></br>
-          <br></br>
-          <br></br>
-         
-          <br></br>
-          
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-
+                    <br></br><br></br><br></br><br></br>
+            
           </div>
-        
-        </div>
  
               
        
   </div>
 
   
-  @include("ADMIN.adminscript")
+  @include("USER.userscript")
  </body>
 </html>

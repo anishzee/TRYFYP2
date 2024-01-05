@@ -51,6 +51,33 @@
             </main>
         </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Check if the user is authenticated
+            @auth
+                // Add a listener for the back button
+                window.addEventListener('popstate', function (event) {
+                    // Display a confirmation message when the user tries to navigate back
+                    var confirmLogout = confirm("Do you really want to log out?");
+                    if (confirmLogout) {
+                        // Perform logout action or redirect to the logout route
+                        window.location.href = "{{ route('logout') }}";
+                    } else {
+                        // Prevent the browser from navigating back
+                        history.pushState(null, null, window.location.href);
+                    }
+                });
+
+                // Prevent accessing the login page after authentication
+                if (window.location.pathname === "{{ route('login') }}") {
+                    window.location.href = "{{url('/redirect')}}";
+                }
+            @endauth
+        });
+    </script>
+
         @stack('modals')
 
         @livewireScripts

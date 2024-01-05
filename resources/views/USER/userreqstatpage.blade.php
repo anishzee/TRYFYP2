@@ -149,8 +149,9 @@
                         <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
                           <thead>
                             <tr>
+                              <th>No.</th>
                               <th>Document name</th>
-                              <th>Last used by</th>
+                              <th>Uploaded by</th>
                               <th>Location</th>
                               <th>Manage</th>
                               <th>Request Status</th>
@@ -158,8 +159,9 @@
                             </tr>
                           </thead>
                           <tbody>
-                          @foreach($userRequested as $x)
+                          @foreach($userRequested as $key => $x)
                             <tr>
+                              <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                               <td>
                                   {{ $x->DocName }}
                               </td>
@@ -167,7 +169,7 @@
                                 {{$x->LastUsed}}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{url('/floorplanUser')}}">{{$x->Location}}</a>
+                                <a class="btn btn-success" href="{{ url('/floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
                               </td>
                               <td>
                                 <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>

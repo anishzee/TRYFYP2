@@ -113,7 +113,7 @@
               <div class="">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">All Files</h4>
+                    <h4 class="card-title" style="text-align: center; font-size: 18px;">All Files</h4>
                     
                     </p>
                     <div class="table-responsive">
@@ -122,9 +122,10 @@
                           <tr>
                             <th>Document name</th>
                             <th>Date</th>
-                            <th>Location</th>
-                            <th>Last used by</th>
+                            <th>Uploaded by</th>
                             <th>Status</th>
+                            <th>Location</th>
+                            <th>Manage</th>
                             <th>Download</th>
                           </tr>
                         </thead>
@@ -132,9 +133,16 @@
                           <tr>
                             <td>{{$data->DocName}}</td>
                             <td>{{$data->DocDate}}</td>
-                            <td>{{$data->Location}}</td>
                             <td>{{$data->LastUsed}}</td>
-                            <td>{{$data->status}}</td>
+                            <td style="font-size: 14px; color: {{ $data->status === 'Available' ? 'green' : ($data->status === 'In Used' ? 'red' : 'black') }};">
+                              {{$data->status}}
+                            </td>
+                            <td>
+                              <a class="btn btn-success" href="{{ url('/floorplanUser', ['location' => urlencode($data->Location)]) }}">{{ $data->Location }}</a>
+                            </td>
+                            <td>
+                              <a class="btn btn-success" href="{{url('updDocUser/'.$data['DocID'])}}">Update✏️</a>
+                            </td>
                             <td>
                             <a class="btn btn-success" href="{{url('/downloadUser',$data->DocUpload)}}">Download⏬</a>
                             </td>
@@ -145,7 +153,7 @@
 
                     <br></br>
 
-                    <iframe class="center" height="400"  width="400" src="/assets/AllDocuments/{{$data->DocUpload}}"></iframe>
+                    <iframe class="center" style="width: 900px; height:900px" src="/assets/AllDocuments/{{$data->DocUpload}}"></iframe>
                     <br></br>
                   </div>
                 </div>

@@ -133,16 +133,28 @@
   @include("USER.usernavbar")
     <div class="centerALL" >
         <div class="content-wrapper pb-0">
-          @if(Session::has('success'))
-            <div class="alert alert-success" style="background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
-              {{ Session::get('success') }}
+        @if(Session::has('success'))
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script>
+              $(document).ready(function(){
+                  var alertElement = $('.alert');
+                  alertElement.fadeIn();
+
+                  // Hide the alert after a few seconds
+                  setTimeout(function(){
+                    alertElement.fadeOut();
+                  }, 3000); // Adjust the delay time in milliseconds (e.g., 3000 for 3 seconds)
+              });
+            </script>
+            <div class="alert alert-success" style="display: none; background-color: #d4edda; color: #155724; border-color: #c3e6cb; padding: 10px;">
+                {{ Session::get('success') }}
             </div>
           @endif
          <br></br>
           <div class="row" >
               <div class="card" style="width: 60%; margin: 0 auto;">
                 <div class="card-body"  >
-                  <h4 class="card-title">Upload New Document</h4>
+                  <h4 class="card-title" style="text-align: center; font-size: 18px;">Upload New Document</h4>
                   <br></br>
                   
                   
@@ -154,8 +166,15 @@
                       </div>
                       <div class="form-group">
                         <label for="docdate">Date:</label>
-                        <input type="date" class="form-control" name="DocDate"  required>
+                        <input type="date" class="form-control" name="DocDate" id="docdate" required>
                       </div>
+                      <script>
+                        // Get the current date in the format "YYYY-MM-DD"
+                        var today = new Date().toISOString().split('T')[0];
+
+                        // Set the max attribute of the date input to today's date
+                        document.getElementById('docdate').setAttribute('max', today);
+                      </script>
 
                       <div class="form-group">
                         <label for="location">Location: </label>
@@ -233,7 +252,7 @@
                         </div>
 
                       <div class="form-group">
-                        <label for="lastused">Last Used: </label>
+                        <label for="lastused">Uploaded by: </label>
                         <input type="text" class="form-control" name="LastUsed" placeholder="Last Used" value="{{ auth()->user()->name }}" readonly required>
                       </div>
                       <div class="form-group">
@@ -249,7 +268,7 @@
                       </div>
                       
                       <button type="submit" class="btn btn-primary mr-2"> Submit </button>
-                      <button class="btn btn-light">Cancel</button>
+                      <button type="reset" class="btn btn-dark">Reset</button>
                     </form>
                 </div>
               </div>

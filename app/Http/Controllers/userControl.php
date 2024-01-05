@@ -118,7 +118,7 @@ class userControl extends Controller
         }
 
         // Display error message
-        Session::flash('fail', 'Failed to request document');
+        Session::flash('fail', 'Failed to request document, document already requested');
         return redirect('/allfilesUser');
     }
 
@@ -197,13 +197,25 @@ class userControl extends Controller
     }
 
 
+
+    //---------------------------------------- VIEW FLOORPLAN  ---------------------------------------------------
+
+
+    function displayfloorplandummyUser() //go to floorplan page on navbar
+    {
+        return view('user.userfloorplanpage'); 
+    }
+
+    function userfloorplan() //go to floorplan when click button
+    {
+        $selectedLocation = request()->route('location');
+        \Log::info('Selected Location: ' . $selectedLocation); // Log the selected location
+        return view('user.floorplanSpecific', compact('selectedLocation'));
+    }
+
+
     //---------------------------------------- TO EDIT LATER ---------------------------------------------------
 
-
-    function userfloorplan() //go to manage request page
-    {
-        return view('user.userfloorplanpage');
-    }
 
     function userhelp() //go to all users page
     {
