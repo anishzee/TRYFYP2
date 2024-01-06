@@ -12,22 +12,21 @@ class homeControl extends Controller
         return view('home');
     }
 
-    function redirectfunct() //go to either admin or user page when login 
+    public function redirectFunct()
     {
-        $typeuser=Auth::user()->usertype; //capture usertype from DB (0 = user, 1 = admin)
+        if (Auth::check()) {
+            $user = auth()->user();
+            $typeuser = $user->usertype;
 
-        if($typeuser=='1')
-        {
-            $user=Auth::user();
-            return view('admin.adminpage')->with('name', $user->name); //the admin view
+            if ($typeuser == '1') {
+                return view('admin.adminpage')->with('name', $user->name);
+            } else {
+                return view('user.userpage')->with('name', $user->name);
+            }
+        } else {
+            // User is not authenticated, handle accordingly (e.g., redirect to login page)
+            return redirect('/login');
         }
-        
-        else
-        {
-            $user=Auth::user();
-            return view('user.userpage')->with('name', $user->name); //the normal user view
-        }
-        
     }
 
 

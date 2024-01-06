@@ -143,10 +143,10 @@
                       <div class="col-sm-4">
                         <div class="card mb-3 mb-sm-0">
                           <div class="card-body py-3 px-4">
-                            <p class="m-0 survey-head">In Used Documents</p>
+                            <p class="m-0 survey-head" style="color: #00b3b3; font-size: 20px; font-weight: bold;">In Used</p>
                             <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
                               <div>
-                                <h3 class="m-0 survey-value">Total: {{ \App\Models\documentinfo::where('status', 'In Used')->count() }}</h3>
+                                <h3 class="m-0 survey-value" style="color: #4d4d4d;"> {{ \App\Models\documentinfo::where('status', 'In Used')->count() }} Docs</h3>
                                 <p class="text-success m-0">as of today</p>
                               </div>
                               <div id="earningChart" class="flot-chart"></div>
@@ -157,10 +157,10 @@
                       <div class="col-sm-4">
                         <div class="card mb-3 mb-sm-0">
                           <div class="card-body py-3 px-4">
-                            <p class="m-0 survey-head">Available Documents</p>
+                            <p class="m-0 survey-head" style="color: #ff1a8c; font-size: 20px; font-weight: bold;">Available </p>
                             <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
                               <div>
-                                <h3 class="m-0 survey-value">Total: {{ \App\Models\documentinfo::where('status', 'Available')->count() }}</h3>
+                                <h3 class="m-0 survey-value" style="color: #4d4d4d;"> {{ \App\Models\documentinfo::where('status', 'Available')->count() }} Docs</h3>
                                 <p class="text-danger m-0">as of today</p>
                               </div>
                               <div id="productChart" class="flot-chart"></div>
@@ -171,10 +171,10 @@
                       <div class="col-sm-4">
                         <div class="card">
                           <div class="card-body py-3 px-4">
-                            <p class="m-0 survey-head">Total All Documents</p>
+                            <p class="m-0 survey-head" style="color: #ffb31a; font-size: 20px; font-weight: bold;"> All </p>
                             <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
                               <div>
-                                <h3 class="m-0 survey-value">Total: {{ \App\Models\DocumentInfo::count() }}</h3>
+                                <h3 class="m-0 survey-value" style="color: #4d4d4d;"> {{ \App\Models\DocumentInfo::count() }} Docs</h3>
                                 <p style="color: #ffc34d; margin: 0;">as of today</p>
                               </div>
                               <div id="orderChart" class="flot-chart"></div>

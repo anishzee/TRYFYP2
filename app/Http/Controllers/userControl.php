@@ -111,6 +111,7 @@ class userControl extends Controller
             docrequest::create([
                 'ReqUserID' => $userId,
                 'ReqDocID' => $docreq->DocID,
+
             ]); 
 
             Session::flash('success', 'Document requested successfully');

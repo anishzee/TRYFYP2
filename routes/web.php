@@ -158,3 +158,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+// Apply 'guest' middleware to the login route
+Route::middleware(['guest'])->group(function () {
+    // Login route accessible to non-authenticated users
+    Route::get('/login', function () {
+        return view('auth.login');
+    })->name('login');
+});

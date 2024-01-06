@@ -151,7 +151,6 @@
                             <tr>
                               <th>No.</th>
                               <th>Document name</th>
-                              <th>Uploaded by</th>
                               <th>Location</th>
                               <th>Manage</th>
                               <th>Request Status</th>
@@ -164,9 +163,6 @@
                               <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                               <td>
                                   {{ $x->DocName }}
-                              </td>
-                              <td>
-                                {{$x->LastUsed}}
                               </td>
                               <td>
                                 <a class="btn btn-success" href="{{ url('/floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>

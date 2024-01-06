@@ -19,7 +19,19 @@
 
             <div>
                 <x-label style="color: #fff; font-size: 15px;" for="email" value="{{ __('Email') }}" />
-                <x-input id="email"  class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <!-- <x-input id="email"  class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" /> -->
+                <x-input
+                    id="email"
+                    class="block mt-1 w-full"
+                    type="email"
+                    name="email"
+                    :value="old('email')"
+                    required  {{-- Add the 'required' attribute --}}
+                    autofocus
+                    pattern="[a-zA-Z0-9._%+-]+@gmail\.com"  {{-- Add the 'pattern' attribute --}}
+                    title="Enter a valid Gmail address in the format name@gmail.com" {{-- Optional title for user guidance --}}
+                    autocomplete="username"
+                />
             </div>
 
             <div class="mt-4">
