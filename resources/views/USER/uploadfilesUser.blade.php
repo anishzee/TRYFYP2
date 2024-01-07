@@ -256,7 +256,7 @@
                         <input type="text" class="form-control" name="LastUsed" placeholder="Last Used" value="{{ auth()->user()->name }}" readonly required>
                       </div>
                       <div class="form-group">
-                        <label>File upload</label>
+                        <label>File upload</label> <label style="color: red;">  *Please upload PDF file only*</label>
                         <input type="file" name="DocUpload" class="file-upload-default" />
 
                         <div class="input-group col-xs-12">

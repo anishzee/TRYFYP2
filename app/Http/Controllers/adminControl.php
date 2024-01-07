@@ -19,7 +19,11 @@ class adminControl extends Controller
 
     public function user() //go to all users page & display all users data
     {
-        $data=User::paginate(3); //can change ikut suka
+        //$data=User::paginate(3);
+       
+        $data = User::where('usertype', '0')
+        ->paginate(3);
+
         return view("ADMIN.allusers",['data'=>$data]);
     }
 
@@ -39,10 +43,16 @@ class adminControl extends Controller
     public function searchUser(Request $request)
    {
        $searchTerm = $request->input('search');
-       $data = User::where('name', 'like', '%' . $searchTerm . '%')
-           ->orWhere('email', 'like', '%' . $searchTerm . '%')
-           ->paginate(3);
-   
+       $data = User::where(function ($query) use ($searchTerm) {
+        $query->where('name', 'like', '%' . $searchTerm . '%')
+              ->where('usertype', '0');
+        })
+        ->orWhere(function ($query) use ($searchTerm) {
+            $query->where('email', 'like', '%' . $searchTerm . '%')
+                ->where('usertype', '0');
+        })
+        ->paginate(3);
+           
        return view("ADMIN.allusers", ['data' => $data]);
    }
 
@@ -63,11 +73,13 @@ class adminControl extends Controller
 
         $DocUpload=$req->DocUpload;
 
-	    $filename=time().'.'.$DocUpload->getClientOriginalExtension();
+	    $uniqueIdentifier = time() . '_' . uniqid();
        
-        $req->DocUpload->move('assets/AllDocuments',$filename);
+        $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . $DocUpload->getClientOriginalExtension();
 
-		$newdoc->DocUpload=$filename;
+        $req->DocUpload->move('assets/AllDocuments',$combinedFilename);
+
+		$newdoc->DocUpload=$combinedFilename;
 
         $newdoc->DocName=$req->DocName;
         $newdoc->DocDate=$req->DocDate;
@@ -266,19 +278,13 @@ class adminControl extends Controller
         // Query the 'docrequest' table to get the requested document IDs for the user
         // Retrieve the documents based on the IDs from the 'Documentinfo' table
         $userRequested = documentinfo::join('docrequests', 'documentinfos.DocID', '=', 'docrequests.ReqDocID')
-            ->join('users', 'users.id', '=', 'docrequests.ReqUserID')    
-            ->select('documentinfos.*', 'users.name as UserName')
+            ->join('users', 'users.id', '=', 'docrequests.ReqUserID')   
+            ->select('documentinfos.*', 'docrequests.*', 'docrequests.ReqStatus as ReqStatus', 'users.name as UserName')
             ->paginate(2);
 
         return view('ADMIN.managereqpage', compact('userRequested'));
 
-        // $userRequested = DB::table('docrequests')
-        //     ->leftJoin('documentinfos', 'documentinfos.DocID', 'docrequests.ReqDocID')// temp name for table
-        //     ->leftJoin('users', 'users.id', 'docrequests.ReqUserID')
-        //     ->select('documentinfos.*', 'users.name as UserName')
-        //     ->paginate(2);
-
-        // return view('ADMIN.managereqpage', array('userRequested' => $userRequested));
+        
     }
 
 
@@ -303,31 +309,43 @@ class adminControl extends Controller
         return redirect('/reqstatsAdmin');
     }
 
-    public function updateStatus(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'status' => 'required|in:Pending,Accepted,Rejected',
-        ]);
 
-        $document = documentinfo::find($id);
-        $document->reqstatus = $validatedData['status'];
+    public function updateStatus(Request $request,$id )// value from form ReqID
+    {
         
-        // If the request status is "Accepted", update the status to "In Used"
-        if ($validatedData['status'] === 'Accepted') {
-            $document->status = 'In Used';
-        } elseif ($validatedData['status'] === 'Rejected' || $validatedData['status'] === 'Pending') {
-            $document->status = 'Available';
+        $data = docrequest::find($id); //find the ReqID
+        
+        $data->ReqStatus = $request->status; //save the value 
+
+
+        $data->save();
+
+        // Find the associated documentinfo
+        $documentinfo = DB::table('documentinfos')->where('DocID', $data->ReqDocID)->first(); //get data from DB terus, bcs we dont use HasMany in model 
+
+        if ($documentinfo) {
+            // Update the status in the documentinfo table
+            if ($request->status === 'Accepted' || $request->status === 'accepted') {
+                $status = 'In Used';
+            } elseif ($request->status === 'Rejected' || $request->status === 'rejected' ||
+                      $request->status === 'Pending' || $request->status === 'pending' ||
+                      $request->status === 'Done' || $request->status === 'done') {
+                $status = 'Available';
+            } else {
+                // Handle other cases if needed
+                $status = '';
+            }
+    
+            // Update the status in the documentinfo table
+            DB::table('documentinfos')->where('DocID', $data->ReqDocID)->update(['status' => $status]);
         }
-        
-        $document->save();
+    
 
         // Redirect back or to a specific page after the update
         Session::flash('success', 'Status updated successfully');
         return redirect('/reqstatsAdmin');
       
     }
-
-
 
     
 

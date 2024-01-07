@@ -20,7 +20,7 @@
         <style>
         
         .min-h-screen {
-            background-image: url('../admin/assets/images/LoginBG5.jpg');
+            background-image: url('../admin/assets/images/LoginBG10.jpg');
             background-size: cover;
             background-position: center;
         }

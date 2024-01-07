@@ -169,6 +169,7 @@ class userControl extends Controller
         return view('User.uploadfilesUser');
     }
 
+
     function uploadfilesDBUser(Request $req) //upload data from form to DB
     {
         $newdoc = new documentinfo;
@@ -178,11 +179,13 @@ class userControl extends Controller
 
         $DocUpload=$req->DocUpload;
 
-	    $filename=time().'.'.$DocUpload->getClientOriginalExtension();
+	    $uniqueIdentifier = time() . '_' . uniqid();
        
-        $req->DocUpload->move('assets/AllDocuments',$filename);
+        $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . $DocUpload->getClientOriginalExtension();
 
-		$newdoc->DocUpload=$filename;
+        $req->DocUpload->move('assets/AllDocuments',$combinedFilename);
+
+		$newdoc->DocUpload=$combinedFilename;
 
         $newdoc->DocName=$req->DocName;
         $newdoc->DocDate=$req->DocDate;
@@ -255,10 +258,9 @@ class userControl extends Controller
         }
 
         // Display error message
-        Session::flash('fail', 'Failed to add favorite');
+        Session::flash('fail', 'Failed to add favorite, Document already added to favorite');
         return redirect('/allfilesUser');
     }
-
 
 
     public function showFavoritesUser()

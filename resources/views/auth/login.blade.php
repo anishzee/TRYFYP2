@@ -1,9 +1,11 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <a class="w-16 h-16" viewbox="0 0 48 48" >
+        <div style="border: 5px solid transparent;">
+            <a class="w-16 h-16" viewbox="0 0 48 48">
                 <img src="../admin/assets/images/LOGOREPO.png" alt="logo" width="300" height="300" />
             </a>
+        </div>
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -19,7 +21,6 @@
 
             <div>
                 <x-label style="color: #fff; font-size: 15px;" for="email" value="{{ __('Email') }}" />
-                <!-- <x-input id="email"  class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" /> -->
                 <x-input
                     id="email"
                     class="block mt-1 w-full"

@@ -101,7 +101,7 @@
         <div class="">
           <div class="content-wrapper ">
             <div class="page-header flex-wrap">
-              <h3 class="mb-0"> Hi, welcome back {{$name}}!</h3>
+              <h3 class="mb-0"> Hi, welcome {{$name}}!</h3>
               
             </div>
             

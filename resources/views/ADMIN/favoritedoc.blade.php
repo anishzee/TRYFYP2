@@ -152,7 +152,7 @@
                               <th>No.</th>
                               <th>Document name</th>
                               <th>Date</th>
-                              <th>Last used by</th>
+                              <th>Uploaded by</th>
                               <th>Status</th>
                               <th>Location</th>
                               <th>Manage</th>

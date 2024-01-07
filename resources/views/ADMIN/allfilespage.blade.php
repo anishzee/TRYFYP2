@@ -206,10 +206,10 @@
                                 {{$x->status}}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{ url('/floorplan', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
+                                <a class="btn btn-success" href="{{ url('../floorplan', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
+                                <a class="btn btn-success" href={{"../documentinfo/".$x['DocID']}}>View📑</a>
                               </td>
                               <td>
                                 <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
@@ -218,7 +218,7 @@
                                 </form>
                               </td>
                               <td>
-                                <a class="btn btn-danger"  href={{"deleteDoc/".$x['DocID']}} >Delete🗑️</a>
+                                <a class="btn btn-danger"  href={{"../deleteDoc/".$x['DocID']}} >Delete🗑️</a>
                               </td>
                             </tr>
                             @endforeach

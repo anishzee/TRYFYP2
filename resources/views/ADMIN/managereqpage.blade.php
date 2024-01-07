@@ -155,7 +155,7 @@
                               <th>Status</th>
                               <th>Location</th>
                               <th>Manage</th>
-                              <th>Request Status</th>
+                              <th>Manage</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
@@ -180,16 +180,22 @@
                                 <a class="btn btn-danger" href={{"removeReqAdmin/".$r['DocID']}}>Remove🗑️</a>
                               </td>
                               <td>
-                                <form method="post" action="{{ route('updateStatus', ['id' => $r->DocID]) }}">
+                                <form method="post" action="{{ route('updateStatus', ['id' => $r->ReqID]) }}">
                                    @csrf
                                     @method('patch') 
 
                                   
-                                  <select name="status" class="form-control" onchange="this.form.submit()" style="background-color: {{ $r->reqstatus === 'Pending' ? '#ffc107' : ($r->reqstatus === 'Accepted' ? '#28a745' : ($r->reqstatus === 'Rejected' ? '#dc3545' : '')) }}; color: #fff; border-color: #ced4da; border-radius: 5px; padding: 8px; font-weight: bold;">
-                                      <option value="Pending" {{ $r->reqstatus === 'Pending' ? 'selected' : '' }} style="background-color: #ffc107; color: #212529;" >Pending</option>
-                                      <option value="Accepted" {{ $r->reqstatus === 'Accepted' ? 'selected' : '' }} style="background-color: #28a745; color: #fff;">Accepted</option>
-                                      <option value="Rejected" {{ $r->reqstatus === 'Rejected' ? 'selected' : '' }} style="background-color: #dc3545; color: #fff;">Rejected</option>
-                                  </select>
+                                    <select name="status" class="form-control" onchange="this.form.submit()" style="background-color:
+                                        {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? '#ffc107' :
+                                          ($r->ReqStatus === 'Accepted' || $r->ReqStatus === 'accepted' ? '#28a745' :
+                                          ($r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? '#dc3545' :
+                                          ($r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? '#007bff' : ''))) }};
+                                        color: #fff; border-color: #ced4da; border-radius: 5px; padding: 8px; font-weight: bold;">
+                                        <option value="Pending" {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? 'selected' : '' }} style="background-color: #ffc107; color: #212529;" >Pending</option>
+                                        <option value="Accepted" {{ $r->ReqStatus === 'Accepted' || $r->ReqStatus === 'accepted' ? 'selected' : '' }} style="background-color: #28a745; color: #fff;">Accepted</option>
+                                        <option value="Rejected" {{ $r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? 'selected' : '' }} style="background-color: #dc3545; color: #fff;">Rejected</option>
+                                        <option value="Done" {{ $r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? 'selected' : '' }} style="background-color: #007bff; color: #fff;">Done</option>
+                                    </select>
                                 </form>
                               </td>
                             </tr>
