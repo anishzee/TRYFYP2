@@ -226,23 +226,25 @@ class adminControl extends Controller
 
     public function showFavorites()
     {
-        // Get the current user's ID
+         // Get the current user's ID
         $userId = auth()->id();
 
-        // Query the 'docfavorite' table to get the favorite document IDs for the user
-        $favoriteDocumentIds = docfavorite::where('user_id', $userId)->pluck('doc_id')->toArray();
-
-        // Retrieve the documents based on the IDs from the 'Documentinfo' table
-        $userFavorites = documentinfo::whereIn('DocID', $favoriteDocumentIds)->paginate(2);
-        
-        return view('admin.favoritedoc', compact('userFavorites'));
+            // Query the 'docfavorites' table to get the user's favorite document IDs and FavID
+        $userFavorites = docfavorite::where('user_id', $userId)
+        ->join('documentinfos', 'docfavorites.doc_id', '=', 'documentinfos.DocID')
+        ->select('documentinfos.*', 'docfavorites.FavID')
+        ->paginate(2);
+     
+        return view('ADMIN.favoritedoc', compact('userFavorites'));
     }
+
+
 
 
     public function removeFav($doc_id)
     {
         // Find the favorite record based on doc_id and user_id
-        $favorite = docfavorite::where('doc_id', $doc_id)
+        $favorite = docfavorite::where('FavID', $doc_id)
             ->where('user_id', auth()->id())
             ->first();
 
@@ -291,7 +293,7 @@ class adminControl extends Controller
     public function removeReqAdmin($doc_id)
     {
         // Find the requested record based on doc_id and user_id
-        $requested = docrequest::where('ReqDocID', $doc_id)->first();
+        $requested = docrequest::where('ReqID', $doc_id)->first();
 
         // Check if the request record exists
         if ($requested) {

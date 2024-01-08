@@ -29,12 +29,6 @@
               <span class="menu-title">Request Status</span>
             </a>
           </li>
-          <li class="nav-item"> 
-            <a class="nav-link" title="Tutorial" href="{{url('/helpUser')}}">
-              <i class="mdi mdi-contacts menu-icon"></i>
-              <span class="menu-title">Help</span>
-            </a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" title="Visual of the store room" href="{{url('/floorplanUserNav')}}">
               <i class="mdi mdi-table-large menu-icon"></i>
@@ -42,7 +36,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{url('/favoritesUser')}}">
+            <a class="nav-link" title="View favorite documents" href="{{url('/favoritesUser')}}">
               <i class="mdi mdi-file-document menu-icon"></i>
               <span class="menu-title">Favorite Document</span>
             </a>

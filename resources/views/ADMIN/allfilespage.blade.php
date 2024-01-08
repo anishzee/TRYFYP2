@@ -166,8 +166,8 @@
                         </div>
 
                         <div>
-                          <button type="submit" class="btn btn-primary">Search</button>
-                          <button type="button" class="btn btn-primary" onclick="window.location.href='/allfiles'">Reset</button>
+                          <button title="Search document" type="submit" class="btn btn-primary">Search</button>
+                          <button title="Return to original records" type="button" class="btn btn-primary" onclick="window.location.href='/allfiles'">Reset</button>
                         </div> 
                     </form>
                     <!-- End Search Bar -->
@@ -177,7 +177,7 @@
                     <div class="table-container">
                       <div >
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfiles'">
+                            <button title="Add new document" type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfiles'">
                               <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
                         </div> 
                         <br></br>
@@ -191,7 +191,7 @@
                               <th>Status</th>
                               <th>Location</th>
                               <th>Manage</th>
-                              <th>Add to Favorite</th>
+                              <th>Favorite</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
@@ -206,19 +206,19 @@
                                 {{$x->status}}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{ url('../floorplan', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
+                                <a title="View location" class="btn btn-success" href="{{ url('../floorplan', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"../documentinfo/".$x['DocID']}}>View📑</a>
+                                <a title="View document" class="btn btn-success" href={{"../documentinfo/".$x['DocID']}}>View📑</a>
                               </td>
                               <td>
                                 <form action="{{ route('addfav', $x['DocID']) }}" method="POST">
                                 @csrf
-                                  <button type="submit" class="btn btn-success">Favorite💜</button>
+                                  <button title="Add to favorite" type="submit" class="btn btn-success">Favorite💜</button>
                                 </form>
                               </td>
                               <td>
-                                <a class="btn btn-danger"  href={{"../deleteDoc/".$x['DocID']}} >Delete🗑️</a>
+                                <a title="Delete document" class="btn btn-danger"  href={{"../deleteDoc/".$x['DocID']}} >Delete🗑️</a>
                               </td>
                             </tr>
                             @endforeach

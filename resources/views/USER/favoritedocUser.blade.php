@@ -182,7 +182,7 @@
                                 <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>
                               </td>
                               <td>
-                                <a class="btn btn-danger" href={{"removeFavUser/".$x['DocID']}}>Remove🗑️</a>
+                                <a class="btn btn-danger" href={{"removeFavUser/".$x['FavID']}}>Remove🗑️</a>
                               </td>
                             </tr>
                           @endforeach

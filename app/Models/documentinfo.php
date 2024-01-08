@@ -12,7 +12,8 @@ class documentinfo extends Model
    
     
 
-    protected $fillable = ['DocUpload'];
+    protected $fillable = ['DocUpload',
+                            'status'];
 
     public $incrementing = false;
 
@@ -21,6 +22,7 @@ class documentinfo extends Model
     protected $primaryKey = 'DocID';
 
     protected $keyType ="integer";
+
 
     public $timestamps=false; //disabale the created_at & updated_at field (so we wont get error column not found)
     

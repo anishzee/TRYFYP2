@@ -94,7 +94,7 @@ class userControl extends Controller
     public function addToRequests($DocID)
     {
         // Fetch the Documentinfo model based on the document ID
-        $docreq = Documentinfo::find($DocID);
+        $docreq = documentinfo::find($DocID);
 
         if (!$docreq) {
             // Handle the case where the document is not found
@@ -114,13 +114,19 @@ class userControl extends Controller
 
             ]); 
 
+            // Update the status in Documentinfo table to "In Used" so other user cannot request the same document. 
+            $docreq->update([
+                'status' => 'In Used',
+            ]);
+
             Session::flash('success', 'Document requested successfully');
             return redirect('/allfilesUser');
-        }
+        }else {
 
-        // Display error message
-        Session::flash('fail', 'Failed to request document, document already requested');
-        return redirect('/allfilesUser');
+            // Handle the case where the document is already in requests
+            Session::flash('fail', 'Document is already in requests');
+            return redirect('/allfilesUser');
+        }
     }
 
     public function showRequests()
@@ -128,20 +134,21 @@ class userControl extends Controller
         // Get the current user's ID
         $userId = auth()->id();
 
-        // Query the 'docrequest' table to get the requested document IDs for the user
-        $requestedDocumentIds = docrequest::where('ReqUserID', $userId)->pluck('ReqDocID')->toArray();
+        // Query the 'docrequest' table to get the user's requested ReqID and document information
+        $userRequested = docrequest::where('ReqUserID', $userId)
+            ->join('documentinfos', 'docrequests.ReqDocID', '=', 'documentinfos.DocID')
+            ->select('documentinfos.*', 'docrequests.*', 'docrequests.ReqStatus as ReqStatus')
+            ->paginate(2);
 
-        // Retrieve the documents based on the IDs from the 'Documentinfo' table
-        $userRequested = documentinfo::whereIn('DocID', $requestedDocumentIds)->paginate(2);
-        
         return view('user.userreqstatpage', compact('userRequested'));
     }
+
 
 
     public function removeReq($doc_id)
     {
         // Find the requested record based on doc_id and user_id
-        $requested = docrequest::where('ReqDocID', $doc_id)
+        $requested = docrequest::where('ReqID', $doc_id)
             ->where('ReqUserID', auth()->id())
             ->first();
 
@@ -268,11 +275,11 @@ class userControl extends Controller
         // Get the current user's ID
         $userId = auth()->id();
 
-        // Query the 'docfavorite' table to get the favorite document IDs for the user
-        $favoriteDocumentIds = docfavorite::where('user_id', $userId)->pluck('doc_id')->toArray();
-
-        // Retrieve the documents based on the IDs from the 'Documentinfo' table
-        $userFavorites = documentinfo::whereIn('DocID', $favoriteDocumentIds)->paginate(2);
+            // Query the 'docfavorites' table to get the user's favorite document IDs and FavID
+        $userFavorites = docfavorite::where('user_id', $userId)
+        ->join('documentinfos', 'docfavorites.doc_id', '=', 'documentinfos.DocID')
+        ->select('documentinfos.*', 'docfavorites.FavID')
+        ->paginate(2);
         
         return view('user.favoritedocUser', compact('userFavorites'));
     }
@@ -281,7 +288,7 @@ class userControl extends Controller
     public function removeFavUser($doc_id)
     {
         // Find the favorite record based on doc_id and user_id
-        $favorite = docfavorite::where('doc_id', $doc_id)
+        $favorite = docfavorite::where('FavID', $doc_id)
             ->where('user_id', auth()->id())
             ->first();
 

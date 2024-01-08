@@ -191,7 +191,7 @@
                               <th>Status</th>
                               <th>Location</th>
                               <th>Manage</th>
-                              <th>Add to Favorite</th>
+                              <th>Favorite</th>
                               <th>Operation</th>
                             </tr>
                           </thead>
@@ -224,7 +224,7 @@
                                     <button type="submit" class="btn btn-success">Request</button>
                                   </form>
                                 @else
-                                  <button class="btn btn-success" disabled>Request</button>
+                                  <button style="background-color: grey" class="btn btn-success" disabled>Request</button>
                                 @endif
                                </td>
                             </tr>

@@ -171,13 +171,13 @@
                                 {{$r->status}}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{url('/floorplan')}}">{{$r->Location}}</a>
+                                <a title="View location" class="btn btn-success" href="{{url('/floorplan')}}">{{$r->Location}}</a>
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"documentinfo/".$r['DocID']}}>View📑</a>
+                                <a title="View document" class="btn btn-success" href={{"documentinfo/".$r['DocID']}}>View📑</a>
                               </td>
                               <td>
-                                <a class="btn btn-danger" href={{"removeReqAdmin/".$r['DocID']}}>Remove🗑️</a>
+                                <a class="btn btn-danger" href={{"removeReqAdmin/".$r['ReqID']}}>Remove🗑️</a>
                               </td>
                               <td>
                                 <form method="post" action="{{ route('updateStatus', ['id' => $r->ReqID]) }}">

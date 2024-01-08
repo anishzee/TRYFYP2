@@ -170,11 +170,16 @@
                               <td>
                                 <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>
                               </td>
-                              <td style="font-size: 14px; color: {{ $x->reqstatus === 'Pending' ? 'orange' : ($x->reqstatus === 'Accepted' ? 'green' : ($x->reqstatus === 'Rejected' ? 'red' : 'black')) }};">
-                                {{$x->reqstatus}}
+                              <td style="font-size: 14px; color:
+                                    {{ $x->ReqStatus === 'Pending' || $x->ReqStatus === 'pending' ? '#ffc107' :
+                                      ($x->ReqStatus === 'Accepted' || $x->ReqStatus === 'accepted' ? '#28a745' :
+                                      ($x->ReqStatus === 'Rejected' || $x->ReqStatus === 'rejected' ? '#dc3545' :
+                                      ($x->ReqStatus === 'Done' || $x->ReqStatus === 'done' ? '#007bff' : ''))) }};
+                                    font-weight: bold;">
+                                {{$x->ReqStatus}}
                               </td>
                               <td>
-                                <a class="btn btn-danger" href={{"removeReq/".$x['DocID']}}>Remove🗑️</a>
+                                <a class="btn btn-danger" href={{"removeReq/".$x['ReqID']}}>Remove🗑️</a>
                               </td>
                             </tr>
                           @endforeach
