@@ -215,9 +215,9 @@
 
                       <div class="form-group">
                         <label for="LastUsed">Uploaded by: </label>
-                        <input type="text" class="form-control" name="LastUsed" value="{{$disp['LastUsed']}}" required>
+                        <input type="text" class="form-control" name="LastUsed" value="{{$disp['LastUsed']}}" required readonly>
                       </div>
-                      
+                                 
                       <button type="submit" class="btn btn-primary mr-2"> Update </button>
                       <button type="reset" class="btn btn-dark">Reset</button>
                     </form>

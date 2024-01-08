@@ -176,13 +176,13 @@
                                 {{$x->status}}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{ url('/floorplan', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
+                                <a title="View location" class="btn btn-success" href="{{ url('/floorplan', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
+                                <a title="View document" class="btn btn-success" href={{"documentinfo/".$x['DocID']}}>View📑</a>
                               </td>
                               <td>
-                                <a class="btn btn-danger" href={{"removeFav/".$x['FavID']}}>Remove🗑️</a>
+                                <a title="Delete document" class="btn btn-danger" href={{"removeFav/".$x['FavID']}}>Remove🗑️</a>
                               </td>
                             </tr>
                           @endforeach

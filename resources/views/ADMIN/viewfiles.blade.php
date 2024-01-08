@@ -138,13 +138,13 @@
                               {{$data->status}}
                             </td>
                             <td>
-                              <a class="btn btn-success" href="{{ url('/floorplan', ['location' => urlencode($data->Location)]) }}">{{ $data->Location }}</a>
+                              <a title="View location" class="btn btn-success" href="{{ url('/floorplan', ['location' => urlencode($data->Location)]) }}">{{ $data->Location }}</a>
                             </td>
                             <td>
-                              <a class="btn btn-success" href="{{url('updDoc/'.$data['DocID'])}}">Update✏️</a>
+                              <a title="Update document" class="btn btn-success" href="{{url('updDoc/'.$data['DocID'])}}">Update✏️</a>
                             </td>
                             <td>
-                              <a class="btn btn-success" href="{{url('/download',$data->DocUpload)}}">Download⏬</a>
+                              <a title="Download document" class="btn btn-success" href="{{url('/download',$data->DocUpload)}}">Download⏬</a>
                             </td>
                           </tr>
                         </tbody>

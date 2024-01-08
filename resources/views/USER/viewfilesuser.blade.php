@@ -141,7 +141,11 @@
                               <a class="btn btn-success" href="{{ url('/floorplanUser', ['location' => urlencode($data->Location)]) }}">{{ $data->Location }}</a>
                             </td>
                             <td>
-                              <a class="btn btn-success" href="{{url('updDocUser/'.$data['DocID'])}}">Update✏️</a>
+                              @if(auth()->user()->name == $data->LastUsed)
+                                <a class="btn btn-success" href="{{url('updDocUser/'.$data['DocID'])}}">Update✏️</a>
+                              @else
+                                <button style="background-color: grey" class="btn btn-success" disabled>Update✏️</button>
+                              @endif
                             </td>
                             <td>
                             <a class="btn btn-success" href="{{url('/downloadUser',$data->DocUpload)}}">Download⏬</a>

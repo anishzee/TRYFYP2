@@ -154,8 +154,8 @@
                         </div>
 
                         <div>
-                          <button type="submit" class="btn btn-primary">Search</button>
-                          <button type="button" class="btn btn-primary" onclick="window.location.href='/allusers'">Reset</button>
+                          <button title="Search user" type="submit" class="btn btn-primary">Search</button>
+                          <!-- <button type="button" class="btn btn-primary" onclick="window.location.href='/allusers'">Reset</button> -->
                         </div> 
                     </form>
                     <!-- End Search Bar -->
@@ -178,7 +178,7 @@
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>
-                            <a class="btn btn-danger" href={{"del/".$user['id']}}>Delete🗑️</a> 
+                            <a title="Delete user" class="btn btn-danger" href={{"del/".$user['id']}}>Delete🗑️</a> 
                           </td>
                         </tr>
                         @endforeach

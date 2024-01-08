@@ -167,7 +167,7 @@
 
                         <div>
                           <button type="submit" class="btn btn-primary">Search</button>
-                          <button type="button" class="btn btn-primary" onclick="window.location.href='/allfilesUser'">Reset</button>
+                          <!-- <button type="button" class="btn btn-primary" onclick="window.location.href='/allfilesUser'">Reset</button> -->
                         </div> 
                     </form>
                     <!-- End Search Bar -->

@@ -141,6 +141,10 @@
   box-sizing: border-box; /* Include border in box dimensions */
 }
 
+.horizontal.selected {
+    background-color: #660066; /* Highlight color */
+}
+
 .door {
   width: 50px; /* Adjust width */
   height: 100px; /* Adjust height */

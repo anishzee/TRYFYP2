@@ -182,7 +182,7 @@ class userControl extends Controller
         $newdoc = new documentinfo;
 
         $newdoc->status = 'Available'; //set value by default = Available 
-        $newdoc->reqstatus = 'Pending'; //set value by default = Pending 
+        $newdoc->reqstatus = 'Pending'; //set value by default = Pending (dummy yang ni dah pindah kat ReqStatus) 
 
         $DocUpload=$req->DocUpload;
 

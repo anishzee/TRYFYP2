@@ -214,8 +214,8 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="LastUsed">Uploaded by: </label>
-                        <input type="text" class="form-control" name="LastUsed" value="{{$disp['LastUsed']}}" required>
+                          <label for="LastUsed">Uploaded by: </label>
+                          <input type="text" class="form-control" name="LastUsed" value="{{$disp['LastUsed']}}" required readonly>
                       </div>
                       
                       

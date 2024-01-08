@@ -177,7 +177,7 @@
                                 <a title="View document" class="btn btn-success" href={{"documentinfo/".$r['DocID']}}>View📑</a>
                               </td>
                               <td>
-                                <a class="btn btn-danger" href={{"removeReqAdmin/".$r['ReqID']}}>Remove🗑️</a>
+                                <a title="Delete document" class="btn btn-danger" href={{"removeReqAdmin/".$r['ReqID']}}>Remove🗑️</a>
                               </td>
                               <td>
                                 <form method="post" action="{{ route('updateStatus', ['id' => $r->ReqID]) }}">
@@ -191,7 +191,7 @@
                                           ($r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? '#dc3545' :
                                           ($r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? '#007bff' : ''))) }};
                                         color: #fff; border-color: #ced4da; border-radius: 5px; padding: 8px; font-weight: bold;">
-                                        <option value="Pending" {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? 'selected' : '' }} style="background-color: #ffc107; color: #212529;" >Pending</option>
+                                        <option value="Pending" {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? 'selected' : '' }} style="background-color: grey; color: #212529;" disabled>Pending</option>
                                         <option value="Accepted" {{ $r->ReqStatus === 'Accepted' || $r->ReqStatus === 'accepted' ? 'selected' : '' }} style="background-color: #28a745; color: #fff;">Accepted</option>
                                         <option value="Rejected" {{ $r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? 'selected' : '' }} style="background-color: #dc3545; color: #fff;">Rejected</option>
                                         <option value="Done" {{ $r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? 'selected' : '' }} style="background-color: #007bff; color: #fff;">Done</option>
