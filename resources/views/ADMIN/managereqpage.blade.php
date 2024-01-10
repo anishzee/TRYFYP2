@@ -155,8 +155,8 @@
                               <th>Status</th>
                               <th>Location</th>
                               <th>Manage</th>
-                              <th>Manage</th>
-                              <th>Operation</th>
+                              <!-- <th>Manage</th> -->
+                              <th>Request status</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -176,30 +176,77 @@
                               <td>
                                 <a title="View document" class="btn btn-success" href={{"documentinfo/".$r['DocID']}}>View📑</a>
                               </td>
-                              <td>
+                              <!-- <td>
                                 <a title="Delete document" class="btn btn-danger" href={{"removeReqAdmin/".$r['ReqID']}}>Remove🗑️</a>
-                              </td>
+                              </td> -->
                               <td>
                                 <form method="post" action="{{ route('updateStatus', ['id' => $r->ReqID]) }}">
-                                   @csrf
-                                    @method('patch') 
-
-                                  
-                                    <select name="status" class="form-control" onchange="this.form.submit()" style="background-color:
-                                        {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? '#ffc107' :
-                                          ($r->ReqStatus === 'Accepted' || $r->ReqStatus === 'accepted' ? '#28a745' :
-                                          ($r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? '#dc3545' :
-                                          ($r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? '#007bff' : ''))) }};
-                                        color: #fff; border-color: #ced4da; border-radius: 5px; padding: 8px; font-weight: bold;">
-                                        <option value="Pending" {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? 'selected' : '' }} style="background-color: grey; color: #212529;" disabled>Pending</option>
-                                        <option value="Accepted" {{ $r->ReqStatus === 'Accepted' || $r->ReqStatus === 'accepted' ? 'selected' : '' }} style="background-color: #28a745; color: #fff;">Accepted</option>
-                                        <option value="Rejected" {{ $r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? 'selected' : '' }} style="background-color: #dc3545; color: #fff;">Rejected</option>
-                                        <option value="Done" {{ $r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? 'selected' : '' }} style="background-color: #007bff; color: #fff;">Done</option>
-                                    </select>
+                                  @csrf
+                                  @method('patch') 
+                                  <select name="status" class="form-control" onchange="handleChange(this, {{ $r->ReqID }})" style="background-color:
+                                    {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? '#ffc107' :
+                                      ($r->ReqStatus === 'Accepted' || $r->ReqStatus === 'accepted' ? '#28a745' :
+                                      ($r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? '#dc3545' :
+                                      ($r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? '#007bff' : ''))) }};
+                                    color: #fff; border-color: #ced4da; border-radius: 5px; padding: 8px; font-weight: bold;">
+                                    <option value="Pending" {{ $r->ReqStatus === 'Pending' || $r->ReqStatus === 'pending' ? 'selected' : '' }} style="background-color: grey; color: #212529;" disabled>Pending</option>
+                                    <option value="Accepted" {{ $r->ReqStatus === 'Accepted' || $r->ReqStatus === 'accepted' ? 'selected' : '' }} style="background-color: #28a745; color: #fff;">Accepted</option>
+                                    <option value="Rejected" {{ $r->ReqStatus === 'Rejected' || $r->ReqStatus === 'rejected' ? 'selected' : '' }} style="background-color: #dc3545; color: #fff;">Rejected</option>
+                                    <option value="Done" {{ $r->ReqStatus === 'Done' || $r->ReqStatus === 'done' ? 'selected' : '' }} style="background-color: #007bff; color: #fff;">Done</option>
+                                  </select>
                                 </form>
                               </td>
                             </tr>
                           @endforeach
+
+                          <!-- Modal for confirmation -->
+                          <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmationModalLabel">Confirm Deletion</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  This option will delete the request, are you sure you want to delete this record?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                  <button type="button" class="btn btn-danger" onclick="deleteRecord()">Delete</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <script>
+                              function handleChange(select, reqID) {
+                                  if (select.value === 'Done') {
+                                      // Show the confirmation modal
+                                      $('#confirmationModal').modal('show');
+                                      // Set the data attributes for deletion
+                                      $('#confirmationModal').attr('data-req-id', reqID);
+                                      $('#confirmationModal').attr('data-previous-index', select.selectedIndex);
+                                  } else {
+                                      // Save the previous index when the value is not 'Done'
+                                      select.setAttribute('data-previous-index', select.selectedIndex);
+                                      select.form.submit();
+                                  }
+                              }
+
+                              function deleteRecord() {
+                                  // Get the selected option element
+                                  var select = document.getElementsByName('status')[0];
+                                  // Get the data attributes set in the modal
+                                  var reqID = $('#confirmationModal').data('req-id');
+                                  var previousIndex = $('#confirmationModal').data('previous-index');
+                                  // Redirect to the delete route
+                                  window.location.href = "{{ url('removeReqAdmin') }}/" + reqID;
+                              }
+                          </script>
+
+
                           </tbody>
                         </table>
                     </div>

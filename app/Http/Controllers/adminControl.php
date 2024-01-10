@@ -27,14 +27,46 @@ class adminControl extends Controller
         return view("ADMIN.allusers",['data'=>$data]);
     }
 
-    function deleteit($id)//delete user
+    public function deleteit($id)
     {
-        DB::delete('delete from users where id=?',[$id]);
+        DB::beginTransaction();
 
-        Session::flash('success', 'User deleted successfully');
+        try {
+            // Delete records from docfavorites where user_id = $id
+            DB::delete('delete from docfavorites where user_id = ?', [$id]);
 
-        return redirect('/allusers');
+            // Delete records from docrequests where ReqUserID = $id
+            DB::delete('delete from docrequests where ReqUserID = ?', [$id]);
+
+            // ... Add more delete statements for other related tables ...
+
+            // Finally, delete the user from the 'users' table
+            DB::delete('delete from users where id = ?', [$id]);
+
+            // Commit the transaction
+            DB::commit();
+
+            Session::flash('success', 'User and related records deleted successfully');
+
+            return redirect('/allusers');
+        } catch (\Exception $e) {
+            // An error occurred, rollback the transaction
+            DB::rollBack();
+
+            Session::flash('error', 'Error deleting user and related records');
+
+            return redirect('/allusers');
+        }
     }
+
+    // function deleteit($id)//delete user
+    // {
+    //     DB::delete('delete from users where id=?',[$id]);
+
+    //     Session::flash('success', 'User deleted successfully');
+
+    //     return redirect('/allusers');
+    // }
 
 
     //---------------------------------------- SEARCH USERLIST ---------------------------------------------------
@@ -290,24 +322,31 @@ class adminControl extends Controller
     }
 
 
-    public function removeReqAdmin($doc_id)
+    public function removeReqAdmin($req_id)
     {
-        // Find the requested record based on doc_id and user_id
-        $requested = docrequest::where('ReqID', $doc_id)->first();
+        // Find the requested record based on req_id
+        $requested = docrequest::find($req_id);
 
         // Check if the request record exists
         if ($requested) {
-            // Delete the record
+            // Get the associated documentinfo
+            $documentinfo = DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->first();
+
+            // Check if the associated documentinfo exists
+            if ($documentinfo) {
+                // Update the status in the documentinfo table to "Available"
+                DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->update(['status' => 'Available']);
+            }
+
+            // Delete the request record
             $requested->delete();
 
             Session::flash('success', 'Document removed from request successfully');
-
             return redirect('/reqstatsAdmin');
         }
 
         // If the requested record doesn't exist
-        Session::flash('fail', 'Failed to remove, document did not exist');
-
+        Session::flash('fail', 'Failed to remove, document request did not exist');
         return redirect('/reqstatsAdmin');
     }
 
@@ -327,11 +366,11 @@ class adminControl extends Controller
 
         if ($documentinfo) {
             // Update the status in the documentinfo table
-            if ($request->status === 'Accepted' || $request->status === 'accepted') {
+            if ($request->status === 'Accepted' || $request->status === 'accepted' ||
+                 $request->status === 'Pending' || $request->status === 'pending' || 
+                 $request->status === 'Rejected' || $request->status === 'rejected') {
                 $status = 'In Used';
-            } elseif ($request->status === 'Rejected' || $request->status === 'rejected' ||
-                      $request->status === 'Pending' || $request->status === 'pending' ||
-                      $request->status === 'Done' || $request->status === 'done') {
+            } elseif ($request->status === 'Done' || $request->status === 'done') {
                 $status = 'Available';
             } else {
                 // Handle other cases if needed
@@ -341,7 +380,6 @@ class adminControl extends Controller
             // Update the status in the documentinfo table
             DB::table('documentinfos')->where('DocID', $data->ReqDocID)->update(['status' => $status]);
         }
-    
 
         // Redirect back or to a specific page after the update
         Session::flash('success', 'Status updated successfully');

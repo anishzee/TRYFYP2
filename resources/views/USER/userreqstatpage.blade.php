@@ -153,22 +153,25 @@
                               <th>Document name</th>
                               <th>Location</th>
                               <th>Manage</th>
-                              <th>Request Status</th>
                               <th>Operation</th>
+                              <th>Request Status</th>
                             </tr>
                           </thead>
                           <tbody>
                           @foreach($userRequested as $key => $x)
-                            <tr>
+                            <tr style="text-align: center;" >
                               <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
                               <td>
                                   {{ $x->DocName }}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{ url('/floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
+                                <a title="View location" class="btn btn-success" href="{{ url('/floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>
+                                <a title="View document" class="btn btn-success" href={{"documentinfoUser/".$x['DocID']}}>View📑</a>
+                              </td>
+                              <td>
+                                <a title="Cancel request" class="btn btn-danger" href={{"removeReq/".$x['ReqID']}}>Remove🗑️</a>
                               </td>
                               <td style="font-size: 14px; color:
                                     {{ $x->ReqStatus === 'Pending' || $x->ReqStatus === 'pending' ? '#ffc107' :
@@ -177,9 +180,6 @@
                                       ($x->ReqStatus === 'Done' || $x->ReqStatus === 'done' ? '#007bff' : ''))) }};
                                     font-weight: bold;">
                                 {{$x->ReqStatus}}
-                              </td>
-                              <td>
-                                <a class="btn btn-danger" href={{"removeReq/".$x['ReqID']}}>Remove🗑️</a>
                               </td>
                             </tr>
                           @endforeach

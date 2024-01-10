@@ -114,7 +114,7 @@ Route::post("/editUser",[userControl::class,"updatedoc"]); //post update documen
 
 Route::post('/reqdoc/{DocID}', [userControl::class, 'addToRequests'])->name('reqdoc');
 Route::get('/reqstatsUser', [userControl::class, 'showRequests'])->name('reqstatsUser');
-Route::get('/removeReq/{doc_id}', [userControl::class, 'removeReq'])->name('removeReq');
+Route::get('/removeReq/{req_id}', [userControl::class, 'removeReq'])->name('removeReq');
 
 
 //---------------------------------------- VIEW UPLOAD DOCUMENTS ---------------------------------------------------

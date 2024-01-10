@@ -145,20 +145,28 @@ class userControl extends Controller
 
 
 
-    public function removeReq($doc_id)
+    public function removeReq($req_id)
     {
         // Find the requested record based on doc_id and user_id
-        $requested = docrequest::where('ReqID', $doc_id)
+        $requested = docrequest::where('ReqID', $req_id)
             ->where('ReqUserID', auth()->id())
             ->first();
 
         // Check if the request record exists
         if ($requested) {
-            // Delete the favorite record
+            // Get the associated documentinfo
+            $documentinfo = DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->first();
+
+            // Check if the associated documentinfo exists
+            if ($documentinfo) {
+                // Update the status in the documentinfo table to "Available"
+                DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->update(['status' => 'Available']);
+            }
+
+            // Delete the request record
             $requested->delete();
 
             Session::flash('success', 'Document removed from request successfully');
-
             return redirect('/reqstatsUser');
         }
 
@@ -167,6 +175,34 @@ class userControl extends Controller
 
         return redirect('/reqstatsUser');
     }
+
+    // public function removeReqAdmin($req_id)
+    // {
+    //     // Find the requested record based on req_id
+    //     $requested = docrequest::find($req_id);
+
+    //     // Check if the request record exists
+    //     if ($requested) {
+    //         // Get the associated documentinfo
+    //         $documentinfo = DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->first();
+
+    //         // Check if the associated documentinfo exists
+    //         if ($documentinfo) {
+    //             // Update the status in the documentinfo table to "Available"
+    //             DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->update(['status' => 'Available']);
+    //         }
+
+    //         // Delete the request record
+    //         $requested->delete();
+
+    //         Session::flash('success', 'Document removed from request successfully');
+    //         return redirect('/reqstatsAdmin');
+    //     }
+
+    //     // If the requested record doesn't exist
+    //     Session::flash('fail', 'Failed to remove, document request did not exist');
+    //     return redirect('/reqstatsAdmin');
+    // }
 
     
     //---------------------------------------- UPLOAD DOCUMENTS ---------------------------------------------------

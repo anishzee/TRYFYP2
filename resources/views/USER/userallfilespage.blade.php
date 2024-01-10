@@ -166,7 +166,7 @@
                         </div>
 
                         <div>
-                          <button type="submit" class="btn btn-primary">Search</button>
+                          <button title="Search document" type="submit" class="btn btn-primary">Search</button>
                           <!-- <button type="button" class="btn btn-primary" onclick="window.location.href='/allfilesUser'">Reset</button> -->
                         </div> 
                     </form>
@@ -177,7 +177,7 @@
                     <div class="table-container">
                       <div >
                         <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfilesUser'">
+                            <button title="Add new document" type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfilesUser'">
                               <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
                         </div> 
                         <br></br>
@@ -206,25 +206,25 @@
                                 {{$x->status}}
                               </td>
                               <td>
-                                <a class="btn btn-success" href="{{ url('../floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
+                                <a title="View location" class="btn btn-success" href="{{ url('../floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
                               </td>
                               <td>
-                                <a class="btn btn-success" href={{"../documentinfoUser/".$x['DocID']}}>View📑</a>
+                                <a title="View document" class="btn btn-success" href={{"../documentinfoUser/".$x['DocID']}}>View📑</a>
                               </td>
                               <td>
                                 <form action="{{ route('addfavUser', $x['DocID']) }}" method="POST">
                                 @csrf
-                                  <button type="submit" class="btn btn-success">Favorite💜</button>
+                                  <button title="Add to favorite" type="submit" class="btn btn-success">Favorite💜</button>
                                 </form>
                               </td>
                               <td>
                                 @if($x->status === 'Available')
                                   <form action="{{ route('reqdoc', $x['DocID']) }}" method="POST">
                                   @csrf
-                                    <button type="submit" class="btn btn-success">Request</button>
+                                    <button title="Request document" type="submit" class="btn btn-success">Request</button>
                                   </form>
                                 @else
-                                  <button style="background-color: grey" class="btn btn-success" disabled>Request</button>
+                                  <button title="Request document" style="background-color: grey" class="btn btn-success" disabled>Request</button>
                                 @endif
                                </td>
                             </tr>
