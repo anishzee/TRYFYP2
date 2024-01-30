@@ -26,21 +26,59 @@ class adminControl extends Controller
         return view("ADMIN.allusers",['data'=>$data]);
     }
 
+    // public function deleteit($id)
+    // {
+    //     DB::beginTransaction();
+
+    //     try {
+    //         // Delete records from docfavorites where user_id = $id
+    //         DB::delete('delete from docfavorites where user_id = ?', [$id]);
+
+    //         // Delete records from docrequests where ReqUserID = $id
+    //         DB::delete('delete from docrequests where ReqUserID = ?', [$id]);
+
+    //         // Finally, delete the user from the 'users' table
+    //         DB::delete('delete from users where id = ?', [$id]);
+
+    //         // Commit the transaction
+    //         DB::commit();
+
+    //         Session::flash('success', 'User and related records deleted successfully');
+
+    //         return redirect('/allusers');
+    //     } catch (\Exception $e) {
+    //         // An error occurred, rollback the transaction
+    //         DB::rollBack();
+
+    //         Session::flash('error', 'Error deleting user and related records');
+
+    //         return redirect('/allusers');
+    //     }
+    // }
+
     public function deleteit($id)
     {
         DB::beginTransaction();
 
         try {
+            // Check if ReqID exists in docrequests table
+            $reqIDExists = DB::table('docrequests')->where('ReqUserID', $id)->exists();
+
+            // If ReqID exists, update documentinfo table
+            if ($reqIDExists) {
+                // Update status to 'Available' for matching DocID
+                $reqDocID = DB::table('docrequests')->where('ReqUserID', $id)->value('ReqDocID');
+                DB::table('documentinfos')->where('DocID', $reqDocID)->update(['status' => 'Available']);
+            }
+
             // Delete records from docfavorites where user_id = $id
-            DB::delete('delete from docfavorites where user_id = ?', [$id]);
+            DB::table('docfavorites')->where('user_id', $id)->delete();
 
             // Delete records from docrequests where ReqUserID = $id
-            DB::delete('delete from docrequests where ReqUserID = ?', [$id]);
-
-            // ... Add more delete statements for other related tables ...
+            DB::table('docrequests')->where('ReqUserID', $id)->delete();
 
             // Finally, delete the user from the 'users' table
-            DB::delete('delete from users where id = ?', [$id]);
+            DB::table('users')->where('id', $id)->delete();
 
             // Commit the transaction
             DB::commit();
@@ -48,15 +86,17 @@ class adminControl extends Controller
             Session::flash('success', 'User and related records deleted successfully');
 
             return redirect('/allusers');
+
         } catch (\Exception $e) {
             // An error occurred, rollback the transaction
             DB::rollBack();
 
-            Session::flash('error', 'Error deleting user and related records');
+            Session::flash('fail', 'Error deleting user and related records');
 
             return redirect('/allusers');
         }
     }
+
 
 
     //---------------------------------------- SEARCH USERLIST ---------------------------------------------------
