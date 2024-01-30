@@ -38,7 +38,7 @@ class userControl extends Controller
        $searchTerm = $request->input('search');
        $data = documentinfo::where('DocName', 'like', '%' . $searchTerm . '%')
            ->orWhere('Location', 'like', '%' . $searchTerm . '%')
-           ->paginate(2);
+           ->paginate(50);
    
        return view("user.userallfilespage", ['data' => $data]);
    }
@@ -176,34 +176,7 @@ class userControl extends Controller
         return redirect('/reqstatsUser');
     }
 
-    // public function removeReqAdmin($req_id)
-    // {
-    //     // Find the requested record based on req_id
-    //     $requested = docrequest::find($req_id);
-
-    //     // Check if the request record exists
-    //     if ($requested) {
-    //         // Get the associated documentinfo
-    //         $documentinfo = DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->first();
-
-    //         // Check if the associated documentinfo exists
-    //         if ($documentinfo) {
-    //             // Update the status in the documentinfo table to "Available"
-    //             DB::table('documentinfos')->where('DocID', $requested->ReqDocID)->update(['status' => 'Available']);
-    //         }
-
-    //         // Delete the request record
-    //         $requested->delete();
-
-    //         Session::flash('success', 'Document removed from request successfully');
-    //         return redirect('/reqstatsAdmin');
-    //     }
-
-    //     // If the requested record doesn't exist
-    //     Session::flash('fail', 'Failed to remove, document request did not exist');
-    //     return redirect('/reqstatsAdmin');
-    // }
-
+    
     
     //---------------------------------------- UPLOAD DOCUMENTS ---------------------------------------------------
 

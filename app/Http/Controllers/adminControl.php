@@ -19,8 +19,7 @@ class adminControl extends Controller
 
     public function user() //go to all users page & display all users data
     {
-        //$data=User::paginate(3);
-       
+      
         $data = User::where('usertype', '0')
         ->paginate(3);
 
@@ -59,15 +58,6 @@ class adminControl extends Controller
         }
     }
 
-    // function deleteit($id)//delete user
-    // {
-    //     DB::delete('delete from users where id=?',[$id]);
-
-    //     Session::flash('success', 'User deleted successfully');
-
-    //     return redirect('/allusers');
-    // }
-
 
     //---------------------------------------- SEARCH USERLIST ---------------------------------------------------
     
@@ -101,13 +91,13 @@ class adminControl extends Controller
         $newdoc = new documentinfo;
 
         $newdoc->status = 'Available'; //set value by default = Available 
-        $newdoc->reqstatus = 'Pending'; //set value by default = Pending 
 
         $DocUpload=$req->DocUpload;
 
 	    $uniqueIdentifier = time() . '_' . uniqid();
        
-        $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . $DocUpload->getClientOriginalExtension();
+        $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . 
+        $DocUpload->getClientOriginalExtension();
 
         $req->DocUpload->move('assets/AllDocuments',$combinedFilename);
 
@@ -136,6 +126,9 @@ class adminControl extends Controller
 
     function deletedoc($DocID) //delete doc in DB
     {
+        // Delete related records in docrequests table first
+        DB::delete('delete from docrequests where ReqDocID = ?', [$DocID]);
+
         // Delete related records in docfavorites table first
         DB::delete('delete from docfavorites where doc_id = ?', [$DocID]);
 
@@ -210,6 +203,7 @@ class adminControl extends Controller
     {
         $selectedLocation = request()->route('location');
         \Log::info('Selected Location: ' . $selectedLocation); // Log the selected location
+
         return view('ADMIN.floorplanpage', compact('selectedLocation'));
     }
 

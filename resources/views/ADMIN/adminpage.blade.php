@@ -194,7 +194,7 @@
                   </script> 
 
                   <script>
-                    // Assuming you have defined these variables in your Blade template
+                    // defined these variables to get the data from documentinfo table based on the status
                       var inUsedCount = {{ \App\Models\DocumentInfo::where('status', 'In Used')->count() }};
                       var availableCount = {{ \App\Models\DocumentInfo::where('status', 'Available')->count() }};
                       var totalCount = {{ \App\Models\DocumentInfo::count() }};
