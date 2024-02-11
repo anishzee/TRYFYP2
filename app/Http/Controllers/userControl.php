@@ -188,18 +188,38 @@ class userControl extends Controller
 
     function uploadfilesDBUser(Request $req) //upload data from form to DB
     {
+        $req->validate([
+            'DocName' => 'required|unique:documentinfos', // Check uniqueness against the documentinfos table
+            'DocUpload' => 'required|file|mimes:pdf', // Add validation rules for file upload
+        ]);
+
+        // Check if a document with the same name already exists
+        if (documentinfo::where('DocName', $req->DocName)->exists()) {
+            Session::flash('fail', 'Failed to add, document existed');
+            return redirect()->back();
+        }
+
+        // Check if the location has reached its limit
+        $locationLimit = 3; // Set the limit for the number of files per location
+        $fileCount = documentinfo::where('Location', $req->Location)->count();
+
+        if ($fileCount >= $locationLimit) {
+            Session::flash('fail', 'Failed to add, location has reached its limit');
+            return redirect()->back();
+        }
+        
         $newdoc = new documentinfo;
 
         $newdoc->status = 'Available'; //set value by default = Available 
         $newdoc->reqstatus = 'Pending'; //set value by default = Pending (dummy yang ni dah pindah kat ReqStatus) 
 
-        $DocUpload=$req->DocUpload;
+        $DocUpload=$req->file('DocUpload');
 
 	    $uniqueIdentifier = time() . '_' . uniqid();
        
         $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . $DocUpload->getClientOriginalExtension();
 
-        $req->DocUpload->move('assets/AllDocuments',$combinedFilename);
+        $DocUpload->move('assets/AllDocuments',$combinedFilename);
 
 		$newdoc->DocUpload=$combinedFilename;
 

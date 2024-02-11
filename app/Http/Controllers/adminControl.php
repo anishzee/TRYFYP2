@@ -26,35 +26,6 @@ class adminControl extends Controller
         return view("ADMIN.allusers",['data'=>$data]);
     }
 
-    // public function deleteit($id)
-    // {
-    //     DB::beginTransaction();
-
-    //     try {
-    //         // Delete records from docfavorites where user_id = $id
-    //         DB::delete('delete from docfavorites where user_id = ?', [$id]);
-
-    //         // Delete records from docrequests where ReqUserID = $id
-    //         DB::delete('delete from docrequests where ReqUserID = ?', [$id]);
-
-    //         // Finally, delete the user from the 'users' table
-    //         DB::delete('delete from users where id = ?', [$id]);
-
-    //         // Commit the transaction
-    //         DB::commit();
-
-    //         Session::flash('success', 'User and related records deleted successfully');
-
-    //         return redirect('/allusers');
-    //     } catch (\Exception $e) {
-    //         // An error occurred, rollback the transaction
-    //         DB::rollBack();
-
-    //         Session::flash('error', 'Error deleting user and related records');
-
-    //         return redirect('/allusers');
-    //     }
-    // }
 
     public function deleteit($id)
     {
@@ -128,18 +99,37 @@ class adminControl extends Controller
 
     function uploadfilesDB(Request $req) //upload data from form to DB
     {
+        $req->validate([
+            'DocName' => 'required|unique:documentinfos', // Check uniqueness against the documentinfos table
+            'DocUpload' => 'required|file|mimes:pdf', // Add validation rules for file upload
+        ]);
+
+        // Check if a document with the same name already exists
+        if (documentinfo::where('DocName', $req->DocName)->exists()) {
+            Session::flash('fail', 'Failed to add, document existed');
+            return redirect()->back();
+        }
+
+        // Check if the location has reached its limit
+        $locationLimit = 3; // Set the limit for the number of files per location
+        $fileCount = documentinfo::where('Location', $req->Location)->count();
+
+        if ($fileCount >= $locationLimit) {
+            Session::flash('fail', 'Failed to add, location has reached its limit');
+            return redirect()->back();
+        }
+
         $newdoc = new documentinfo;
 
         $newdoc->status = 'Available'; //set value by default = Available 
 
-        $DocUpload=$req->DocUpload;
+        $DocUpload=$req->file('DocUpload');
 
 	    $uniqueIdentifier = time() . '_' . uniqid();
        
-        $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . 
-        $DocUpload->getClientOriginalExtension();
+        $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . $DocUpload->getClientOriginalExtension();
 
-        $req->DocUpload->move('assets/AllDocuments',$combinedFilename);
+        $DocUpload->move('assets/AllDocuments',$combinedFilename);
 
 		$newdoc->DocUpload=$combinedFilename;
 
@@ -303,8 +293,6 @@ class adminControl extends Controller
      
         return view('ADMIN.favoritedoc', compact('userFavorites'));
     }
-
-
 
 
     public function removeFav($doc_id)

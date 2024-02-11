@@ -171,7 +171,7 @@
                                 {{$r->status}}
                               </td>
                               <td>
-                                <a title="View location" class="btn btn-success" href="{{url('/floorplan')}}">{{$r->Location}}</a>
+                                <a title="View location" class="btn btn-success" href="{{ url('../floorplan', ['location' => urlencode($r->Location)]) }}">{{ $r->Location }}</a>
                               </td>
                               <td>
                                 <a title="View document" class="btn btn-success" href={{"documentinfo/".$r['DocID']}}>View📑</a>

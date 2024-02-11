@@ -218,10 +218,57 @@
                                 </form>
                               </td>
                               <td>
-                                <a title="Delete document" class="btn btn-danger"  href={{"../deleteDoc/".$x['DocID']}} >Delete🗑️</a>
+                                <!-- <a title="Delete document" class="btn btn-danger"  href={{"../deleteDoc/".$x['DocID']}} >Delete🗑️</a> -->  
+                                <a title="Delete document" class="btn btn-danger" data-toggle="modal" onclick="confirmDeleteModal(this, {{ $x['DocID'] }})">Delete🗑️</a>
                               </td>
+                              <!-- This will also delete the document's requests and favorites, are you sure you want to delete this record? -->
                             </tr>
                             @endforeach
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    Are you sure you want to delete this record?
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <!-- Set the href attribute directly in the "Delete" button -->
+                                    <button type="button" class="btn btn-danger" onclick="deleteRecord()">Delete</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <script>
+                              // Function to set the DocID and show the modal
+                              function confirmDeleteModal(button, docID) {
+                                  var deleteUrl = "../deleteDoc/" + docID; // Construct delete URL
+                                  // Set the onclick event of the "Delete" button
+                                  $('#confirmDeleteModal').find('.btn-danger').attr('onclick', 'deleteRecord("' + deleteUrl + '")');
+                                  // Show the modal
+                                  $('#confirmDeleteModal').modal('show');
+                              }
+
+                              // Function to proceed with deletion
+                              function deleteRecord(deleteUrl) {
+                                  if (deleteUrl !== "") {
+                                      // Proceed with deletion by navigating to the delete URL
+                                      window.location.href = deleteUrl;
+                                  }
+                              }
+                            </script>
+
+
+                          
                           </tbody>
                         </table>
                       </div>  
