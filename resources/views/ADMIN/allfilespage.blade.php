@@ -119,11 +119,11 @@
  <body>
 
 
-  <div class="container-scroller">
+  <div class="container-scroller" style="overflow-x: auto; " >
 
     @include("ADMIN.navbar")
         <div class="centerALL">
-          <div class="content-wrapper pb-0">
+          <div class="content-wrapper pb-0" style="overflow-x: auto; " >
             
           @if(Session::has('success') || Session::has('fail'))
               <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -237,7 +237,7 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    Are you sure you want to delete this record?
+                                    This will also delete the document's requests and favorites. Are you sure you want to delete this record?
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -294,11 +294,7 @@
           <br></br>
          
           <br></br>
-          
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+  
 
           </div>
         

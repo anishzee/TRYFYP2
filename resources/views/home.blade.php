@@ -172,7 +172,7 @@ https://templatemo.com/tm-569-edu-meeting
       
         
     <div class="footer">
-      <p>Copyright © 2023 Anishah Hawa. All Rights Reserved.</p>
+      <p>Copyright © 2024 Anishah Hawa. All Rights Reserved.</p>
           
     </div>
   </section>

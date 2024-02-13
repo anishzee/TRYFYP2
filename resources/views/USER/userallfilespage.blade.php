@@ -90,6 +90,7 @@
 }
 
 .table-container {
+  display: grid;
   overflow-x: auto;
 }
 
@@ -119,11 +120,11 @@
  <body>
 
 
-  <div class="container-scroller">
+  <div class="container-scroller" style="overflow-x: auto; " >
 
     @include("USER.usernavbar")
         <div class="centerALL">
-          <div class="content-wrapper pb-0">
+          <div class="content-wrapper pb-0" style="overflow-x: auto;" >
             
           @if(Session::has('success') || Session::has('fail'))
               <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -174,63 +175,65 @@
                       
                    
                     <br></br>
-                    <div class="table-container">
+                    <div class="table-container" >
                       <div >
                         <div class="d-flex justify-content-end">
                             <button title="Add new document" type="button" class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal" onclick="window.location.href='/uploadfilesUser'">
                               <i class="mdi mdi-email btn-icon-prepend"></i>+NEW</button>
                         </div> 
                         <br></br>
-                        <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
-                          <thead>
-                            <tr>
-                              <th>No.</th>
-                              <th>Document Name</th>
-                              <th>Date</th>
-                              <th>Uploaded by</th>
-                              <th>Status</th>
-                              <th>Location</th>
-                              <th>Manage</th>
-                              <th>Favorite</th>
-                              <th>Operation</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @foreach($data as $key => $x)
-                            <tr>
-                              <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
-                              <td>{{$x->DocName}}</td>
-                              <td>{{$x->DocDate}}</td>
-                              <td>{{$x->LastUsed}}</td>
-                              <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
-                                {{$x->status}}
-                              </td>
-                              <td>
-                                <a title="View location" class="btn btn-success" href="{{ url('../floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
-                              </td>
-                              <td>
-                                <a title="View document" class="btn btn-success" href={{"../documentinfoUser/".$x['DocID']}}>View📑</a>
-                              </td>
-                              <td>
-                                <form action="{{ route('addfavUser', $x['DocID']) }}" method="POST">
-                                @csrf
-                                  <button title="Add to favorite" type="submit" class="btn btn-success">Favorite💜</button>
-                                </form>
-                              </td>
-                              <td>
-                                @if($x->status === 'Available')
-                                  <form action="{{ route('reqdoc', $x['DocID']) }}" method="POST">
-                                  @csrf
-                                    <button title="Request document" type="submit" class="btn btn-success">Request</button>
-                                  </form>
-                                @else
-                                  <button title="Request document" style="background-color: grey" class="btn btn-success" disabled>Request</button>
-                                @endif
-                               </td>
-                            </tr>
-                            @endforeach
-                          </tbody>
-                        </table>
+                      
+                            <table class="table table-hover"  style="max-width: 100%; overflow-x: auto;">
+                              <thead>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>Document Name</th>
+                                  <th>Date</th>
+                                  <th>Uploaded by</th>
+                                  <th>Status</th>
+                                  <th>Location</th>
+                                  <th>Manage</th>
+                                  <th>Favorite</th>
+                                  <th>Operation</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @foreach($data as $key => $x)
+                                <tr>
+                                  <td>{{ $key + 1 }}</td> <!-- Display the numbering starting from 1 -->
+                                  <td>{{$x->DocName}}</td>
+                                  <td>{{$x->DocDate}}</td>
+                                  <td>{{$x->LastUsed}}</td>
+                                  <td style="font-size: 14px; color: {{ $x->status === 'Available' ? 'green' : ($x->status === 'In Used' ? 'red' : 'black') }};">
+                                    {{$x->status}}
+                                  </td>
+                                  <td>
+                                    <a title="View location" class="btn btn-success" href="{{ url('../floorplanUser', ['location' => urlencode($x->Location)]) }}">{{ $x->Location }}</a>
+                                  </td>
+                                  <td>
+                                    <a title="View document" class="btn btn-success" href={{"../documentinfoUser/".$x['DocID']}}>View📑</a>
+                                  </td>
+                                  <td>
+                                    <form action="{{ route('addfavUser', $x['DocID']) }}" method="POST">
+                                    @csrf
+                                      <button title="Add to favorite" type="submit" class="btn btn-success">Favorite💜</button>
+                                    </form>
+                                  </td>
+                                  <td>
+                                    @if($x->status === 'Available')
+                                      <form action="{{ route('reqdoc', $x['DocID']) }}" method="POST">
+                                      @csrf
+                                        <button title="Request document" type="submit" class="btn btn-success">Request</button>
+                                      </form>
+                                    @else
+                                      <button title="Request document" style="background-color: grey" class="btn btn-success" disabled>Request</button>
+                                    @endif
+                                  </td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            </table> 
+                         
                       </div>  
                     </div>
                   </div>
@@ -254,11 +257,7 @@
           <br></br>
          
           <br></br>
-          
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
+   
 
           </div>
         
