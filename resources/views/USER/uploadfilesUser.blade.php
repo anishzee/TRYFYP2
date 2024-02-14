@@ -190,7 +190,7 @@
                       </script>
 
                       <div class="form-group">
-                        <label for="location">Location: </label>
+                        <label for="location">Location: </label> <label style="color: red;">  *Please check capacity (limit 3 docs)*</label>
                           <select class="city" style="width:100%" name="Location" required >
                             <option value="KB1A">KB1A</option>
                             <option value="KB1B">KB1B</option>
