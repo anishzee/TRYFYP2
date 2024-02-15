@@ -214,7 +214,7 @@ class userControl extends Controller
         $newdoc->reqstatus = 'Pending'; //set value by default = Pending (dummy yang ni dah pindah kat ReqStatus) 
 
         $DocUpload=$req->file('DocUpload');
-
+ 
 	    $uniqueIdentifier = time() . '_' . uniqid();
        
         $combinedFilename = $DocUpload->getClientOriginalName() . '_' . $uniqueIdentifier . '.' . $DocUpload->getClientOriginalExtension();

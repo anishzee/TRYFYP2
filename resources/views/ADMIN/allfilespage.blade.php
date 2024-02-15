@@ -167,7 +167,7 @@
 
                         <div>
                           <button title="Search document" type="submit" class="btn btn-primary">Search</button>
-                          <!-- <button title="Return to original records" type="button" class="btn btn-primary" onclick="window.location.href='/allfiles'">Reset</button> -->
+                          <button title="Clear search" type="button" class="btn btn-primary" onclick="window.location.href='/allfiles'">Clear</button> 
                         </div> 
                     </form>
                     <!-- End Search Bar -->
